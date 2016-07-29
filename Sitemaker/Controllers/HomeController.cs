@@ -23,12 +23,6 @@ namespace Sitemaker.Controllers
             return View();
         }
 
-        [HttpGet]
-        public ActionResult dsfsdg()
-        {
-            return View();
-        }
-
         public ActionResult CreateSite()
         {
             return View("CreateSite");
@@ -62,7 +56,7 @@ namespace Sitemaker.Controllers
 
 
         [HttpPost]
-        public RedirectResult SaveSite(string id, string name, string about, string dataid)
+        public RedirectToRouteResult SaveSite(string id, string name, string about, string dataid)
         {
             Site site = new Site();
             site.Name = name;
@@ -71,7 +65,7 @@ namespace Sitemaker.Controllers
             site.MenuId = dataid;
             db.Sites.Add(site);
             db.SaveChanges();
-            return RedirectPermanent("/Home/Create");         
+            return RedirectToAction("CreateSite", "HomeController");         
         }
 
         public ActionResult ChangeCulture(string lang)

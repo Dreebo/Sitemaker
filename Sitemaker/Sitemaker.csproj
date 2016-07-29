@@ -386,6 +386,7 @@
     <Content Include="Views\Home\CreateSite.cshtml" />
     <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Home\dsfsdg.cshtml" />
+    <Content Include="Views\Account\DisplayEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
