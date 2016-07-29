@@ -1,5 +1,120 @@
-﻿
+﻿@model Sitemaker.Models.Site
 @{
     ViewBag.Title = "CreateSite";
 }
+
+<style>
+    .thumb{
+        display: inline-block;
+    }
+    .thumb img {
+        padding: 10px;
+        background: #666;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+
+        .thumb img.selected {
+            border: 2px solid #55c5e9;
+        }
+
+        .thumbMune{
+        display: inline-block;
+    }
+    .thumbMenu img {
+        padding: 10px;
+        background: #666;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+
+        .thumbMenu img.selected {
+            border: 2px solid #55c5e9;
+        }
+</style>
+
+@Scripts.Render("~/bundles/createSlideShow")
+    <table>
+    <tr><td><p>Введите название сайта :</p></td></tr>
+        <tr><td><input type="text" id="Name" name="NameSite" /> </td>
+    </tr>
+    <tr>
+        <td><p>Описание :</p></td></tr>
+       <tr> <td><textarea cols="100" id="Textarea" name="myTextarea" rows="5"></textarea></td><>
+    </tr>
+
+    <tr>
+        <td>
+            <p>
+                <h3>Добавьте логотип</h3>
+
+                <div>
+                    <input type="file" name="upload" id="uploadFile" /><br />
+                    <button id="submit">Загрузить</button>
+                </div>
+
+                @section scripts{
+                    <script type="text/javascript">
+
+    $('#submit').on('click', function (e) {
+        e.preventDefault();
+        var files = document.getElementById('uploadFile').files;
+        if (files.length > 0) {
+            if (window.FormData !== undefined) {
+                var data = new FormData();
+                for (var x = 0; x < files.length; x++) {
+                    data.append("file" + x, files[x]);
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Upload", "Home")',
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    success: function (result) {
+ 
+                    },
+                    error: function (xhr, status, p3) {
+
+                    }
+                });
+            } else {
+                alert("Браузер не поддерживает загрузку файлов HTML5!");
+            }
+        }
+    });
+                    </script>
+                }
+            </p>
+        </td>
+        <td></td>
+    </tr>
+
+        <tr><td><p>Выберите тему сайта :</p></td></tr>
+    
+        <td>
+            <div class="thumb">
+            <img align="left" id="1" alt="Логотип" src="http://res.cloudinary.com/dgy6x5krf/image/upload/v1469794361/wsze6wf3icdeasilcn07.jpg" style="width: 350px; height: 320px; "/>
+            <img align="left" id="2" alt="Логотип" src="http://res.cloudinary.com/dgy6x5krf/image/upload/v1469794594/mzad7xxvfpqkn5mx7fgb.jpg" style="width: 350px; height: 320px; "/> 
+            <img align="left" id="3" alt="Логотип" src="http://res.cloudinary.com/dgy6x5krf/image/upload/v1469618536/n9kt7wacnpj20rklza97.jpg" style="width: 350px; height: 320px; "/>      
+            <div>
+        </td>
+
+        <tr><td><p>Выберите шаблон меню :</p></td></tr>
+
+        <td>
+            <div class="thumbMenu">
+                <img align="left" data-id="1" alt="Меню" src="http://res.cloudinary.com/dgy6x5krf/image/upload/v1469813915/parusnik_korabl_more_oblaka_luna%D1%86%D0%B9%D1%83%D0%B9%D1%86_mvxgom.jpg" style="width: 350px; height: 320px; " />
+                <img align="left" data-id="2" alt="Меню" src="http://res.cloudinary.com/dgy6x5krf/image/upload/v1469813915/qweqwe_tcc3o4.jpg" style="width: 350px; height: 320px; " />
+                <div>
+        </td>
+    
+
+
+    <tr>
+        <td><input id="save" type="button" class="btn btn-success" value="Сохранить" /> </td>
+        <td></td>
+    </tr>
+</table>
 

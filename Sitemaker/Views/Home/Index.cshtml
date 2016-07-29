@@ -3,7 +3,4 @@
     ViewBag.Title = @Resources.Resource.IndexHeader;
 }
 
-<h2>@Resources.Resource.IndexHeader</h2>
-<p>
-    @Html.ActionLink(@Resources.Resource.CreateLink, "Create")
-</p>
+<td><a href="@Url.Action("CreateSite", "Home", new { user_id = (string)Session["CurrentUserId"]})" class="btn btn-primary">Create Site</a></td>
