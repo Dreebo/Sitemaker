@@ -1,0 +1,81 @@
+﻿ .ui-draggable {
+            padding: 15px;
+            border-style: solid;
+            border-width: 1px;
+            width: 130px;
+            height: 100px;
+            margin: 10px;
+            float: left;
+        }
+
+        #borderall{
+            border: dashed;
+            overflow:hidden;
+            width: 1000px;
+            height: 800px;
+            padding: 0px;
+        }
+
+        #tabs {
+            font-size: 0.7em;
+            height: 500px;
+        }
+
+        #dragText {
+            width: 200px;
+            height: 10px;
+            margin: 0px;
+        }
+
+        #dragMenu {
+            width: 200px;
+            height: 10px;
+            margin: 0px;
+        }
+
+        #dragVideo {
+            width: 200px;
+            height: 10px;
+            margin: 0px;
+        }
+
+        #wrapText {
+            border: 1px solid;
+            width: 200px;
+            height: 400px;
+            padding: 0px;
+        }
+
+        #wrapImage {
+            border: 1px solid;
+            width: 700px;
+            height: 400px;
+            padding: 0px;
+        }
+
+        #wrapVideo {
+            border: 1px solid;
+            width: 900px;
+            height: 400px;
+            padding: 0px;
+        }
+
+                    #photoList {
+        list-style-type: none;
+        margin-top:10px;
+        padding: 0;
+        width: 100%;
+        overflow:hidden;
+        min-height:150px;
+
+    }
+
+        #photoList li {
+            margin: 10px 3px 10px 3px;
+            padding: 1px;
+            float: left;
+            width: 120px;
+            height: 120px;
+            text-align: center;
+        }
+

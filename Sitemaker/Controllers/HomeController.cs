@@ -50,6 +50,20 @@ namespace Sitemaker.Controllers
             return cloudinary.Api.UrlImgUp.BuildUrl(String.Format("{0}.{1}", uploadResult.PublicId, uploadResult.Format));
         }
 
+        public ActionResult CreatePage(int? id)
+        {
+            Site site;
+            using(var db = new MyDbContext())
+            {
+                site = db.Sites.Where(p => p.Id == id).SingleOrDefault();
+            }
+            if (site == null)
+            {
+                site = new Site();
+            }
+            return View("CreatePage", site);
+        }
+
         [HttpPost]
         public ActionResult SaveSite(Site site)
         {

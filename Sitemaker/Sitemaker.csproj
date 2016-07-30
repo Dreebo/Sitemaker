@@ -266,10 +266,15 @@
     <Compile Include="Migrations\201607300922525_change Site.Designer.cs">
       <DependentUpon>201607300922525_change Site.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607301200526_Add table Page.cs" />
+    <Compile Include="Migrations\201607301200526_Add table Page.Designer.cs">
+      <DependentUpon>201607301200526_Add table Page.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Page.cs" />
     <Compile Include="Models\Site.cs" />
     <Compile Include="Models\TestClass.cs" />
     <Compile Include="MyDbContext.cs" />
@@ -287,6 +292,32 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\backgroundcell.jpg" />
+    <Content Include="Content\Images\bg-dark.jpg" />
+    <Content Include="Content\Images\bg-lights.jpg" />
+    <Content Include="Content\Images\bg.jpg" />
+    <Content Include="Content\Images\cloud1.png" />
+    <Content Include="Content\Images\cloud2.png" />
+    <Content Include="Content\Images\cloud3.png" />
+    <Content Include="Content\Images\cloud4.png" />
+    <Content Include="Content\Images\cloud5.png" />
+    <Content Include="Content\Images\cloud6.png" />
+    <Content Include="Content\Images\cloud7.png" />
+    <Content Include="Content\Images\en.png" />
+    <Content Include="Content\Images\medal.png" />
+    <Content Include="Content\Images\pause.png" />
+    <Content Include="Content\Images\play.png" />
+    <Content Include="Content\Images\ru.png" />
+    <Content Include="Content\Images\template1.jpg" />
+    <Content Include="Content\Images\template2.jpg" />
+    <Content Include="Content\Images\template3.jpg" />
+    <Content Include="Content\Images\template4.jpg" />
+    <Content Include="Content\Images\template5.jpg" />
+    <Content Include="Content\Images\template6.jpg" />
+    <Content Include="Content\Images\template7.jpg" />
+    <Content Include="Content\PageLayout.css" />
+    <Content Include="Content\PageLayout2.css" />
+    <Content Include="Content\PageLayout3.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -306,9 +337,17 @@
     <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
     <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery-ui.min.css" />
     <Content Include="Content\themes\base\menu.css" />
     <Content Include="Content\themes\base\progressbar.css" />
     <Content Include="Content\themes\base\resizable.css" />
@@ -343,13 +382,18 @@
     <Content Include="Scripts\dropzone\dropzone.js" />
     <Content Include="Scripts\dropzone\dropzone.min.css" />
     <Content Include="Scripts\dropzone\dropzone.min.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery-1.12.4-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.12.4.js" />
+    <Content Include="Scripts\jquery-1.12.4.min.js" />
+    <Content Include="Scripts\jquery-1.12.4.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.12.0.js" />
+    <Content Include="Scripts\jquery-ui-1.12.0.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\locationContent.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -392,6 +436,7 @@
     <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Home\dsfsdg.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
+    <Content Include="Views\Home\CreatePage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -404,7 +449,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201607282331219_InitialCreate.resx">
@@ -418,6 +462,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607300922525_change Site.resx">
       <DependentUpon>201607300922525_change Site.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607301200526_Add table Page.resx">
+      <DependentUpon>201607301200526_Add table Page.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Resource.en.resx">
       <CustomToolNamespace>Resources</CustomToolNamespace>

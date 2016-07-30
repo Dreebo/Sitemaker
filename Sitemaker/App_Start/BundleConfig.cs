@@ -11,6 +11,9 @@ namespace Sitemaker
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/jquery-ui").Include(
+                        "~/Scripts/jquery-ui-{version}.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/dropzone").Include(
                         "~/Scripts/dropzone.js"));
 
@@ -19,7 +22,11 @@ namespace Sitemaker
 
             bundles.Add(new ScriptBundle("~/bundles/createSlideShow").Include(
                         "~/Scripts/CreateSlideShow.js"));
-            
+
+            bundles.Add(new ScriptBundle("~/bundles/locationContent").Include(
+                      "~/Scripts/locationContent.js"));
+
+
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -35,6 +42,12 @@ namespace Sitemaker
                         "~/Content/site.css",
                         "~/Content/basic.css",
                         "~/Content/dropzone.css"));
+
+            bundles.Add(new StyleBundle("~/Content/PageLayout").Include(
+                        "~/Content/PageLayout.css"));
+
+            bundles.Add(new StyleBundle("~/Content/PageLayout2").Include(
+                       "~/Content/PageLayout2.css"));
         }
     }
 }

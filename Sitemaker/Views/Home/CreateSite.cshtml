@@ -94,7 +94,7 @@
             </div>
         </td>*@
         <tr>
-            <td><input id="addPage" type="button" class="btn btn-success" value="Добавить страницу" /></td>
+            <td><a href="@Url.Action("CreatePage", "Home", new { id = Model.Id})" class="btn btn-primary">Create Page</a></td>
             <td><input id="saveChange" type="button" class="btn btn-success" value="Сохранить изменения" /> </td>
         </tr>
 

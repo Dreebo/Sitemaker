@@ -1,0 +1,53 @@
+﻿ .ui-draggable {
+            padding: 15px;
+            border-style: solid;
+            border-width: 1px;
+            width: 130px;
+            height: 100px;
+            margin: 10px;
+            float: left;
+        }
+
+        #tabs {
+            font-size: 0.7em;
+            height: 500px;
+        }
+
+        #dragText {
+            width: 20px;
+            height: 100px;
+            margin: 0px;
+        }
+
+        #dragImage {
+            width: 200px;
+            height: 10px;
+            margin: 0px;
+        }
+
+        #dragVideo {
+            width: 200px;
+            height: 10px;
+            margin: 0px;
+        }
+
+        #wrapText {
+            border: 1px solid;
+            width: 200px;
+            height: 400px;
+            padding: 0px;
+        }
+
+        #wrapImage {
+            border: 1px solid;
+            width: 700px;
+            height: 400px;
+            padding: 0px;
+        }
+
+        #wrapVideo {
+            border: 1px solid;
+            width: 900px;
+            height: 400px;
+            padding: 0px;
+        }

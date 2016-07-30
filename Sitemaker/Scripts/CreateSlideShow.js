@@ -39,13 +39,7 @@
                 'MenuId': model.selectedMenu,
                 "Logo": reader.result
             });
-            //$.ajax({
-            //    type: 'POST',
-            //    url: "Upload",
-            //    data: { data: reader.result },
-            //    success: function (newUrl) {
-            //    }
-            //});
+
             $.ajax({
                 url: 'SaveSite',
                 type: 'POST',

@@ -1,0 +1,33 @@
+﻿@*@model Sitemaker.Models.Site
+@{Layout = null;}
+<html>
+<head>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+    @{ if (Model.MenuId == 1)
+        { @Styles.Render("~/Content/PageLayout")}
+        else { @Styles.Render("~/Content/PageLayout2")}
+        }
+    @Scripts.Render("~/bundles/locationContent")
+
+</head>
+<body>
+    <div id="borderall">
+            @*<div id="wrapText">
+                <div id="dragText" class="ui-widget ui-widget-content"></div>
+            </div>
+            <div id="wrapImage">
+                <div id="dragImage" class="ui-widget ui-widget-content"></div>
+            </div>
+            <div id="wrapVideo">
+                <div id="dragVideo" class="ui-widget ui-widget-content"></div>
+            </div>*@
+        </div>
+
+
+</body>
+</html>*@
+
+
+
