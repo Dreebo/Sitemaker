@@ -113,3 +113,4 @@ D:\itransition\Sitemaker\Sitemaker\bin\CloudinaryDotNet.dll
 D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.InitialCreate.resources
 D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.addPathLogo.resources
 D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.addmenuIdandtemplateId.resources
+D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.changeSite.resources

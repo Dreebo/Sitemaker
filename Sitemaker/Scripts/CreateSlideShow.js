@@ -26,15 +26,41 @@
         $(".thumbMenu img.selected").each(function (index, element) {
             model.selectedMenu = $(element).attr("data-id");
         })
-        $.ajax({
-            url: "SaveSite",
-            type: "POST",            
-            data: {id : model.selectedTemplate, name : model.name, about : model.about, dataid : model.selectedMenu},
-            success: function (response) {
-              
-               //window.location.replace("http://localhost:50489/Home/Create");
-            }
-        });
+    
+
+        let file = $("#uploadFile")[0].files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = function () {
+            let dataObject = JSON.stringify({
+                'Name': model.name,
+                'About': model.about,
+                'TemplateId': model.selectedTemplate,
+                'MenuId': model.selectedMenu,
+                "Logo": reader.result
+            });
+            //$.ajax({
+            //    type: 'POST',
+            //    url: "Upload",
+            //    data: { data: reader.result },
+            //    success: function (newUrl) {
+            //    }
+            //});
+            $.ajax({
+                url: 'SaveSite',
+                type: 'POST',
+                contentType: 'application/json',
+                success: function (response) {
+                    if (response.result == 'Redirect')
+                        window.location = response.url;
+                },
+                fail: function () {
+                    alert(data);
+                },
+                data: dataObject
+            });
+        }
+   
     });
 })
 
