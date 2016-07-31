@@ -1,20 +1,235 @@
-﻿@*@model Sitemaker.Models.Site
+﻿@model Sitemaker.Models.Site
 @{Layout = null;}
-<html>
+
+@{ if (Model.TemplateId == 1)
+    { @Styles.Render("~/Content/StyleGray")}
+    else
+    { @Styles.Render("~/Content/StyleWhight")}
+}
+@Scripts.Render("~/bundles/locationContent")
+
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+ <!--<![endif]-->
+<head>
+    <head>
+        <meta charset="UTF-8">
+
+        <meta name="viewport" content="width=device-width">
+
+        <title>Sitemaker</title>
+
+        <link rel="shortcut icon" type="image/png" href="favicon.png">
+
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="css/style.css">
+
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    </head>
+</head>
+
+<body>
+    <!-- Prompt IE 7 users to install Chrome Frame -->
+    <!--[if lt IE 8]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+    <div class="container">
+@if (Model.MenuId == 1 || Model.MenuId == 3)
+{
+    <header id="navtop">
+        <nav class="fright">
+            <ul>
+                <li><a href="index.html" class="navactive">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="works.html">Works</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+}
+
+        
+        <div class="home-page main">
+            <hr>
+
+        @if (Model.MenuId == 2 || Model.MenuId == 3)
+        {
+            <aside class="grid col-one-quarter mq2-col-full">
+                <menu>
+                    <p class="fleft"><h3>Menu</h3></p>
+                    <ul>
+                        <li><a href="index.html" class="navactive">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="works.html">Works</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </menu>
+            </aside>
+        }
+            <section class="grid-wrap">
+
+
+                <div class="grid col-one-half mq2-col-full">
+                    <h1>
+                        Web design <br>
+                        Web Development <br>
+                        Graphic Design
+                    </h1>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit.
+                    </p>
+                    <p>
+                        Vivamus pharetra posuere sapien. Nam consectetuer. Sed aliquam, nunc eget euismod ullamcorper, lectus nunc ullamcorper orci, fermentum bibendum enim nibh eget ipsum.
+                    </p>
+                </div>
+
+                <div class="slider grid col-one-half mq2-col-full">
+                    <img src="img/img2.jpg">
+                </div>
+
+            </section>
+            <hr>
+            <section class="grid-wrap">
+
+
+                <div class="grid col-one-half mq2-col-full">
+                    <h1>
+                        Web design <br>
+                        Web Development <br>
+                        Graphic Design
+                    </h1>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit.
+                    </p>
+                    <p>
+                        Vivamus pharetra posuere sapien. Nam consectetuer. Sed aliquam, nunc eget euismod ullamcorper, lectus nunc ullamcorper orci, fermentum bibendum enim nibh eget ipsum.
+                    </p>
+                </div>
+
+                <div class="slider grid col-one-half mq2-col-full">
+                    <img src="img/img.jpg">
+                </div>
+
+            </section>
+        </div> <!--main-->
+        <div class="divide-top">
+            <footer class="grid-wrap">
+                <ul class="grid col-one-third social">
+                    <li><a href="#">RSS</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Google+</a></li>
+                    <li><a href="#">Flickr</a></li>
+                </ul>
+
+                <div class="up grid col-one-third ">
+                    <a href="#navtop" title="Go back up">&uarr;</a>
+                </div>
+
+                <nav class="grid col-one-third ">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="works.html">Works</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </footer>
+        </div>
+    </div>
+    <!-- Javascript - jQuery -->
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.7.2.min.js"><\/script>')</script>
+    <!--[if (gte IE 6)&(lte IE 8)]>
+    <script src="js/selectivizr.js"></script>
+    <![endif]-->
+    <script src="js/jquery.flexslider-min.js"></script>
+    <script src="js/scripts.js"></script>
+    <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID. -->
+    <script>
+  var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+                g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+                s.parentNode.insertBefore(g,s)}(document,'script'));
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@<html>
 <head>
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-    @{ if (Model.MenuId == 1)
-        { @Styles.Render("~/Content/PageLayout")}
-        else { @Styles.Render("~/Content/PageLayout2")}
-        }
-    @Scripts.Render("~/bundles/locationContent")
-
+   
 </head>
 <body>
     <div id="borderall">
-            @*<div id="wrapText">
+            <div id="wrapText">
                 <div id="dragText" class="ui-widget ui-widget-content"></div>
             </div>
             <div id="wrapImage">
@@ -22,12 +237,163 @@
             </div>
             <div id="wrapVideo">
                 <div id="dragVideo" class="ui-widget ui-widget-content"></div>
-            </div>*@
+            </div>
         </div>
 
 
 </body>
 </html>*@
+
+@*<html>
+<head>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"
+          rel="stylesheet" type="text/css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+    <style type="text/css">
+        #drag1 {
+            padding: 15px;
+            border-style: solid;
+            border-width: 1px;
+            width: 130px;
+            height: 100px;
+        }
+
+        #drag2 {
+            padding: 15px;
+            border-style: solid;
+            border-width: 1px;
+            width: 130px;
+            height: 100px;
+        }
+
+         #drag3 {
+            padding: 15px;
+            border-style: solid;
+            border-width: 1px;
+            width: 130px;
+            height: 100px;
+        }
+
+        .ui-draggable-dragging {
+            background-color: #ecbfda;
+        }
+
+        #drop1 {
+            left: 400px;
+            top: 200px;
+            padding: 15px;
+            border-style: solid;
+            border-width: 1px;
+            width: 300px;
+            height: 100px;
+        }
+        #drop2 {
+            left: 400px;
+            top: 200px;
+            padding: 15px;
+            border-style: solid;
+            border-width: 1px;
+            width: 130px;
+            height: 100px;
+        }
+        #drop3 {
+            left: 400px;
+            top: 200px;
+            padding: 15px;
+            border-style: solid;
+            border-width: 1px;
+            width: 130px;
+            height: 100px;
+        }
+    </style>
+    <style type="text/css">
+        #slider {
+            margin: 8px;
+        }
+    </style>
+    <script type="text/javascript">
+$(document).ready(function() {
+
+   $("#slider").slider();
+
+});
+    </script>
+</head>
+<body>
+    <p>Вы можете перетаскивать ползунок расположенный ниже c помощью мышки.</p>
+    <div id="slider"></div>
+    <script type="text/javascript">
+$(document).ready(function(){
+    $("#drag1").draggable({ stack: "#drop1" });
+    $("#drag1").draggable({ stack: "#drop2", revert: true });
+    $("#drag1").draggable({ stack: "#drop3", revert: true });
+    $("#drag2").draggable({ stack: "#drop1", revert: true });
+    $("#drag2").draggable({ stack: "#drop2" });
+    $("#drag2").draggable({ stack: "#drop3", revert: true });
+    $("#drag3").draggable({ stack: "#drop1", revert: true });
+    $("#drag3").draggable({ stack: "#drop2", revert: true });
+    $("#drag3").draggable({ stack: "#drop3" });
+    $("#drop1").draggable();
+    $("#drop2").draggable();
+    $("#drop3").draggable();
+    $("#drop1").droppable({
+      accept:"#drag1",
+      over:function(){
+          $("#drop1").css("background-color", "#d7fa99");
+          
+      },
+      drop:function(){
+         $("#drag1").css("display","none");
+         $("#drop1").css("background-color", "#c4f66f");
+         $("#drop1").html("");
+         document.getElementById('drop1').innerHTML += "<textarea type=\"text\"/>";
+         $("#drop1").resizable();
+      }
+    });
+
+    $("#drop2").droppable({
+        accept: "#drag2",
+        over: function () {
+            $("#drop2").css("background-color", "#d7fa99");
+
+        },
+        drop: function () {
+            $("#drag2").css("display", "none");
+            $("#drop2").css("background-color", "#c4f66f");
+            $("#drop2").resizable();
+        }
+    });
+
+    $("#drop3").droppable({
+        accept: "#drag3",
+        over: function () {
+            $("#drop3").css("background-color", "#d7fa99");
+
+        },
+        drop: function () {
+            $("#drag3").css("display", "none");
+            $("#drop3").css("background-color", "#c4f66f");
+            $("#drop3").resizable();
+        }
+    });
+
+});
+    </script>
+    </head>
+    <body>
+        <div id="drag1" class="ui-widget ui-corner-all">Text </div>
+        <div id="drag2" class="ui-widget ui-corner-all">Image </div>
+        <div id="drag3" class="ui-widget ui-corner-all">Video </div>
+        <div id="drop1" class="ui-widget ui-corner-all"></p>For text</div>
+        <div id="drop2" class="ui-widget ui-corner-all"></p>For Iamge</div>
+        <div id="drop3" class="ui-widget ui-corner-all"></p>For Video</div>
+    </body>
+</html>*@
+
+
+
+
 
 
 

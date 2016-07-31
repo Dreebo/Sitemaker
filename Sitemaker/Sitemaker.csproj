@@ -318,6 +318,8 @@
     <Content Include="Content\PageLayout.css" />
     <Content Include="Content\PageLayout2.css" />
     <Content Include="Content\PageLayout3.css" />
+    <Content Include="Content\style_gray.css" />
+    <Content Include="Content\style_white.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -365,6 +367,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\.gif" />
+    <Content Include="img\background.jpg" />
+    <Content Include="img\background2.jpg" />
+    <Content Include="img\img.jpg" />
+    <Content Include="img\img2.jpg" />
+    <Content Include="img\logo.png" />
+    <Content Include="img\stripes.png" />
+    <Content Include="img\team.jpg" />
+    <Content Include="img\zoom.png" />
     <Content Include="Scripts\ai.0.22.19-build00125.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -372,6 +383,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="img\.DS_Store" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\CreateSlideShow.js" />
     <Content Include="Scripts\dropzone\basic.css" />

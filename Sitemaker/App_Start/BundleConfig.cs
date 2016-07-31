@@ -43,11 +43,11 @@ namespace Sitemaker
                         "~/Content/basic.css",
                         "~/Content/dropzone.css"));
 
-            bundles.Add(new StyleBundle("~/Content/PageLayout").Include(
-                        "~/Content/PageLayout.css"));
+            bundles.Add(new StyleBundle("~/Content/StyleGray").Include(
+                        "~/Content/style_gray.css"));
 
-            bundles.Add(new StyleBundle("~/Content/PageLayout2").Include(
-                       "~/Content/PageLayout2.css"));
+            bundles.Add(new StyleBundle("~/Content/StyleWhight").Include(
+                       "~/Content/style_white.css"));
         }
     }
 }
