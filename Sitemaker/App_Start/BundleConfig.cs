@@ -26,6 +26,10 @@ namespace Sitemaker
             bundles.Add(new ScriptBundle("~/bundles/locationContent").Include(
                       "~/Scripts/locationContent.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/loadTemplate").Include(
+                      "~/Scripts/LoadTemplate.js",
+                      "~/Scripts/MenuDroppable.js"));
+
 
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
@@ -42,6 +46,9 @@ namespace Sitemaker
                         "~/Content/site.css",
                         "~/Content/basic.css",
                         "~/Content/dropzone.css"));
+
+            bundles.Add(new StyleBundle("~/Content/Layout").Include(
+                       "~/Content/Layout.css"));
 
             bundles.Add(new StyleBundle("~/Content/StyleGray").Include(
                         "~/Content/style_gray.css"));

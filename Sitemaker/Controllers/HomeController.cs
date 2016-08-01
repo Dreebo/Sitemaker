@@ -76,6 +76,18 @@ namespace Sitemaker.Controllers
             return Json(new { result = "Redirect", url = Url.Action("CreateSite", "Home", new { id = site.Id }) });
         }
 
+        [HttpPost]
+        public ActionResult LoadTemplate(string id)
+        {
+            return PartialView("template/" + id);
+        }
+
+        [HttpPost]
+        public ActionResult LoadMenuEditor()
+        {
+            return PartialView("template/MenuEditor");
+        }
+
         public ActionResult ChangeCulture(string lang)
         {
             string returnUrl = Request.UrlReferrer.AbsolutePath;
