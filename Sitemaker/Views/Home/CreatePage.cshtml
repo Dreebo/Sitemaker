@@ -81,20 +81,39 @@
                     <div class="main-form center-block" id="main-form">
                     </div>
                 </div>
-                    <div class="allbut" id="allbutId"></div>
+                    <div class="allbut " id="allbutId"></div>
+                <div id="dialog" class="dialog" style="display: none">
+                    <input type="text" class="mytext" />
+                </div>
 
                 <div id="inputtext" style="display: none">
-                    <div style="border: solid; height: 50px" class="content">
-                        <input type="text" class="mytext" />
-                        <input type="button" value="delete" class="buttonDelete btn btn-danger" />
+                    <div id="text" style="border: solid; height: 50px" class="content">
+                        <textarea type="text" id="link" class="form-control" rows="5" ></textarea>   
                     </div>
                 </div> 
+
+                <div id="inputphoto" style="display: none">
+                    <div id="photo" style="border: solid; height: 50px" class="content">
+                        <input type="file" name="upload" id="uploadFile" />
+                    </div>
+                </div> 
+
+                <div id="inputvideo" style="display: none">
+                    <div id="linkall" style="border: solid; height: 50px" class="content">
+                        <input type="text" class="mytext" id="linkvideo"/>                    
+                    </div>
+                </div> 
+
+                
 
             </section>
             <hr>
             <section class="grid-wrap">
 
                 <div class="grid col-one-half mq2-col-full" id="drag1">
+                    <div id="dialog" class="dialog" >                      
+                    </div>
+
                     <h1>
                         Web design <br>
                         Web Development <br>
@@ -161,7 +180,7 @@
     </script>
     <script type="text/javascript">
             $(document).ready(function() {
-          LoadMenuEditor();
+                LoadMenuEditor();
         });
     </script>
 </body>

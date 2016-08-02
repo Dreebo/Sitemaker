@@ -85,6 +85,9 @@
     background: gray;
 }
 .allbut{
+    position: fixed;
+    right: 10px;
+    top: 10px;
     border: dashed;
 }
  .ui-draggable {
@@ -124,3 +127,6 @@ border-width:1px;
 width:10px;
 height:10px;
 }
+   .dialog{
+       visibility: hidden;
+   }
