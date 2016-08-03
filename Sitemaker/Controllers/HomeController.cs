@@ -83,6 +83,13 @@ namespace Sitemaker.Controllers
         }
 
         [HttpPost]
+        public ActionResult SavePage(Page page)
+        {
+                page.HtmlCode = page.HtmlCode.Replace("<textarea ", "<textarea disabled ");
+                return PartialView();
+        }
+
+        [HttpPost]
         public ActionResult LoadMenuEditor()
         {
             return PartialView("template/MenuEditor");

@@ -79,8 +79,18 @@ function LoadScript() {
     }, 20);
 };
 
-function SearchInfo() {
-  //  var contentText = document.getElementById("#text").innerHTML
-    //var contentImage = document.getElementById(image).innerHTML
-    //var contentVideo = document.getElementById(video).innerHTML
+function SavePage() {
+    var page = {
+        Preview: $(".no-js").html()
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: "/Home/SavePage",
+        dataType: 'text',
+        data: JSON.stringify(page),
+        contentType: "application/json; charset=utf-8",
+        traditional: true,
+        success: function (data) { }
+    });
 };
