@@ -17,9 +17,141 @@
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!-->
+
 <html class="no-js" lang="en">
  <!--<![endif]-->
 <head>
+    <style>
+        .input-formName, .input-formLink, .input-formNameSide, .input-formLinkSide {
+            height: 2em;
+            width: 7em;
+        }
+
+        .inputs ul {
+            padding: 4px;
+            margin: 3px;
+        }
+
+            .inputs ul li {
+                padding: 2px;
+                margin: 0;
+            }
+    </style>
+
+    <script>
+$(document).ready(function() {
+
+    var i = document.getElementById('topBarForm')?document.getElementById('topBarForm').getElementsByClassName('field').length + 1:0;
+    //var i = document.getElementById('topBarForm').getElementsByClass('field').length+1;
+
+        //('input').size()/2 + 1;
+
+	$('#add').click(function () {
+
+        if(i<19){
+            $('<div style="display: inline" class="field"><ul>' +
+                    '<li style="display: block;"><input type="text"  id="Name" class="input-formName" placeholder="Name"></li>' +
+                        '<li style="display: block;"><input type="text"  id="Link" class="input-formLink" placeholder="Link"></li>' +
+                    '</ul></div>').fadeIn('slow').appendTo('.inputs');
+	    i++;
+}
+	});
+
+	$('#remove').click(function() {
+	if(i > 1) {
+	    $('.field:last').remove();
+		i--;
+	}
+	});
+
+// here's our click function for when the forms submitted
+
+	$('#submit').click(function(){
+
+
+	    var answers = [];
+	    var names = [];
+	    var links = [];
+	    var topBar = [];
+	    topBar.push('<ul>');
+	    $('.input-formName').each(function() {
+	            names.push($(this).val());
+	        });
+	    $.each($('.input-formLink'),
+	        function () {
+	            links.push($(this).val());
+	        });
+	    for (var k = 0; k < names.length; k++) {
+	        var item = '\nname:' + names[k] + ' link:' + links[k];
+	        answers.push(item);
+	        topBar.push('<li><a href="' + links[k] + '">' + names[k] + '</a></li>');
+	    }
+	    topBar.push('</ul>');
+    if(answers.length == 0) {
+        answers = "none";
+    }
+	alert(answers);
+	document.getElementById('navtop-block').innerHTML = topBar;
+	return false;
+	});
+
+
+	var j = document.getElementById('sideBarForm')?document.getElementById('sideBarForm').getElementsByClassName('fieldSide').length + 1:0;
+
+	$('#addSide').click(function () {
+
+	    if (j< 19) {
+	        $('<div style="display: inline" class="fieldSide">' +
+	            '<input type="text" id="Name" class="input-formNameSide" placeholder="Name">' +
+	            '<input type="text" id="Link" class="input-formLinkSide" placeholder="Link">' +
+	            '</div>').fadeIn('slow').appendTo('.inputsSide');
+	        j++;
+	    }
+	});
+
+	$('#removeSide').click(function () {
+	    if (j> 1) {
+	        $('.fieldSide:last').remove();
+	        j--;
+	    }
+	});
+
+    // here's our click function for when the forms submitted
+
+	$('#submitSide').click(function () {
+
+
+	    var answers = [];
+	    var names = [];
+	    var links = [];
+	    var topBar = [];
+	    topBar.push('<ul>');
+	    $('.input-formNameSide').each(function () {
+	        names.push($(this).val());
+	    });
+	    $.each($('.input-formLinkSide'),
+	        function () {
+	            links.push($(this).val());
+	        });
+	    for (var k = 0; k < names.length; k++) {
+	        var item = '\nname:' + names[k] + ' link:' + links[k];
+	        answers.push(item);
+	        topBar.push('<li><a href="' + links[k] + '">' + names[k] + '</a></li>');
+	    }
+	    topBar.push('</ul>');
+	    if (answers.length == 0) {
+	        answers = "none";
+	    }
+	    alert(answers);
+	    document.getElementById('navside-block').innerHTML = topBar;
+	    return false;
+	});
+
+
+});
+
+    </script>>
+
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
 
@@ -39,40 +171,82 @@
     <!-- Prompt IE 7 users to install Chrome Frame -->
     <!--[if lt IE 8]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
     <div class="container">
-@if (Model.MenuId == 1 || Model.MenuId == 3)
-{
-    <header id="navtop">
-        <nav class="fright">
-            <ul>
-                <li><a href="index.html" class="navactive">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="works.html">Works</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-}
+        @if (Model.MenuId == 1 || Model.MenuId == 3)
+        {
+            <header id="navtop">
+                <nav class="fright" id="navtop-block">
+
+                    <div class="fright" style="margin: 2em; background: 0;">
+                        <a id="add" class="button">Добавить</a> | <a id="remove" class="button">Удалить</a>|<a id="submit" value="OK" class="button">Сохранить</a>
+                    </div>
+
+                    <form id="topBarForm">
+                        <div style="display: block; align-content: center; clear: both">
+
+                            <div style="display: block; width: 100%;" class="inputs">
+
+                                <div style="display: inline" class="field">
+                                    <ul>
+                                        <li style="display: block;"><input type="text" id="Name" class="input-formName" placeholder="Name"></li>
+                                        <li style="display: block;"><input type="text" id="Link" class="input-formLink" placeholder="Link"></li>
+                                    </ul>
+                                </div>
+                                <div style="display: inline" class="field">
+                                    <ul>
+                                        <li style="display: block;"><input type="text" id="Name" class="input-formName" placeholder="Name"></li>
+                                        <li style="display: block;"><input type="text" id="Link" class="input-formLink" placeholder="Link"></li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+
+                </nav>
+            </header>
+        }
 
 
         <div class="home-page main">
             <hr>
 
         @if (Model.MenuId == 2 || Model.MenuId == 3)
-        {
+            {
             <aside class="grid col-one-quarter mq2-col-full">
-                <menu>
-                    <p class="fleft"><h3>Menu</h3></p>
-                    <ul>
-                        <li><a href="index.html" class="navactive">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="works.html">Works</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </menu>
+                <div class="grid-wrap">
+                    <menu id="navside-block">
+                        <p class="fleft">
+                            <h3>Menu</h3>
+                        </p>
+
+                        <div class="fleft" style="height: 9em; background: 0;">
+                            <p><a id="addSide" class="button">Добавить</a></p>
+                            <p><a id="removeSide" class="button">Удалить</a></p>
+                            <p><a id="submitSide" value="OK" class="button">Сохранить</a></p>
+                        </div>
+
+                        <form id="sideBarForm">
+                            <div style="display: block; align-content: center; clear: both">
+
+                                <div style="display: block; width: 100%; margin: 4px;" class="inputsSide">
+
+                                    <div style="display: inline" class="fieldSide">
+                                        <input type="text" id="Name" class="input-formNameSide" placeholder="Name">
+                                        <input type="text" id="Link" class="input-formLinkSide" placeholder="Link">
+                                    </div>
+                                    <div style="display: inline" class="fieldSide">
+                                        <input type="text" id="Name" class="input-formNameSide" placeholder="Name">
+                                        <input type="text" id="Link" class="input-formLinkSide" placeholder="Link">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+
+
+
+                    </menu>
+                </div>
             </aside>
         }
             <section class="grid-wrap">
@@ -94,7 +268,7 @@
 
                 <div id="inputphoto" style="display: none">
                     <div id="photo" style="border: solid; height: 50px" class="content">
-                        <input type="file" name="upload" id="uploadFile" />
+                        <input type="file" name="upload" id="uploadFiles" />
                     </div>
                 </div> 
 

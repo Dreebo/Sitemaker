@@ -37,42 +37,50 @@ function LoadScript() {
                 $(this).empty();
                 let draggableId = ui.draggable.attr("id");
 
-                if (draggableId == "dragg1")
-                    $(this).append($('#text').html());
+                if (draggableId == "dragg1") {
+                    var text = $(this);
+                    $(this).append($("#text").html());                   
+                }
 
                 if (draggableId == "dragg2") {
-                    $(this).append($("#photo").html());
-                    $(this).find('#uploadFile').cloudinary_upload_widget(
+                    var image = $(this);
+                    cloudinary.openUploadWidget(
                         {
-                            cloud_name: 'dgy6x5krf', upload_preset: 'ntblzmxf',
-                            cropping: 'server', 'folder': 'user_photos'
-                        },                       
-                            function (error, result) {
-                                $(this).empty();
-                                $(this).append("<img style=\"width:70px; height:70px;\" src=\"" + result[0].secure_url + "\"/>")
+                            cloud_name: 'dgy6x5krf', upload_preset: 'ntblzmxf', 'theme': 'purple'
+                        }, function (error, result) {
+                                image.empty();
+                                image.append("<img style=\"width:70px; height:70px;\" src=\"" + result[0].secure_url + "\"/>");
+                                var contentImage = result[0].secure_url;
                             }
                         );
+                   
                 }
 
                 if (draggableId == "dragg3") {
-                    let main = $(this);
-                    let link = null;
+                    var video = $(this);
+                    var link = null;
                     $('#linkall').dialog({
                         title: 'Введите ссылку',
                         buttons: [{
                             text: "OK", click: function () {
                                 link = $("#linkvideo").val();
                                 if (link !== null) {
-                                    $(main).append("<iframe width=\"560\" height=\"315\" src=\"" + link + "\" frameborder=\"0\" allowfullscreen></iframe>");
+                                    $(video).append("<iframe width=\"560\" height=\"315\" src=\"" + link + "\" frameborder=\"0\" allowfullscreen></iframe>");
                                 }
                                 $(this).dialog("close")
                             }
                         }],
                         resizable: false
                     });
-                       
+                   
                 }
             }
         });
     }, 20);
+};
+
+function SearchInfo() {
+  //  var contentText = document.getElementById("#text").innerHTML
+    //var contentImage = document.getElementById(image).innerHTML
+    //var contentVideo = document.getElementById(video).innerHTML
 };
