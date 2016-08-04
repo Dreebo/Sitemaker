@@ -1,10 +1,9 @@
-﻿@model Sitemaker.Models.Site
+﻿@model Sitemaker.Models.Page
 @{Layout = null;}
-
-@{ if (Model.TemplateId == 1)
-    { @Styles.Render("~/Content/StyleGray")}
-    else
-    { @Styles.Render("~/Content/StyleWhight")}
+@{ if (Model.Site.TemplateId == 1)
+            { @Styles.Render("~/Content/StyleGray")}
+        else
+  { @Styles.Render("~/Content/StyleWhight")}
 }
 @Scripts.Render("~/bundles/locationContent")
 @Scripts.Render("~/bundles/loadTemplate")
@@ -171,7 +170,7 @@ $(document).ready(function() {
     <!-- Prompt IE 7 users to install Chrome Frame -->
     <!--[if lt IE 8]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
     <div class="container">
-        @if (Model.MenuId == 1 || Model.MenuId == 3)
+         @if (Model.Site.MenuId == 1 || Model.Site.MenuId == 3)
         {
             <header id="navtop">
                 <nav class="fright" id="navtop-block">
@@ -210,7 +209,7 @@ $(document).ready(function() {
         <div class="home-page main">
             <hr>
 
-        @if (Model.MenuId == 2 || Model.MenuId == 3)
+       @if (Model.Site.MenuId == 2 || Model.Site.MenuId == 3)
             {
             <aside class="grid col-one-quarter mq2-col-full">
                 <div class="grid-wrap">

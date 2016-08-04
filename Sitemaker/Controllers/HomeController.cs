@@ -34,7 +34,9 @@ namespace Sitemaker.Controllers
             {
                 site = new Site();
             }
-            return View("CreateSite", site);
+            Page Page = new Page();
+            Page.Site = site;
+            return View("CreateSite", Page);
         }
 
         
@@ -50,7 +52,7 @@ namespace Sitemaker.Controllers
             return cloudinary.Api.UrlImgUp.BuildUrl(String.Format("{0}.{1}", uploadResult.PublicId, uploadResult.Format));
         }
 
-        public ActionResult CreatePage(int? id)
+        public ActionResult CreatePage(int? id, int pageId)
         {
             Site site;
             using(var db = new MyDbContext())
@@ -61,7 +63,10 @@ namespace Sitemaker.Controllers
             {
                 site = new Site();
             }
-            return View("CreatePage", site);
+            Page Page = new Page();
+            Page.Site = site;
+            Page.Id = pageId;
+            return View("CreatePage", Page);
         }
 
         [HttpPost]
@@ -83,10 +88,10 @@ namespace Sitemaker.Controllers
         }
 
         [HttpPost]
-        public ActionResult SavePage(Page page)
+        public string SavePage(Page page)
         {
                 page.HtmlCode = page.HtmlCode.Replace("<textarea ", "<textarea disabled ");
-                return PartialView();
+            return page.HtmlCode;
         }
 
         [HttpPost]

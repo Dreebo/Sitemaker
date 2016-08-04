@@ -81,7 +81,7 @@ function LoadScript() {
 
 function SavePage() {
     var page = {
-        Preview: $(".no-js").html()
+        HtmlCode: $(".no-js").html()
     }
 
     $.ajax({
@@ -91,6 +91,9 @@ function SavePage() {
         data: JSON.stringify(page),
         contentType: "application/json; charset=utf-8",
         traditional: true,
-        success: function (data) { }
+        success: function (data) {
+            window.location.replace(url);
+        }
     });
 };
+

@@ -1,4 +1,4 @@
-﻿@model Sitemaker.Models.Site
+﻿@model Sitemaker.Models.Page
 @{
     ViewBag.Title = "CreateSite";
 }
@@ -33,16 +33,17 @@
         }
 </style>
 
+
 @Scripts.Render("~/bundles/createSlideShow")
 <table>
     <tr><td><p>Введите название сайта :</p></td></tr>
-        <tr><td><input type="text" id="Name" value=@Model.Name /> </td>
+        <tr><td><input type="text" id="Name" value=@Model.Site.Name /> </td>
     </tr>
     <tr>
         <td><p>Описание :</p></td></tr>
-       <tr> <td><textarea cols="100" id="Textarea" rows="5">@Model.About </textarea></td>
+       <tr> <td><textarea cols="100" id="Textarea" rows="5">@Model.Site.About </textarea></td>
     </tr>
-@{if (Model.Name == null)
+@{if (Model.Site.Name == null)
     {
                     <tr>
                          <td>
@@ -86,7 +87,7 @@
     }
     else
     {
-        <img style="width:120px; height:120px" src="@Model.Logo" />
+        <img style="width:120px; height:120px" src="@Model.Site.Logo" />
         @*<td>
             <h3>Изменить логотип</h3>
             <div>
@@ -94,7 +95,7 @@
             </div>
         </td>*@
         <tr>
-            <td><a href="@Url.Action("CreatePage", "Home", new { id = Model.Id})" class="btn btn-primary">Create Page</a></td>
+            <td><a href="@Url.Action("CreatePage", "Home", new { id = Model.Site.Id, pageId=Model.Id})" class="btn btn-primary">Create Page</a></td>
             <td><input id="saveChange" type="button" class="btn btn-success" value="Сохранить изменения" /> </td>
         </tr>
 
@@ -102,4 +103,6 @@
 }
 
 </table>
+
+
 

@@ -14,6 +14,7 @@
 
     $("#save").click(
     function () {
+        var url = window.location.href;
         let model = {
             name: $("#Name").val(),
             about: $("#Textarea").val(),
@@ -32,7 +33,7 @@
         var reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = function () {
-            let dataObject = JSON.stringify({
+            var dataObject = JSON.stringify({
                 'Name': model.name,
                 'About': model.about,
                 'TemplateId': model.selectedTemplate,
@@ -57,6 +58,8 @@
    
     });
 })
+
+
 
 
 
