@@ -6,6 +6,8 @@
 
 <h2>Index</h2>
 
+<td><a href="@Url.Action("CreateSite", "Sites", new { user_id = (string)Session["CurrentUserId"]})" class="btn btn-primary">Create Site</a></td>
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>

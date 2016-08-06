@@ -22,7 +22,7 @@ namespace Sitemaker
             routes.MapRoute(
                name: "ForPage",
                url: "{controller}/{action}/{id}/{pageId}",
-               defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional, pageId = UrlParameter .Optional}
+               defaults: new { controller = "Sites", action = "Index", id = UrlParameter.Optional, pageId = UrlParameter .Optional}
            );
 
             

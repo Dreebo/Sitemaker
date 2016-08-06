@@ -1,7 +1,7 @@
 ﻿function LoadTemplate(e) {
     $.ajax({
         type: 'POST',
-        url: "/Home/LoadTemplate",
+        url: "/Sites/LoadTemplate",
         data: { id: e.id },
         success: function (data) {
             $("#main-form").empty();
@@ -15,7 +15,7 @@
     function LoadMenuEditor() {
         $.ajax({
             type: 'POST',
-            url: "/Home/LoadMenuEditor",
+            url: "/Sites/LoadMenuEditor",
             success: function (data) {
                 $("#allbutId").empty();
                 $("#allbutId").append(data);
@@ -80,20 +80,29 @@ function LoadScript() {
 };
 
 function SavePage() {
-    var page = {
-        HtmlCode: $(".no-js").html()
+    let id = window.location.href;
+    let position = id.lastIndexOf("/");
+    id = id.slice(position + 1);
+    let html = $(".no-js").html();
+    var savePage = {
+        Id: id,
+        HtmlCode: html
     }
 
     $.ajax({
         type: 'POST',
-        url: "/Home/SavePage",
+        url: "/Sites/SavePage",
         dataType: 'text',
-        data: JSON.stringify(page),
+        data: JSON.stringify(savePage),
         contentType: "application/json; charset=utf-8",
         traditional: true,
         success: function (data) {
-            window.location.replace(url);
+          let  url = window.location.href;
+          let pos = url.lastIndexOf("/");
+          url = url.slice(0, pos);
+           window.location.replace(url);
         }
     });
 };
+
 
