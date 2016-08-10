@@ -19,11 +19,12 @@
             success: function (data) {
                 $("#allbutId").empty();
                 $("#allbutId").append(data);
+                setTimeout(function () {
+                    LoadScript();
+                }, 1);
             }
         });
-        setTimeout(function () {
-            LoadScript();
-        }, 20);
+      
     }
 
 function LoadScript() {

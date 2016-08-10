@@ -14,5 +14,6 @@ namespace Sitemaker
 
         public DbSet<Site> Sites { get; set; }
         public DbSet<Page> Pages { get; set; }
+        public DbSet<Comment> Comments {get; set;}
     }
 }

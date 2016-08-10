@@ -17,6 +17,8 @@ namespace Sitemaker.Models
         public bool Pablish { get; set; }
         public DateTime Date { get; set; }
         public int MenuId { get; set; }
+        public ICollection<Comment> Comments { get; set; }
+        public int Rating { get; set; }
 
         public Site()
         {

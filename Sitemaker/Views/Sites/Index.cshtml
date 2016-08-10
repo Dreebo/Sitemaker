@@ -4,10 +4,14 @@
 @{
     ViewBag.Title = "Index";
 }
+@Styles.Render("~/Content/Rating")
 
 <style type='text/css'>
     #signature {
 padding-top:20%;
+    }
+    #commet {
+        padding-top:18.5%;
     }
 </style>
 
@@ -18,14 +22,31 @@ padding-top:20%;
     {
         <tr>
             <td>
-               <h2><a href="@Url.Action("OpenSite", "Sites", new {userName = (string)Session["CurrentUserName"], id = item.Id, indicator = false})">@item.Name</a></h2>
+                <h2><a href="@Url.Action("OpenSite", "Sites", new {userName = (string)Session["CurrentUserName"], id = item.Id})">@item.Name</a></h2>
                 <p>
                     <img style="width:120px; height:120px" src="@item.Logo" />
                 </p>
+            <p>
+                <div class="stars">
+                    <form action="">
+                        <input class="star star-5" id="star-5" type="radio" name="star" />
+                        <label class="star star-5" for="star-5"></label>
+                        <input class="star star-4" id="star-4" type="radio" name="star" />
+                        <label class="star star-4" for="star-4"></label>
+                        <input class="star star-3" id="star-3" type="radio" name="star" />
+                        <label class="star star-3" for="star-3"></label>
+                        <input class="star star-2" id="star-2" type="radio" name="star" />
+                        <label class="star star-2" for="star-2"></label>
+                        <input class="star star-1" id="star-1" type="radio" name="star" />
+                        <label class="star star-1" for="star-1"></label>
+                    </form>
+                </div>
+            </p>
                 </td>
                <td> 
                    @item.About
                </td>
+            <td id="commet"><a href="@Url.Action("Comments", "Sites", new {userName = (string)Session["CurrentUserName"], id = item.Id})" class="btn btn-primary">Comments</a></td>
             <td id="signature"><a href="@Url.Action("ShowUser", "Sites", new {userName = (string)Session["CurrentUserName"], siteCreator = item.UserName })">@item.UserName</a>, @item.Date</td>
         </tr>
     }

@@ -370,20 +370,39 @@ namespace Sitemaker.Controllers
             return RedirectToAction("Index");
         }
 
-        //public ActionResult PublishSite(string userName, int id)
-        //{
-        //    Site site;
-        //    using (MyDbContext db = new MyDbContext())
-        //    {
-        //        site = db.Sites
-        //            .Include(s => s.Pages)
-        //            .Where(p => p.Id == id)
-        //            .SingleOrDefault(); ;
-        //        site.Pablish = true;
-        //        site.Date = DateTime.Now;
-        //    }
-        //    return View("Index", site);
-        //}
+        public ActionResult Comments(string userName, int id)
+        {
+            Site site;
+            using (MyDbContext db = new MyDbContext())
+            {
+                site = db.Sites
+                    .Include(s => s.Comments)
+                    .Where(p => p.Id == id)
+                    .SingleOrDefault(); 
+            }
+           // Comment comment = site.Comments.Where(p => p.Id == id).SingleOrDefault();
+            return View("Comments", site);
+        }
+
+        [HttpPost]
+        public void AddComment(int Id, string UserName, string Comment)
+        {
+            Comment comment = new Comment();
+            Site site;
+            using (MyDbContext db = new MyDbContext())
+            {
+                site = db.Sites
+                    .Include(s => s.Comments)
+                    .Where(p => p.Id == Id)
+                    .SingleOrDefault();
+                comment.Date = DateTime.Now;
+                comment.UserComment = Comment;
+                comment.UserName = UserName;
+                comment.Site = site;
+                db.Comments.Add(comment);
+                db.SaveChanges();
+            }
+        }
 
         public ActionResult ChangeCulture(string lang)
         {

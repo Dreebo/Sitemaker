@@ -1,0 +1,94 @@
+﻿@model Sitemaker.Models.Site
+@{
+    ViewBag.Title = "Comments";
+}
+
+@Styles.Render("~/Content/Comment.css")
+@Styles.Render("~/Content/Rating")
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<style type='text/css'>
+    #signature {
+        padding-top: 20%;
+    }
+</style>
+
+
+<table class="table">
+    <tr></tr>
+
+        <tr>
+            <td>
+                <h2>@Model.Name</h2>
+                <p>
+                    <img style="width:120px; height:120px" src="@Model.Logo" />
+                </p>
+                <p>
+                    <div class="stars">
+                        <form action="">
+                            <input class="star star-5" id="star-5" type="radio" name="star" />
+                            <label class="star star-5" for="star-5"></label>
+                            <input class="star star-4" id="star-4" type="radio" name="star" />
+                            <label class="star star-4" for="star-4"></label>
+                            <input class="star star-3" id="star-3" type="radio" name="star" />
+                            <label class="star star-3" for="star-3"></label>
+                            <input class="star star-2" id="star-2" type="radio" name="star" />
+                            <label class="star star-2" for="star-2"></label>
+                            <input class="star star-1" id="star-1" type="radio" name="star" />
+                            <label class="star star-1" for="star-1"></label>
+                        </form>
+                    </div>
+                </p>
+                <p>
+                    <ul itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
+                        <li itemprop="rating" itemscope itemtype="http://data-vocabulary.org/Rating">Rating: <span class="seostars"><strong itemprop="average">@*3.5*@</strong> out of <i itemprop="best">5</i></span></li>
+                        <li>based on: <strong itemprop="count">@*76*@</strong> reviews</li>
+                    </ul>
+            </td>
+            <td>
+                @Model.About
+            </td>
+            <td id="signature"><a href="@Url.Action("ShowUser", "Sites", new {userName = (string)Session["CurrentUserName"], siteCreator = Model.UserName })">@Model.UserName</a>, @Model.Date</td>
+        </tr>
+</table>
+
+<body>
+    <div class="container">
+        <form role="form">
+            <div class="form-group">
+                <label for="comment">Comment:</label>
+                <textarea class="form-control"  rows="5" id="comment"></textarea>
+                <input type="button" id="addComment" class="btn btn-primary" value="Add">
+            </div>
+        </form>
+    </div>
+</body>
+
+
+<section class="messages">
+@foreach (var item in Model.Comments.Reverse())
+{
+    <article class="message">
+        <a class="message-img" href="#non">
+            <img src="http://lorempixum.com/50/50/people/1" alt="" width="50" height="50">
+        </a>
+        <div class="message-body">
+            <div class="text">
+                <p>@item.UserComment</p>
+            </div>
+            <p class="attribution">by <a href="#non">@item.UserName</a> @item.Date</p>
+        </div>
+    </article>
+}  
+</section>​
+
+@Scripts.Render("~/bundles/addComment")
+

@@ -115,3 +115,5 @@ D:\itransition\Sitemaker\Sitemaker\obj\Debug\en\Sitemaker.resources.dll
 D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.dll
 D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.pdb
 D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.asdasd.resources
+D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.comments.resources
+D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.rating.resources

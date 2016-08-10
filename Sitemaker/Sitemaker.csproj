@@ -263,10 +263,19 @@
     <Compile Include="Migrations\201608101241479_asdasd.Designer.cs">
       <DependentUpon>201608101241479_asdasd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608101431061_comments.cs" />
+    <Compile Include="Migrations\201608101431061_comments.Designer.cs">
+      <DependentUpon>201608101431061_comments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608102056548_rating.cs" />
+    <Compile Include="Migrations\201608102056548_rating.Designer.cs">
+      <DependentUpon>201608102056548_rating.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Page.cs" />
     <Compile Include="Models\Site.cs" />
     <Compile Include="Models\TestClass.cs" />
@@ -285,6 +294,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Comment.css" />
     <Content Include="Content\Images\backgroundcell.jpg" />
     <Content Include="Content\Images\bg-dark.jpg" />
     <Content Include="Content\Images\bg-lights.jpg" />
@@ -308,11 +318,13 @@
     <Content Include="Content\Images\template5.jpg" />
     <Content Include="Content\Images\template6.jpg" />
     <Content Include="Content\Images\template7.jpg" />
+    <Content Include="Content\Images\star.png" />
     <Content Include="Content\Layout.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\PageLayout.css" />
     <Content Include="Content\PageLayout2.css" />
     <Content Include="Content\PageLayout3.css" />
+    <Content Include="Content\rating.css" />
     <Content Include="Content\style_gray.css" />
     <Content Include="Content\style_white.css" />
     <Content Include="Content\themes\base\accordion.css" />
@@ -397,6 +409,7 @@
     <Content Include="img\text.png" />
     <Content Include="img\zoom.png" />
     <Content Include="img\video.png" />
+    <Content Include="Scripts\AddComment.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -493,6 +506,7 @@
     <Content Include="Views\Sites\ShowMySite.cshtml" />
     <Content Include="Views\Sites\OpenSite.cshtml" />
     <Content Include="Views\Sites\ShowUser.cshtml" />
+    <Content Include="Views\Sites\Comments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -508,6 +522,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201608101241479_asdasd.resx">
       <DependentUpon>201608101241479_asdasd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608101431061_comments.resx">
+      <DependentUpon>201608101431061_comments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608102056548_rating.resx">
+      <DependentUpon>201608102056548_rating.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Resource.en.resx">
       <CustomToolNamespace>Resources</CustomToolNamespace>
