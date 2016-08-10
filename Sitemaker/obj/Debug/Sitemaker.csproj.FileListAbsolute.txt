@@ -52,6 +52,8 @@ D:\itransition\Sitemaker\Sitemaker\bin\Microsoft.Owin.Security.Twitter.dll
 D:\itransition\Sitemaker\Sitemaker\bin\Microsoft.Web.Infrastructure.dll
 D:\itransition\Sitemaker\Sitemaker\bin\Newtonsoft.Json.dll
 D:\itransition\Sitemaker\Sitemaker\bin\Owin.dll
+D:\itransition\Sitemaker\Sitemaker\bin\PagedList.dll
+D:\itransition\Sitemaker\Sitemaker\bin\PagedList.Mvc.dll
 D:\itransition\Sitemaker\Sitemaker\bin\System.Net.Http.dll
 D:\itransition\Sitemaker\Sitemaker\bin\System.Net.Http.WebRequest.dll
 D:\itransition\Sitemaker\Sitemaker\bin\System.Web.Helpers.dll
@@ -76,6 +78,8 @@ D:\itransition\Sitemaker\Sitemaker\bin\Microsoft.AI.Web.xml
 D:\itransition\Sitemaker\Sitemaker\bin\Microsoft.AI.WindowsServer.xml
 D:\itransition\Sitemaker\Sitemaker\bin\Microsoft.ApplicationInsights.xml
 D:\itransition\Sitemaker\Sitemaker\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\itransition\Sitemaker\Sitemaker\bin\PagedList.xml
+D:\itransition\Sitemaker\Sitemaker\bin\PagedList.Mvc.xml
 D:\itransition\Sitemaker\Sitemaker\bin\System.Net.Http.xml
 D:\itransition\Sitemaker\Sitemaker\bin\System.Net.Http.WebRequest.xml
 D:\itransition\Sitemaker\Sitemaker\bin\System.Web.Helpers.xml
@@ -104,14 +108,10 @@ D:\itransition\Sitemaker\Sitemaker\bin\Microsoft.Owin.Security.MicrosoftAccount.
 D:\itransition\Sitemaker\Sitemaker\bin\Org.Mentalis.Security.Cryptography.xml
 D:\itransition\Sitemaker\Sitemaker\bin\Mono.Math.xml
 D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.csprojResolveAssemblyReference.cache
-D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.InitialCreate.resources
-D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.addPathLogo.resources
-D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.addmenuIdandtemplateId.resources
-D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.changeSite.resources
-D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.AddtablePage.resources
 D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Resources.Resource.resources
 D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Resources.Resource.en.resources
 D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.csproj.GenerateResource.Cache
 D:\itransition\Sitemaker\Sitemaker\obj\Debug\en\Sitemaker.resources.dll
 D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.dll
 D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.pdb
+D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.asdasd.resources

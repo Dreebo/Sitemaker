@@ -50,6 +50,9 @@ namespace Sitemaker
             bundles.Add(new StyleBundle("~/Content/Layout").Include(
                        "~/Content/Layout.css"));
 
+            bundles.Add(new StyleBundle("~/Content/PageLayout").Include(
+                       "~/Content/PageLayout.css"));
+
             bundles.Add(new StyleBundle("~/Content/StyleGray").Include(
                         "~/Content/style_gray.css"));
 

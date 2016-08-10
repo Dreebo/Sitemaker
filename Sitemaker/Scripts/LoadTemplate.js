@@ -21,6 +21,9 @@
                 $("#allbutId").append(data);
             }
         });
+        setTimeout(function () {
+            LoadScript();
+        }, 20);
     }
 
 function LoadScript() {
@@ -39,8 +42,19 @@ function LoadScript() {
 
                 if (draggableId == "dragg1") {
                     var text = $(this);
-                    $(this).append($("#text").html());                   
+                    let word = null;
+                    $(this).append($("#text").html());
+                    tinymce.init({
+                        selector: '#link'
+                    });
+                    $("#textinput").click(
+                        function () {
+                            word = tinyMCE.get("link").getContent();
+                            text.empty();
+                            text.append(word);
+                        });
                 }
+
 
                 if (draggableId == "dragg2") {
                     var image = $(this);
@@ -49,7 +63,7 @@ function LoadScript() {
                             cloud_name: 'dgy6x5krf', upload_preset: 'ntblzmxf', 'theme': 'purple'
                         }, function (error, result) {
                                 image.empty();
-                                image.append("<img style=\"width:70px; height:70px;\" src=\"" + result[0].secure_url + "\"/>");
+                                image.append("<img style=\"width:100%; height:100%;\" src=\"" + result[0].secure_url + "\"/>");
                                 var contentImage = result[0].secure_url;
                             }
                         );
@@ -65,7 +79,7 @@ function LoadScript() {
                             text: "OK", click: function () {
                                 link = $("#linkvideo").val();
                                 if (link !== null) {
-                                    $(video).append("<iframe width=\"560\" height=\"315\" src=\"" + link + "\" frameborder=\"0\" allowfullscreen></iframe>");
+                                    $(video).append("<iframe width=\"100%\" height=\"100%\" src=\"" + link + "\" frameborder=\"0\" allowfullscreen></iframe>");
                                 }
                                 $(this).dialog("close")
                             }
@@ -84,7 +98,7 @@ function SavePage() {
     let position = id.lastIndexOf("/");
     id = id.slice(position + 1);
     let html = $(".no-js").html();
-    var savePage = {
+    var savePage = { 
         Id: id,
         HtmlCode: html
     }
@@ -97,10 +111,16 @@ function SavePage() {
         contentType: "application/json; charset=utf-8",
         traditional: true,
         success: function (data) {
-          let  url = window.location.href;
-          let pos = url.lastIndexOf("/");
-          url = url.slice(0, pos);
-           window.location.replace(url);
+          let  urlId = window.location.href;
+          let pos = urlId.lastIndexOf("/");
+          urlId = urlId.slice(0, pos);
+          pos = urlId.lastIndexOf("/");
+          let userName = urlId.slice(0, pos);
+          let userNamePos = userName.lastIndexOf("/");
+          userName = userName.slice(userNamePos + 1);
+          urlId = urlId.slice(pos + 1);
+            
+          window.location.replace("https://localhost:44396/Sites/CreateSite/" + userName + "/" + urlId);
         }
     });
 };

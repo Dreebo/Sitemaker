@@ -10,6 +10,9 @@ using Sitemaker;
 using Sitemaker.Models;
 using CloudinaryDotNet;
 using Sitemaker.Filters;
+using Microsoft.AspNet.Identity;
+using PagedList.Mvc;
+using PagedList;
 
 namespace Sitemaker.Controllers
 {
@@ -19,19 +22,41 @@ namespace Sitemaker.Controllers
         private MyDbContext db = new MyDbContext();
 
         // GET: Sites
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.Sites.ToList());
+            List<Site> sites;
+            sites = new List<Site>();
+            foreach (var x in db.Sites.Include(s => s.Pages))
+            {
+                if (x.Pablish == true)
+                {
+                    sites.Add(x);
+                }
+                }
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            string userName = User.Identity.GetUserName();
+            if (userName != "")
+            {
+                int position = userName.IndexOf("@");
+                userName = userName.Remove(position);
+            }
+            else { userName = ""; }
+            Session["CurrentUserName"] = userName;
+            return View(sites.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Sites/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(string userName, int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Site site = db.Sites.Find(id);
+            Site site = db.Sites
+                    .Include(s => s.Pages)
+                    .Where(p => p.Id == id)
+                    .SingleOrDefault(); 
             if (site == null)
             {
                 return HttpNotFound();
@@ -50,7 +75,7 @@ namespace Sitemaker.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,UserId,Logo,Name,About,TemplateId,MenuId")] Site site)
+        public ActionResult Create([Bind(Include = "Id,UserName,Logo,Name,About,TemplateId,MenuId")] Site site)
         {
             if (ModelState.IsValid)
             {
@@ -63,7 +88,7 @@ namespace Sitemaker.Controllers
         }
 
         // GET: Sites/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(string userName, int? id)
         {
             if (id == null)
             {
@@ -82,7 +107,7 @@ namespace Sitemaker.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,UserId,Logo,Name,About,TemplateId,MenuId")] Site site)
+        public ActionResult Edit([Bind(Include = "Id,UserName,Logo,Name,About,TemplateId,MenuId")] Site site)
         {
             if (ModelState.IsValid)
             {
@@ -94,13 +119,16 @@ namespace Sitemaker.Controllers
         }
 
         // GET: Sites/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(string userName, int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Site site = db.Sites.Find(id);
+            Site site = db.Sites
+                    .Include(s => s.Pages)
+                    .Where(p => p.Id == id)
+                    .SingleOrDefault();
             if (site == null)
             {
                 return HttpNotFound();
@@ -113,10 +141,13 @@ namespace Sitemaker.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Site site = db.Sites.Find(id);
+            Site site = db.Sites
+                   .Include(s => s.Pages)
+                   .Where(p => p.Id == id)
+                   .SingleOrDefault();
             db.Sites.Remove(site);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("ShowMySite");
         }
 
         protected override void Dispose(bool disposing)
@@ -128,7 +159,47 @@ namespace Sitemaker.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult CreateSite(int? id)
+        [Authorize]
+        public ActionResult ShowMySite(string userName)
+        {
+            string Name = User.Identity.GetUserName();
+            int position = Name.IndexOf("@");
+            Name = Name.Remove(position);
+            Session["CurrentUserName"] = Name;
+            return View("ShowMySite", db.Sites.Where(p => p.UserName == Name).ToList());
+        }
+
+        public ActionResult ShowUser(string userName, string siteCreator)
+        {
+            string Name = User.Identity.GetUserName();
+            int position = Name.IndexOf("@");
+            Name = Name.Remove(position);
+            Session["CurrentUserName"] = Name;
+            return View("ShowUser", db.Sites.Where(p => p.UserName == siteCreator).ToList());
+        }
+
+        public ActionResult OpenSite(string userName, int id)
+        {
+            Site site;
+            using (var db = new MyDbContext())
+            {
+                site = db.Sites
+                    .Include(s => s.Pages)
+                    .Where(p => p.Id == id)
+                    .SingleOrDefault();
+            }
+            if (site == null)
+            {
+                throw new Exception("idi naxyi pidr");
+            }
+            
+            Page page = site.Pages.Where(p => p.Site.Id == id).FirstOrDefault();
+            return View("OpenSite", page);
+        }
+
+
+        [Authorize]
+        public ActionResult CreateSite(string userName, int? id )
         {
             // TODO check is author.
             Site site;
@@ -141,7 +212,7 @@ namespace Sitemaker.Controllers
             }
             if (site == null)
             {
-                site = new Site();
+                site = new Site(); 
             }
             return View("CreateSite", site);
         }
@@ -159,7 +230,7 @@ namespace Sitemaker.Controllers
             return cloudinary.Api.UrlImgUp.BuildUrl(String.Format("{0}.{1}", uploadResult.PublicId, uploadResult.Format));
         }
 
-        public ActionResult CreatePage1(int id)
+        public ActionResult CreatePage1(string userName, int id)
         {
             Site site;
             using (var db = new MyDbContext())
@@ -170,13 +241,13 @@ namespace Sitemaker.Controllers
                     Page page = new Page();
                     site.Pages.Add(page);
                     db.SaveChanges();
-                    return RedirectToAction("CreatePage", new { id = id, pageId = page.Id });
+                    return RedirectToAction("CreatePage", new { userName = site.UserName , id = id, pageId = page.Id });
                 }
             }
             throw new Exception("idi naxyi pidr");
         }
 
-        public ActionResult CreatePage(int id, int? pageId)
+        public ActionResult CreatePage(string userName, int id, int? pageId)
         {
             if (pageId == null)
             {
@@ -198,8 +269,12 @@ namespace Sitemaker.Controllers
             return View("CreatePage", page);
         }
 
-        public ActionResult ShowPage(int id, int? pageId)
+        public ActionResult ShowPage(string userName, int id, int? pageId)
         {
+            string Name = User.Identity.GetUserName();
+            int position = Name.IndexOf("@");
+            Name = Name.Remove(position);
+            Session["CurrentUserName"] = Name;
             if (pageId == null)
             {
                 return RedirectToAction("CreateSite", new { id = id });
@@ -220,7 +295,7 @@ namespace Sitemaker.Controllers
             return View("Page", page);
         }
 
-        public ActionResult Page(int id, int? pageId)
+        public ActionResult Page(string userName, int id, int? pageId)
         {
             Site site;
             using (var db = new MyDbContext())
@@ -231,7 +306,7 @@ namespace Sitemaker.Controllers
                     .SingleOrDefault();
             }
             Page page = site.Pages.Where(p => p.Id == pageId).FirstOrDefault();
-            return RedirectToAction("ShowPage", new { id = id, pageId = page.Id });
+            return RedirectToAction("ShowPage", new { userName = site.UserName, id = id, pageId = page.Id });
         }
 
         [HttpPost]
@@ -239,11 +314,16 @@ namespace Sitemaker.Controllers
         {
             using (MyDbContext db = new MyDbContext())
             {
+                string user = User.Identity.GetUserName();
+                int position = user.IndexOf("@");
+                user = user.Remove(position);
+                site.UserName = user;
                 site.Logo = Upload(site.Logo);
+                site.Date = DateTime.Now;
                 db.Sites.Add(site);
                 db.SaveChanges();
             }
-            return Json(new { result = "Redirect", url = Url.Action("CreateSite", "Sites", new { id = site.Id }) });
+            return Json(new { result = "Redirect", url = Url.Action("CreateSite", "Sites", new { userName = site.UserName, id = site.Id  }) });
         }
 
         [HttpPost]
@@ -263,7 +343,7 @@ namespace Sitemaker.Controllers
                 {
                     page.HtmlCode = null;
                 }
-                page.HtmlCode = savePage.HtmlCode.Replace("<textarea ", "<textarea disabled ");
+                page.HtmlCode = savePage.HtmlCode;
                 db.SaveChanges();
             }
         }
@@ -273,6 +353,37 @@ namespace Sitemaker.Controllers
         {
             return PartialView("template/MenuEditor");
         }
+
+        public ActionResult PublishSite(string userName, int id)
+        {
+            Site site;
+            using (MyDbContext db = new MyDbContext())
+            {
+                site = db.Sites
+                    .Include(s => s.Pages)
+                    .Where(p => p.Id == id)
+                    .SingleOrDefault(); ;
+                site.Pablish = true;
+                site.Date = DateTime.Now;
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
+
+        //public ActionResult PublishSite(string userName, int id)
+        //{
+        //    Site site;
+        //    using (MyDbContext db = new MyDbContext())
+        //    {
+        //        site = db.Sites
+        //            .Include(s => s.Pages)
+        //            .Where(p => p.Id == id)
+        //            .SingleOrDefault(); ;
+        //        site.Pablish = true;
+        //        site.Date = DateTime.Now;
+        //    }
+        //    return View("Index", site);
+        //}
 
         public ActionResult ChangeCulture(string lang)
         {

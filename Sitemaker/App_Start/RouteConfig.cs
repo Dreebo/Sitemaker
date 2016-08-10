@@ -21,13 +21,9 @@ namespace Sitemaker
 
             routes.MapRoute(
                name: "ForPage",
-               url: "{controller}/{action}/{id}/{pageId}",
-               defaults: new { controller = "Sites", action = "Index", id = UrlParameter.Optional, pageId = UrlParameter .Optional}
+               url: "{controller}/{action}/{userName}/{id}/{pageId}",
+               defaults: new { controller = "Sites", action = "Index", userName = UrlParameter.Optional, id = UrlParameter.Optional, pageId = UrlParameter .Optional}
            );
-
-            
-
-            
         }
     }
 }

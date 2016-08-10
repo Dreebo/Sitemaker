@@ -10,7 +10,6 @@ namespace Sitemaker.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "Sitemaker.MyDbContext";
         }
 
         protected override void Seed(Sitemaker.MyDbContext context)

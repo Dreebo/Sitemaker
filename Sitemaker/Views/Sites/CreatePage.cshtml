@@ -11,6 +11,7 @@
 @Scripts.Render("~/scripts/jquery-3.1.0.js")
 
 
+
 <!DOCTYPE html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
@@ -151,14 +152,18 @@ $(document).ready(function() {
 
     </script>>
 
+
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
 
         <title>Sitemaker</title>
 
+    @*<a href="@Url.Action("Index", "Sites", new { userId = (string)Session["CurrentUserName"] })" class="back">Back to list </a>*@
+
         <link rel="shortcut icon" type="image/png" href="favicon.png">
         <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+        <script src='https://cdn.tinymce.com/4/tinymce.min.js'></script>
         <link rel="stylesheet" href="css/style.css">
 
         <!--[if lt IE 9]>
@@ -171,7 +176,7 @@ $(document).ready(function() {
     <!--[if lt IE 8]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
     <div class="container">
          @if (Model.Site.MenuId == 1 || Model.Site.MenuId == 3)
-        {
+         {
             <header id="navtop">
                 <nav class="fright" id="navtop-block">
 
@@ -210,7 +215,7 @@ $(document).ready(function() {
             <hr>
 
        @if (Model.Site.MenuId == 2 || Model.Site.MenuId == 3)
-            {
+       {
             <aside class="grid col-one-quarter mq2-col-full">
                 <div class="grid-wrap">
                     <menu id="navside-block">
@@ -254,7 +259,9 @@ $(document).ready(function() {
                     <div class="main-form center-block" id="main-form">
                     </div>
                 </div>
-                    <div class="allbut " id="allbutId"></div>
+                    <div class="allbut " id="allbutId">
+                       
+                    </div>
                 <div id="dialog" class="dialog" style="display: none">
                     <input type="text" class="mytext" />
                 </div>
@@ -262,6 +269,7 @@ $(document).ready(function() {
                 <div id="inputtext" style="display: none">
                     <div id="text" style="border: solid; height: 50px" class="content">
                         <textarea type="text" id="link" class="form-control" rows="5" ></textarea>   
+                        <input type="button" class="mytext" id="textinput"/>
                     </div>
                 </div> 
 
@@ -351,9 +359,10 @@ $(document).ready(function() {
                 g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
                 s.parentNode.insertBefore(g,s)}(document,'script'));
     </script>
+
     <script type="text/javascript">
             $(document).ready(function() {
-                LoadMenuEditor();
+                LoadMenuEditor();             
         });
     </script>
 </body>
