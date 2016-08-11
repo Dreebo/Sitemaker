@@ -15,6 +15,26 @@ padding-top:20%;
     }
 </style>
 
+<script type="text/javascript">
+    $(function () {
+        $(".stars label").click(function () {
+            $(".star").removeClass("selected");
+            let elem = $(this).attr("class");
+            $(".star").each(function (i, element) {
+                if (element.className == elem) { return false; }
+                $(element).addClass("selected")
+            });
+            $(this).addClass("selected");
+        });
+
+        //$(".thumbMenu img").click(function () {
+        //    $(".thumbMenu").children().each((i, element) =>
+        //        $(element).removeClass("selected"))
+        //    $(this).addClass("selected");
+        //});
+    });
+</script>
+
 <table class="table">
     <tr>
     </tr>
@@ -28,7 +48,7 @@ padding-top:20%;
                 </p>
             <p>
                 <div class="stars">
-                    <form action="">
+                    <form action="" class="formstars">
                         <input class="star star-5" id="star-5" type="radio" name="star" />
                         <label class="star star-5" for="star-5"></label>
                         <input class="star star-4" id="star-4" type="radio" name="star" />

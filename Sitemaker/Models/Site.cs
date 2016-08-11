@@ -18,10 +18,12 @@ namespace Sitemaker.Models
         public DateTime Date { get; set; }
         public int MenuId { get; set; }
         public ICollection<Comment> Comments { get; set; }
-        public int Rating { get; set; }
+
+        public virtual ICollection<UserRating> Ratings { get; set; }
 
         public Site()
         {
+            Ratings = new List<UserRating>();
             Pages = new List<Page>();
         }
     }

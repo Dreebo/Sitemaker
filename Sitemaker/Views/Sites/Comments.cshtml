@@ -21,6 +21,23 @@
     }
 </style>
 
+<script type="text/javascript">
+    $(function () {
+        $(".stars label").click(function () { 
+            $(".star").removeClass("selected");
+            $(".star").removeClass("max");
+            $(".star").removeClass("min");
+            let elem = $(this).attr("class");
+            $(".star").each(function (i, element) {
+                if (element.className == elem) { return false; }
+                $(element).addClass("selected")               
+            });
+            if (elem == "star star-5") { $(".star").addClass("max") }         
+            $(this).addClass("selected");
+            if (elem == "star star-1") { $(this).addClass("min") }
+        });
+    });
+</script>
 
 <table class="table">
     <tr></tr>
@@ -34,24 +51,23 @@
                 <p>
                     <div class="stars">
                         <form action="">
-                            <input class="star star-5" id="star-5" type="radio" name="star" />
-                            <label class="star star-5" for="star-5"></label>
-                            <input class="star star-4" id="star-4" type="radio" name="star" />
-                            <label class="star star-4" for="star-4"></label>
-                            <input class="star star-3" id="star-3" type="radio" name="star" />
-                            <label class="star star-3" for="star-3"></label>
-                            <input class="star star-2" id="star-2" type="radio" name="star" />
-                            <label class="star star-2" for="star-2"></label>
                             <input class="star star-1" id="star-1" type="radio" name="star" />
                             <label class="star star-1" for="star-1"></label>
+                            <input class="star star-2" id="star-2" type="radio" name="star" />
+                            <label class="star star-2" for="star-2"></label>
+                            <input class="star star-3" id="star-3" type="radio" name="star" />
+                            <label class="star star-3" for="star-3"></label>
+                            <input class="star star-4" id="star-4" type="radio" name="star" />
+                            <label class="star star-4" for="star-4"></label>
+                            <input class="star star-5" id="star-5" type="radio" name="star" />
+                            <label class="star star-5" for="star-5"></label>
                         </form>
                     </div>
                 </p>
-                <p>
-                    <ul itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
-                        <li itemprop="rating" itemscope itemtype="http://data-vocabulary.org/Rating">Rating: <span class="seostars"><strong itemprop="average">@*3.5*@</strong> out of <i itemprop="best">5</i></span></li>
-                        <li>based on: <strong itemprop="count">@*76*@</strong> reviews</li>
-                    </ul>
+                    @*<ul itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
+                        <li itemprop="rating" itemscope itemtype="http://data-vocabulary.org/Rating">Rating: <span class="seostars"><strong itemprop="average">3.5</strong></i></span></li>
+                        <li>based on: <strong itemprop="count">76</strong> reviews</li>
+                    </ul>*@
             </td>
             <td>
                 @Model.About
