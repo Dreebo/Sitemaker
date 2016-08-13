@@ -26,7 +26,7 @@ namespace Sitemaker.Controllers
         {
             List<Site> sites;
             sites = new List<Site>();
-            foreach (var x in db.Sites.Include(s => s.Pages))
+            foreach (var x in db.Sites.Include(s => s.Pages).Include(s => s.Ratings))
             {
                 if (x.Pablish == true)
                 {
@@ -377,6 +377,7 @@ namespace Sitemaker.Controllers
             {
                 site = db.Sites
                     .Include(s => s.Comments)
+                    .Include(s => s.Ratings)
                     .Where(p => p.Id == id)
                     .SingleOrDefault(); 
             }
@@ -403,6 +404,38 @@ namespace Sitemaker.Controllers
                 db.SaveChanges();
             }
         }
+
+        bool result;
+        [Authorize]
+        public void AddRating(int id, string rating)
+        {
+            string user = User.Identity.GetUserName();
+            int position = user.IndexOf("@");
+            user = user.Remove(position);
+            Site site;
+            UserRating num = new UserRating();
+            using (MyDbContext db = new MyDbContext())
+            {
+                site = db.Sites
+                    .Include(s => s.Ratings)
+                    .Where(p => p.Id == id)
+                    .SingleOrDefault();
+                foreach (var x in site.Ratings)
+                {
+                    if (x.UserName == user) { result = true; break; }
+                }
+                if (result == false)
+                {
+                    site.RatingCount++;
+                    site.AverageRating = Math.Round((site.AverageRating*(site.RatingCount-1) + Int32.Parse(rating)) / site.RatingCount);
+                    num.UserName = user;
+                    num.Star = Int32.Parse(rating);
+                    num.Sites.Add(site);
+                    db.Ratings.Add(num);
+                    db.SaveChanges();
+                }
+            }
+         }
 
         public ActionResult ChangeCulture(string lang)
         {

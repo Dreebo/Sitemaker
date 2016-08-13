@@ -271,6 +271,22 @@
     <Compile Include="Migrations\201608102056548_rating.Designer.cs">
       <DependentUpon>201608102056548_rating.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608111453391_rating1.cs" />
+    <Compile Include="Migrations\201608111453391_rating1.Designer.cs">
+      <DependentUpon>201608111453391_rating1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608111458307_rating2.cs" />
+    <Compile Include="Migrations\201608111458307_rating2.Designer.cs">
+      <DependentUpon>201608111458307_rating2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608111554310_werw.cs" />
+    <Compile Include="Migrations\201608111554310_werw.Designer.cs">
+      <DependentUpon>201608111554310_werw.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608111755386_update raring.cs" />
+    <Compile Include="Migrations\201608111755386_update raring.Designer.cs">
+      <DependentUpon>201608111755386_update raring.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -529,6 +545,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608102056548_rating.resx">
       <DependentUpon>201608102056548_rating.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608111453391_rating1.resx">
+      <DependentUpon>201608111453391_rating1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608111458307_rating2.resx">
+      <DependentUpon>201608111458307_rating2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608111554310_werw.resx">
+      <DependentUpon>201608111554310_werw.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608111755386_update raring.resx">
+      <DependentUpon>201608111755386_update raring.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Resource.en.resx">
       <CustomToolNamespace>Resources</CustomToolNamespace>

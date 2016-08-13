@@ -47,7 +47,7 @@ label.star {
   transition: all .2s;
 }
 
-.stars label.selected/*:checked ~ label.star:before*/ {
+.stars label.selected {
   content:"★";
   color: #FD4;
   transition: all .25s;

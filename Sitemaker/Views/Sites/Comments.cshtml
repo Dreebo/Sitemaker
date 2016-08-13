@@ -23,18 +23,48 @@
 
 <script type="text/javascript">
     $(function () {
+        $(document).ready(function () {
+            let averageRating = +($(".AverageRating").text());
+            $(".star").each(function (i, element) {
+                if (i / 2 <= +(averageRating)) $(element).addClass("selected")
+                else return false;
+            });
+            if (+(averageRating) == 5) $(".star").addClass("max");
+            if (+(averageRating) == 1) $(".star-1").addClass("min");
+        });
+        let id = window.location.href;
+        let position = id.lastIndexOf("/");
+        id = id.slice(position + 1);
         $(".stars label").click(function () { 
             $(".star").removeClass("selected");
             $(".star").removeClass("max");
             $(".star").removeClass("min");
+            let model = {
+                Id: id, 
+                rating: null
+            }
             let elem = $(this).attr("class");
             $(".star").each(function (i, element) {
-                if (element.className == elem) { return false; }
+                if (element.className == elem) {
+                    model.rating = element.id;
+                    return false;
+                }
                 $(element).addClass("selected")               
             });
-            if (elem == "star star-5") { $(".star").addClass("max") }         
-            $(this).addClass("selected");
             if (elem == "star star-1") { $(this).addClass("min") }
+            $(this).addClass("selected");
+            if (elem == "star star-5") { $(".star").addClass("max") }
+
+            $.ajax({
+                type: 'POST',
+                url: "/Sites/AddRating",
+                dataType: 'text',
+                data: model,
+                success: function (data) {
+                    window.location.replace(window.location.href);
+                }
+            });
+            
         });
     });
 </script>
@@ -50,24 +80,24 @@
                 </p>
                 <p>
                     <div class="stars">
-                        <form action="">
-                            <input class="star star-1" id="star-1" type="radio" name="star" />
-                            <label class="star star-1" for="star-1"></label>
-                            <input class="star star-2" id="star-2" type="radio" name="star" />
-                            <label class="star star-2" for="star-2"></label>
-                            <input class="star star-3" id="star-3" type="radio" name="star" />
-                            <label class="star star-3" for="star-3"></label>
-                            <input class="star star-4" id="star-4" type="radio" name="star" />
-                            <label class="star star-4" for="star-4"></label>
-                            <input class="star star-5" id="star-5" type="radio" name="star" />
-                            <label class="star star-5" for="star-5"></label>
+                        <form action="" class="formstars">
+                            <input class="star star-1" id="1" type="radio" name="star" />
+                            <label class="star star-1" for="1"></label>
+                            <input class="star star-2" id="2" type="radio" name="star" />
+                            <label class="star star-2" for="2"></label>
+                            <input class="star star-3" id="3" type="radio" name="star" />
+                            <label class="star star-3" for="3"></label>
+                            <input class="star star-4" id="4" type="radio" name="star" />
+                            <label class="star star-4" for="4"></label>
+                            <input class="star star-5" id="5" type="radio" name="star" />
+                            <label class="star star-5" for="5"></label>
                         </form>
                     </div>
                 </p>
-                    @*<ul itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
-                        <li itemprop="rating" itemscope itemtype="http://data-vocabulary.org/Rating">Rating: <span class="seostars"><strong itemprop="average">3.5</strong></i></span></li>
-                        <li>based on: <strong itemprop="count">76</strong> reviews</li>
-                    </ul>*@
+                    <ul itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
+                        <li >Rating:<strong class="AverageRating" itemprop="average">@Model.AverageRating</strong></li>
+                        <li>based on: <strong itemprop="count">@Model.RatingCount</strong> reviews</li>
+                    </ul>
             </td>
             <td>
                 @Model.About
@@ -94,13 +124,13 @@
 {
     <article class="message">
         <a class="message-img" href="#non">
-            <img src="http://lorempixum.com/50/50/people/1" alt="" width="50" height="50">
+            <img src="" alt="" width="50" height="50">
         </a>
         <div class="message-body">
             <div class="text">
                 <p>@item.UserComment</p>
             </div>
-            <p class="attribution">by <a href="#non">@item.UserName</a> @item.Date</p>
+            <p class="attribution">by <a href="@Url.Action("ShowUser", "Sites", new {userName = (string)Session["CurrentUserName"], siteCreator = item.UserName })">@item.UserName</a> @item.Date</p>
         </div>
     </article>
 }  

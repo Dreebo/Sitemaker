@@ -117,3 +117,7 @@ D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.pdb
 D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.asdasd.resources
 D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.comments.resources
 D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.rating.resources
+D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.rating1.resources
+D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.rating2.resources
+D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.werw.resources
+D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.updateraring.resources

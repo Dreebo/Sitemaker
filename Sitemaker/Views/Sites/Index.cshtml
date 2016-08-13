@@ -16,62 +16,59 @@ padding-top:20%;
 </style>
 
 <script type="text/javascript">
-    $(function () {
-        $(".stars label").click(function () {
-            $(".star").removeClass("selected");
-            let elem = $(this).attr("class");
-            $(".star").each(function (i, element) {
-                if (element.className == elem) { return false; }
-                $(element).addClass("selected")
+    $(document).ready(function () {
+        $(".stars").each(function (i, mainelement) {
+            let id = $(mainelement.children).attr("id");
+            let averageRating = +(id);
+            let label = $(mainelement.children).children();
+            $(label).each(function (i, element) {
+                if (mainelement.children.form == element.parentElment) {
+                    if (i / 2 < +(averageRating)) $(element).addClass("selected")
+                    else return false;
+                }
             });
-            $(this).addClass("selected");
+            if (+(averageRating) == 5) $(label).addClass("max");
         });
-
-        //$(".thumbMenu img").click(function () {
-        //    $(".thumbMenu").children().each((i, element) =>
-        //        $(element).removeClass("selected"))
-        //    $(this).addClass("selected");
-        //});
     });
 </script>
 
 <table class="table">
     <tr>
     </tr>
-    @foreach (var item in Model)
-    {
+  @foreach (var item in Model.Reverse())
+  {
         <tr>
             <td>
-                <h2><a href="@Url.Action("OpenSite", "Sites", new {userName = (string)Session["CurrentUserName"], id = item.Id})">@item.Name</a></h2>
+                <h2><a href="@Url.Action("OpenSite", "Sites", new { userName = (string)Session["CurrentUserName"], id = item.Id })">@item.Name</a></h2>
                 <p>
                     <img style="width:120px; height:120px" src="@item.Logo" />
                 </p>
             <p>
-                <div class="stars">
+                <div class="stars" id="@item.Id">
+                    <div class="rating" style="display:none" id="@item.AverageRating"></div>
                     <form action="" class="formstars">
-                        <input class="star star-5" id="star-5" type="radio" name="star" />
-                        <label class="star star-5" for="star-5"></label>
-                        <input class="star star-4" id="star-4" type="radio" name="star" />
-                        <label class="star star-4" for="star-4"></label>
-                        <input class="star star-3" id="star-3" type="radio" name="star" />
-                        <label class="star star-3" for="star-3"></label>
-                        <input class="star star-2" id="star-2" type="radio" name="star" />
-                        <label class="star star-2" for="star-2"></label>
-                        <input class="star star-1" id="star-1" type="radio" name="star" />
-                        <label class="star star-1" for="star-1"></label>
+                        <input class="star star-1" id="1" type="radio" name="star" />
+                        <label class="star star-1" for="1"></label>
+                        <input class="star star-2" id="2" type="radio" name="star" />
+                        <label class="star star-2" for="2"></label>
+                        <input class="star star-3" id="3" type="radio" name="star" />
+                        <label class="star star-3" for="3"></label>
+                        <input class="star star-4" id="4" type="radio" name="star" />
+                        <label class="star star-4" for="4"></label>
+                        <input class="star star-5" id="5" type="radio" name="star" />
+                        <label class="star star-5" for="5"></label>
                     </form>
-                </div>
+                </div>               
             </p>
                 </td>
                <td> 
                    @item.About
                </td>
-            <td id="commet"><a href="@Url.Action("Comments", "Sites", new {userName = (string)Session["CurrentUserName"], id = item.Id})" class="btn btn-primary">Comments</a></td>
-            <td id="signature"><a href="@Url.Action("ShowUser", "Sites", new {userName = (string)Session["CurrentUserName"], siteCreator = item.UserName })">@item.UserName</a>, @item.Date</td>
+            <td id="commet"><a href="@Url.Action("Comments", "Sites", new { userName = (string)Session["CurrentUserName"], id = item.Id })" class="btn btn-primary">Comments</a></td>
+            <td id="signature"><a href="@Url.Action("ShowUser", "Sites", new { userName = (string)Session["CurrentUserName"], siteCreator = item.UserName })">@item.UserName</a>, @item.Date</td>
         </tr>
-    }
+  }
 </table>
-
 Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
 
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
