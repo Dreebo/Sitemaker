@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Sitemaker;
 using Sitemaker.Models;
 using CloudinaryDotNet;
+using Microsoft.Ajax.Utilities;
 using Sitemaker.Filters;
 using Microsoft.AspNet.Identity;
 using PagedList.Mvc;
@@ -192,8 +193,8 @@ namespace Sitemaker.Controllers
             {
                 throw new Exception("idi naxyi pidr");
             }
-            
-            Page page = site.Pages.Where(p => p.Site.Id == id).FirstOrDefault();
+
+            Page page = site.Pages.FirstOrDefault();
             return View("OpenSite", page);
         }
 
@@ -265,8 +266,8 @@ namespace Sitemaker.Controllers
             {
                 throw new Exception("idi naxyi pidr");
             }
-            Page page = site.Pages.Where(p => p.Id == pageId).SingleOrDefault();
-            return View("CreatePage", page);
+            //Page page = site.Pages.Where(p => p.Id == pageId).SingleOrDefault();
+            return View("CreatePage", site);
         }
 
         public ActionResult ShowPage(string userName, int id, int? pageId)
@@ -307,7 +308,59 @@ namespace Sitemaker.Controllers
             }
             Page page = site.Pages.Where(p => p.Id == pageId).FirstOrDefault();
             return RedirectToAction("ShowPage", new { userName = site.UserName, id = id, pageId = page.Id });
+            //return Json(new { result = "Redirect", url = Url.Action("FillSite", "Sites", new { userName = site.UserName, id = site.Id }) });
         }
+
+        public ActionResult PageView(string userName, int id, int? pageId)
+        {
+            Site site;
+            using (var db = new MyDbContext())
+            {
+                site = db.Sites
+                    .Include(s => s.Pages)
+                    .Where(p => p.Id == id)
+                    .SingleOrDefault();
+            }
+            Page page = site.Pages.Where(p => p.Id == pageId).FirstOrDefault();
+            return View("PageView", page);
+        }
+
+
+        public ActionResult CreateMenu(string userName, int id)
+        {
+            Site site;
+            using (var db = new MyDbContext())
+            {
+                site = db.Sites
+                    .Include(s => s.Pages)
+                    .Include(s => s.Menu)
+                    .Include(s => s.Menu.TopBar)
+                    .Include(s => s.Menu.SideBar)
+                    .Where(p => p.Id == id)
+                    .SingleOrDefault();
+            }
+            if (site == null)
+            {
+                site = new Site();
+            }
+
+            return View("CreateMenu", site);
+        }
+
+        public ActionResult FillSite(string userName, int id)
+        {
+            Site site;
+            using (var db = new MyDbContext())
+            {
+                site = db.Sites.Where(p => p.Id == id).SingleOrDefault();
+            }
+            if (site == null)
+            {
+                site = new Site();
+            }
+            return View("FillSite", site);
+        }
+
 
         [HttpPost]
         public ActionResult SaveSite(Site site)
@@ -321,9 +374,13 @@ namespace Sitemaker.Controllers
                 site.Logo = Upload(site.Logo);
                 site.Date = DateTime.Now;
                 db.Sites.Add(site);
+                //db.Menus.Add(site.Menu);
                 db.SaveChanges();
+
             }
-            return Json(new { result = "Redirect", url = Url.Action("CreateSite", "Sites", new { userName = site.UserName, id = site.Id  }) });
+            //return Json(new { result = "Redirect", url = Url.Action("CreateSite", "Sites", new { userName = site.UserName, id = site.Id }) });
+            //return Json(new {result="Redirect", Url=Url.Action("FillSite","Sites",)})
+            return Json(new { result = "Redirect", url = Url.Action("FillSite", "Sites", new { userName = site.UserName, id = site.Id }) });
         }
 
         [HttpPost]
@@ -344,6 +401,21 @@ namespace Sitemaker.Controllers
                     page.HtmlCode = null;
                 }
                 page.HtmlCode = savePage.HtmlCode;
+                db.SaveChanges();
+            }
+        }
+
+        [HttpPost]
+        public void SaveMenu(Menu saveMenu)
+        {
+            Menu menu;
+            using (MyDbContext db = new MyDbContext())
+            {
+                menu = db.Menus.Include(c => c.TopBar).Include(s => s.SideBar).Where(p => p.Id == saveMenu.Id).SingleOrDefault();
+                menu.TopBar.Clear();
+                menu.SideBar.Clear();
+                saveMenu.TopBar.CopyItemsTo(menu.TopBar);
+                saveMenu.SideBar.CopyItemsTo(menu.SideBar);
                 db.SaveChanges();
             }
         }

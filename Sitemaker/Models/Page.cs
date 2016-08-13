@@ -11,6 +11,5 @@ namespace Sitemaker.Models
         public string NamePage { get; set; }
         public string HtmlCode { get; set; }
         public string SiteId { get; set; }
-        public Site Site { get; set; }
     }
 }

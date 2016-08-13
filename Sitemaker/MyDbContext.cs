@@ -14,8 +14,11 @@ namespace Sitemaker
 
         public DbSet<Site> Sites { get; set; }
         public DbSet<Page> Pages { get; set; }
+        public DbSet<Menu> Menus { get; set; }
+        public DbSet<MenuItem> MenuItems { get; set; }
         public DbSet<Comment> Comments {get; set;}
         public DbSet<UserRating> Ratings { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

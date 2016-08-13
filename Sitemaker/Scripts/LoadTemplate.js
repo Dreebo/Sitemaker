@@ -99,6 +99,7 @@ function SavePage() {
     let position = id.lastIndexOf("/");
     id = id.slice(position + 1);
     let html = $(".no-js").html();
+    
     var savePage = { 
         Id: id,
         HtmlCode: html
@@ -121,7 +122,7 @@ function SavePage() {
           userName = userName.slice(userNamePos + 1);
           urlId = urlId.slice(pos + 1);
             
-          window.location.replace("https://localhost:44396/Sites/CreateSite/" + userName + "/" + urlId);
+          window.location.replace("https://localhost:44396/Sites/FillSite/" + userName + "/" + urlId);
         }
     });
 };
