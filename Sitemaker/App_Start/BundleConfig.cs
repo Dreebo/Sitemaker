@@ -22,6 +22,8 @@ namespace Sitemaker
 
             bundles.Add(new ScriptBundle("~/bundles/createSlideShow").Include(
                         "~/Scripts/CreateSlideShow.js"));
+            bundles.Add(new ScriptBundle("~/bundles/addComment").Include(
+                        "~/Scripts/AddComment.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/locationContent").Include(
                       "~/Scripts/locationContent.js"));
@@ -49,6 +51,15 @@ namespace Sitemaker
 
             bundles.Add(new StyleBundle("~/Content/Layout").Include(
                        "~/Content/Layout.css"));
+
+            bundles.Add(new StyleBundle("~/Content/Rating").Include(
+                      "~/Content/rating.css"));
+
+            bundles.Add(new StyleBundle("~/Content/Comment").Include(
+                     "~/Content/Comment.css"));
+
+            bundles.Add(new StyleBundle("~/Content/PageLayout").Include(
+                       "~/Content/PageLayout.css"));
 
             bundles.Add(new StyleBundle("~/Content/StyleGray").Include(
                         "~/Content/style_gray.css"));

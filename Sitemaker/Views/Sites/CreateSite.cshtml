@@ -88,23 +88,20 @@
     else
     {
         <img style="width:120px; height:120px" src="@Model.Logo" />
-        foreach (var x in Model.Pages)
-        {
-            <li><a href="@Url.Action("Page", "Sites", new { id = Model.Id, pageId = @x.Id })" class="btn btn-primary">@x.Id</a></li>
-        }
 
-        @*<td>
-            <h3>Изменить логотип</h3>
-            <div>
-                <input type="file" name="upload" id="uploadFile" /><br />
-            </div>
-        </td>*@
         <tr>
-            <td><a href="@Url.Action("CreatePage1", "Sites", new { id = Model.Id })" class="btn btn-primary">Create Page</a></td>
+            <td><a href="@Url.Action("CreatePage1", "Sites", new { userName = Model.UserName, id = Model.Id })" class="btn btn-primary">Create Page</a></td>
             <td><input id="saveChange" type="button" class="btn btn-success" value="Сохранить изменения" /> </td>
         </tr>
+        foreach (var x in Model.Pages)
+        {
+            if (x.HtmlCode != null)
+            {
+               <a href="@Url.Action("Page", "Sites", new {userName = Model.UserName, id = Model.Id, pageId = @x.Id })" class="btn btn-primary">@x.Id</a>
+            }
         }
     }
+}
 
 </table>
 

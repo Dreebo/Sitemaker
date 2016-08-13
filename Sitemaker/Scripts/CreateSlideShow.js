@@ -33,7 +33,7 @@
         var reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = function () {
-            var dataObject = JSON.stringify({
+            var dataObject = JSON.stringify({ 
                 'Name': model.name,
                 'About': model.about,
                 'TemplateId': model.selectedTemplate,
