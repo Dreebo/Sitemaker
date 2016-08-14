@@ -25,6 +25,25 @@ namespace Sitemaker.Controllers
         // GET: Sites
         public ActionResult Index(int? page)
         {
+            //Medal medal = new Medal();
+            //using (MyDbContext db = new MyDbContext())
+            //{
+            //        medal.Description = "5s";
+            //        db.Medals.Add(medal);
+            //        db.SaveChanges();
+            //        medal.Description = "10s";
+            //        db.Medals.Add(medal);
+            //        db.SaveChanges();
+            //        medal.Description = "20s";
+            //        db.Medals.Add(medal);
+            //        db.SaveChanges();
+            //        medal.Description = "maxkomment";
+            //        db.Medals.Add(medal);
+            //        db.SaveChanges();
+            //        medal.Description = "topsite";
+            //        db.Medals.Add(medal);
+            //        db.SaveChanges();
+            //}
             List<Site> sites;
             sites = new List<Site>();
             foreach (var x in db.Sites.Include(s => s.Pages).Include(s => s.Ratings))
@@ -33,8 +52,8 @@ namespace Sitemaker.Controllers
                 {
                     sites.Add(x);
                 }
-                }
-            int pageSize = 5;
+            }
+                int pageSize = 5;
             int pageNumber = (page ?? 1);
             string userName = User.Identity.GetUserName();
             if (userName != "")
@@ -176,7 +195,13 @@ namespace Sitemaker.Controllers
             int position = Name.IndexOf("@");
             Name = Name.Remove(position);
             Session["CurrentUserName"] = Name;
-            return View("ShowUser", db.Sites.Where(p => p.UserName == siteCreator).ToList());
+            UserRating user;
+            using (MyDbContext db = new MyDbContext())
+            {
+                user = db.Ratings.Include(m => m.Medals).Include(s => s.Sites).Where(p => p.UserName == siteCreator).FirstOrDefault();
+                user.Medals = CheckMedal(siteCreator).Medals;
+            }
+            return View("ShowUser", user);
         }
 
         public ActionResult OpenSite(string userName, int id)
@@ -508,6 +533,65 @@ namespace Sitemaker.Controllers
                 }
             }
          }
+
+        public UserRating CheckMedal (string userName)
+        {
+            int count = 0;
+            bool countMedal = false;
+            Site site;
+            UserRating userMedal;
+            using (MyDbContext db = new MyDbContext())
+            {
+                userMedal = db.Ratings.Include(s => s.Medals).Where(p => p.UserName == userName).FirstOrDefault();
+                foreach (var x in db.Sites)
+                {
+                    if (x.UserName == userName) count++;
+                }
+                if (count >= 5)
+                {
+                    foreach (var x in userMedal.Medals)
+                    {
+                        if (x.Description == "5") countMedal = true;
+                    }
+                    if (countMedal == false)
+                    {
+                        Medal medal = new Medal()
+                        { Description = "5" };
+                        userMedal.Medals.Add(medal);
+                        db.SaveChanges();
+                    }
+                }
+                if (count >= 10)
+                {
+                    foreach (var x in userMedal.Medals)
+                    {
+                        if (x.Description == "10") countMedal = true;
+                    }
+                    if (countMedal == false)
+                    {
+                        Medal medal = new Medal()
+                        { Description = "10" };
+                        userMedal.Medals.Add(medal);
+                        db.SaveChanges();
+                    }
+                }
+                if (count >= 20)
+                {
+                    foreach (var x in userMedal.Medals)
+                    {
+                        if (x.Description == "20") countMedal = true;
+                    }
+                    if (countMedal == false)
+                    {
+                        Medal medal = new Medal()
+                        { Description = "20" };
+                        userMedal.Medals.Add(medal);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            return userMedal;
+        }
 
         public ActionResult ChangeCulture(string lang)
         {

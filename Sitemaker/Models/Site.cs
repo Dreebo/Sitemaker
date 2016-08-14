@@ -23,9 +23,10 @@ namespace Sitemaker.Models
         public virtual Menu Menu { get; set; }
 
         public virtual ICollection<UserRating> Ratings { get; set; }
+        public virtual ICollection<Medal> Medals { get; set; }
 
         public Site()
-        {
+        { 
             Ratings = new List<UserRating>();
             Pages = new List<Page>();
         }
