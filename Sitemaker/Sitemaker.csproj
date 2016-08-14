@@ -295,12 +295,18 @@
     <Compile Include="Migrations\201608132238433_medal1.Designer.cs">
       <DependentUpon>201608132238433_medal1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608141508398_migr11.cs" />
+    <Compile Include="Migrations\201608141508398_migr11.Designer.cs">
+      <DependentUpon>201608141508398_migr11.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Medal.cs" />
+    <Compile Include="Models\Menu.cs" />
+    <Compile Include="Models\MenuItem.cs" />
     <Compile Include="Models\Page.cs" />
     <Compile Include="Models\Site.cs" />
     <Compile Include="Models\TestClass.cs" />
@@ -533,6 +539,9 @@
     <Content Include="Views\Sites\OpenSite.cshtml" />
     <Content Include="Views\Sites\ShowUser.cshtml" />
     <Content Include="Views\Sites\Comments.cshtml" />
+    <Content Include="Views\Sites\CreateMenu.cshtml" />
+    <Content Include="Views\Sites\FillSite.cshtml" />
+    <Content Include="Views\Sites\PageView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -572,6 +581,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608132238433_medal1.resx">
       <DependentUpon>201608132238433_medal1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608141508398_migr11.resx">
+      <DependentUpon>201608141508398_migr11.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Resource.en.resx">
       <CustomToolNamespace>Resources</CustomToolNamespace>
