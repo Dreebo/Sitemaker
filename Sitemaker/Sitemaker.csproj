@@ -287,17 +287,20 @@
     <Compile Include="Migrations\201608111755386_update raring.Designer.cs">
       <DependentUpon>201608111755386_update raring.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201608132134366_menuMigr12.cs" />
-    <Compile Include="Migrations\201608132134366_menuMigr12.Designer.cs">
-      <DependentUpon>201608132134366_menuMigr12.cs</DependentUpon>
+    <Compile Include="Migrations\201608132144506_medal.cs" />
+    <Compile Include="Migrations\201608132144506_medal.Designer.cs">
+      <DependentUpon>201608132144506_medal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608132238433_medal1.cs" />
+    <Compile Include="Migrations\201608132238433_medal1.Designer.cs">
+      <DependentUpon>201608132238433_medal1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Comment.cs" />
-    <Compile Include="Models\Menu.cs" />
-    <Compile Include="Models\MenuItem.cs" />
+    <Compile Include="Models\Medal.cs" />
     <Compile Include="Models\Page.cs" />
     <Compile Include="Models\Site.cs" />
     <Compile Include="Models\TestClass.cs" />
@@ -530,9 +533,6 @@
     <Content Include="Views\Sites\OpenSite.cshtml" />
     <Content Include="Views\Sites\ShowUser.cshtml" />
     <Content Include="Views\Sites\Comments.cshtml" />
-    <Content Include="Views\Sites\FillSite.cshtml" />
-    <Content Include="Views\Sites\PageView.cshtml" />
-    <Content Include="Views\Sites\CreateMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -567,8 +567,11 @@
     <EmbeddedResource Include="Migrations\201608111755386_update raring.resx">
       <DependentUpon>201608111755386_update raring.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608132134366_menuMigr12.resx">
-      <DependentUpon>201608132134366_menuMigr12.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201608132144506_medal.resx">
+      <DependentUpon>201608132144506_medal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608132238433_medal1.resx">
+      <DependentUpon>201608132238433_medal1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Resource.en.resx">
       <CustomToolNamespace>Resources</CustomToolNamespace>
