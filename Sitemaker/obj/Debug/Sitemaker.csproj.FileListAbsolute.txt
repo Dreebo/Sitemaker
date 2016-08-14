@@ -121,3 +121,5 @@ D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.rating1.resour
 D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.rating2.resources
 D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.werw.resources
 D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.updateraring.resources
+D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.medal.resources
+D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.medal1.resources

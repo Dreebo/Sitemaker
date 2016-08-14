@@ -287,11 +287,20 @@
     <Compile Include="Migrations\201608111755386_update raring.Designer.cs">
       <DependentUpon>201608111755386_update raring.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608132144506_medal.cs" />
+    <Compile Include="Migrations\201608132144506_medal.Designer.cs">
+      <DependentUpon>201608132144506_medal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608132238433_medal1.cs" />
+    <Compile Include="Migrations\201608132238433_medal1.Designer.cs">
+      <DependentUpon>201608132238433_medal1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\Medal.cs" />
     <Compile Include="Models\Page.cs" />
     <Compile Include="Models\Site.cs" />
     <Compile Include="Models\TestClass.cs" />
@@ -557,6 +566,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608111755386_update raring.resx">
       <DependentUpon>201608111755386_update raring.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608132144506_medal.resx">
+      <DependentUpon>201608132144506_medal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608132238433_medal1.resx">
+      <DependentUpon>201608132238433_medal1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Resource.en.resx">
       <CustomToolNamespace>Resources</CustomToolNamespace>

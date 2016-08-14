@@ -20,11 +20,11 @@ namespace Sitemaker.Models
         public ICollection<Comment> Comments { get; set; }
         public int RatingCount { get; set; }
         public double AverageRating { get; set; }
-
         public virtual ICollection<UserRating> Ratings { get; set; }
+        public virtual ICollection<Medal> Medals { get; set; }
 
         public Site()
-        {
+        { 
             Ratings = new List<UserRating>();
             Pages = new List<Page>();
         }
