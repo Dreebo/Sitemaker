@@ -1,0 +1,88 @@
+﻿@using Sitemaker.Models
+@model Sitemaker.Models.Page
+    @{
+        Layout = null;
+        var Menu =(Menu) Session["Menu"];
+        var TemplateId = (int) Session["TemplateId"];
+
+    }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @{ if (TemplateId == 1)
+            { @Styles.Render("~/Content/StyleGray")}
+        else
+        { @Styles.Render("~/Content/StyleWhight")}
+    }
+    @Styles.Render("~/Content/PageLayout")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/dropzone")
+
+</head>
+<body>
+    @if (Menu.IsTopBarExicist)
+    {
+        <div class="container">
+            <header id="navtop">
+
+                <nav class="fright">
+                    <ul>
+                        @foreach (var item in Menu.TopBar)
+                        {
+                            <li><a href="@item.Link" class="navactive">@item.Name</a></li>
+                        }
+                    </ul>
+                </nav>
+            </header>
+        </div>
+    }
+
+    <div class="works-page main grid-wrap">
+        <hr>
+        @if (Menu.IsSideBarExicist)
+        {
+            <aside class="grid col-one-quarter mq2-col-full">
+                <menu>
+                    <p class="fleft">
+                        <h3>Menu</h3>
+                    </p>
+                    <ul>
+                        @foreach (var item in Menu.SideBar)
+                        {
+                            <li><a href="@item.Link">@item.Name</a></li>
+                        }
+                    </ul>
+                </menu>
+            </aside>
+        }
+
+        <section class="grid-wrap">
+            @if (Model.HtmlCode != null)
+            {
+                @Html.Raw(Model.HtmlCode)
+            }
+            @*@{
+                var pageN = Session["pageId"];
+                if (pageN != null)
+                {
+                    var page = Model.Pages.Where(p => p.Id == (int) pageN).FirstOrDefault();
+                    if (page.HtmlCode != null)
+                    {
+                        Html.Raw(page.HtmlCode);
+                    }
+                }
+            }*@
+
+
+        </section>
+</div>
+
+
+        
+</body>
+</html>

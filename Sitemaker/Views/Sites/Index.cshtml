@@ -39,7 +39,7 @@ padding-top:20%;
   {
         <tr>
             <td>
-                <h2><a href="@Url.Action("OpenSite", "Sites", new { userName = (string)Session["CurrentUserName"], id = item.Id })">@item.Name</a></h2>
+                <h2><a href="@Url.Action("Site", "Sites", new { userName =item.UserName, id = item.Id })">@item.Name</a></h2>
                 <p>
                     <img style="width:120px; height:120px" src="@item.Logo" />
                 </p>

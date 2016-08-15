@@ -232,6 +232,12 @@ C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\Microsoft.Owin.Security.Twit
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\Org.Mentalis.Security.Cryptography.xml
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\Mono.Math.xml
+C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\ru\System.Web.Helpers.resources.dll
+C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\ru\System.Web.Mvc.resources.dll
+C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\ru\System.Web.Razor.resources.dll
+C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\ru\System.Web.WebPages.resources.dll
+C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\ru\System.Web.WebPages.Deployment.resources.dll
+C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\ru\System.Web.WebPages.Razor.resources.dll
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.asdasd.resources
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.comments.resources
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.rating.resources
@@ -248,3 +254,4 @@ C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\obj\Debug\Sitemaker.csproj.Gener
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\obj\Debug\en\Sitemaker.resources.dll
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\obj\Debug\Sitemaker.dll
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\obj\Debug\Sitemaker.pdb
+C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\obj\Debug\Sitemaker.csprojResolveAssemblyReference.cache

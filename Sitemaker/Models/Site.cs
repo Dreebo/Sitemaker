@@ -29,6 +29,7 @@ namespace Sitemaker.Models
         { 
             Ratings = new List<UserRating>();
             Pages = new List<Page>();
+            
         }
     }
 }

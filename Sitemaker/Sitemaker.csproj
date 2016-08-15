@@ -542,6 +542,8 @@
     <Content Include="Views\Sites\CreateMenu.cshtml" />
     <Content Include="Views\Sites\FillSite.cshtml" />
     <Content Include="Views\Sites\PageView.cshtml" />
+    <Content Include="Views\Shared\Menu.cshtml" />
+    <Content Include="Views\Sites\Site.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
