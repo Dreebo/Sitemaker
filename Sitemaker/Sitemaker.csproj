@@ -351,6 +351,7 @@
     <Content Include="Content\Images\template6.jpg" />
     <Content Include="Content\Images\template7.jpg" />
     <Content Include="Content\Images\star.png" />
+    <Content Include="Content\image_preview.css" />
     <Content Include="Content\Layout.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\PageLayout.css" />

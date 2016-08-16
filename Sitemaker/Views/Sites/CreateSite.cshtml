@@ -35,7 +35,7 @@
         }
 </style>
 
-
+@Styles.Render("~/Content/ImagePreview")
 @Scripts.Render("~/bundles/createSlideShow")
 <table>
     <tr><td><p>Введите название сайта :</p></td></tr>
@@ -53,9 +53,22 @@
             <p>
                 <h3>Добавьте логотип</h3>
 
-                <div>
-                    <input type="file" name="upload" id="uploadFile" />
-                </div>
+                <fieldset>
+
+                    <div class="input-file-row-1">
+
+                        <div class="upload-file-container">
+                            <img id="image" alt=""/>
+                            <div class="upload-file-container-text">
+                                <span>Add<br />photo</span>
+                                <input type="file" name="upload" id="uploadFile" class="photo"/>
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
+
+               
             </p>
         </td>
         <td></td>
@@ -93,4 +106,21 @@
 </table>
 
 
+<script>
+    function readURL(input) {
 
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#image').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#uploadFile").change(function () {
+        readURL(this);
+    });
+</script>
