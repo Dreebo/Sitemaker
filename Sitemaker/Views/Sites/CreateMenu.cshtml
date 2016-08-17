@@ -1,6 +1,10 @@
 ﻿@model Sitemaker.Models.Site
 @{Layout = null;}
-@Styles.Render("~/Content/StyleGray")
+@{ if (Model.TemplateId == 1)
+            { @Styles.Render("~/Content/StyleGray")}
+    else
+    { @Styles.Render("~/Content/StyleWhight")}
+}
 @Scripts.Render("~/bundles/locationContent")
 @Scripts.Render("~/bundles/loadTemplate")
 @Styles.Render("~/Content/Layout")
@@ -254,12 +258,13 @@ $(document).ready(function() {
                     </div>
                 </aside>
             }
+            
 @foreach (var page in Model.Pages)
 {
     <section class="grid-wrap">
         <div class="grid-wrap">
 
-            <input type="text" style="border: none;" value="@Url.Action("PageView", "Sites", new {userName = Model.UserName, id = Model.Id, pageId = @page.Id})" />
+            <input type="text" style="border: none;" value="@Url.Action("Site", "Sites", new {userName = Model.UserName, id = Model.Id, pageId = @page.Id})" />
             <iframe src="@Url.Action("PageView", "Sites", new {userName = Model.UserName, id = Model.Id, pageId = @page.Id})"> </iframe>
             
 

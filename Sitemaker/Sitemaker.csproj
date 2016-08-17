@@ -311,6 +311,10 @@
     <Compile Include="Migrations\201608141508398_migr11.Designer.cs">
       <DependentUpon>201608141508398_migr11.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608141508398_migr11.cs" />
+    <Compile Include="Migrations\201608141508398_migr11.Designer.cs">
+      <DependentUpon>201608141508398_migr11.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201608152019061_asdasd1.cs" />
     <Compile Include="Migrations\201608152019061_asdasd1.Designer.cs">
       <DependentUpon>201608152019061_asdasd1.cs</DependentUpon>
@@ -371,6 +375,7 @@
     <Content Include="Content\Images\template7.jpg" />
     <Content Include="Content\Images\star.png" />
     <Content Include="Content\jquery.tag-editor.css" />
+    <Content Include="Content\image_preview.css" />
     <Content Include="Content\Layout.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\PageLayout.css" />
@@ -565,6 +570,11 @@
     <Content Include="Views\Sites\CreateMenu.cshtml" />
     <Content Include="Views\Sites\FillSite.cshtml" />
     <Content Include="Views\Sites\PageView.cshtml" />
+    <Content Include="Views\Shared\Menu.cshtml" />
+    <Content Include="Views\Sites\Site.cshtml" />
+    <Content Include="Views\Sites\CreateMenu.cshtml" />
+    <Content Include="Views\Sites\FillSite.cshtml" />
+    <Content Include="Views\Sites\PageView.cshtml" />
     <Content Include="Views\Sites\Search.cshtml" />
     <Content Include="Views\Sites\_TableSearch.cshtml" />
     <Content Include="Views\Sites\TableSearch.cshtml" />
@@ -608,6 +618,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608132238433_medal1.resx">
       <DependentUpon>201608132238433_medal1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608141508398_migr11.resx">
+      <DependentUpon>201608141508398_migr11.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608141508398_migr11.resx">
       <DependentUpon>201608141508398_migr11.cs</DependentUpon>

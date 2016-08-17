@@ -383,6 +383,64 @@ namespace Sitemaker.Controllers
             return View("FillSite", site);
         }
 
+        public ActionResult Site(string userName, int id, int? pageId)
+        {
+            Site site;
+            using (var db = new MyDbContext())
+            {
+                site = db.Sites
+                    .Include(s => s.Pages)
+                    .Include(s => s.Menu)
+                    .Include(s => s.Menu.TopBar)
+                    .Include(s => s.Menu.SideBar)
+                    .Where(p => p.Id == id)
+                    .SingleOrDefault();
+            }
+            if (site == null)
+            {
+                site = new Site();
+            }
+
+            Session.Add("TemplateId",site.TemplateId);
+            Session.Add("Menu",site.Menu);
+            //if(pageId!=null)
+            //        Session.Add("pageId",pageId);
+
+            //else if(site.Pages.Count>0)
+            //{
+            //    Session.Add("pageId", site.Pages.ElementAt(0).Id);
+            //}
+            Page page=null;
+            if(pageId!=null)
+                page = site.Pages.Where(s => s.Id == pageId).FirstOrDefault();
+            if(page==null)
+                if (site.Pages.Count > 0)
+                    page = site.Pages.FirstOrDefault();
+                else
+                    page=new Page();
+            return View("Site", page);
+        }
+
+        public ActionResult PageResult(int id, int? pageId)
+        {
+            Site site;
+            using (var db = new MyDbContext())
+            {
+                site = db.Sites.Where(p => p.Id == id).SingleOrDefault();
+            }
+            if (site == null)
+            {
+                site = new Site();
+            }
+            Page page;
+            if (pageId == null)
+                page = site.Pages.FirstOrDefault();
+            page = site.Pages.Where(p => p.Id == pageId).SingleOrDefault();
+            //return View("Site", site);
+            return Json(page);
+        }
+
+
 
         [HttpPost]
         public ActionResult SaveSite(Site site, string[] tagsArray)

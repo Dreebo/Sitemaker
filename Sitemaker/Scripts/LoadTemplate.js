@@ -99,8 +99,8 @@ function SavePage() {
     let id = window.location.href;
     let position = id.lastIndexOf("/");
     id = id.slice(position + 1);
-    let html = $(".no-js").html();
-    
+    //let html = $(".no-js").html();
+    let html = $("#content").html();
     var savePage = { 
         Id: id,
         HtmlCode: html

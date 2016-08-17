@@ -66,6 +66,8 @@ namespace Sitemaker
 
             bundles.Add(new StyleBundle("~/Content/StyleWhight").Include(
                        "~/Content/style_white.css"));
+            bundles.Add(new StyleBundle("~/Content/ImagePreview").Include(
+                       "~/Content/image_preview.css"));
         }
     }
 }
