@@ -19,6 +19,7 @@ namespace Sitemaker
         public DbSet<Comment> Comments {get; set;}
         public DbSet<UserRating> Ratings { get; set; }
         public DbSet<Medal> Medals { get; set; }
+        public DbSet<Tag> Tags { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

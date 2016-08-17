@@ -40,7 +40,7 @@ input.star{
 }
 
 label.star {
-  float: right;
+  float: left;
   padding: 10px;
   font-size: 36px;
   color: #444;

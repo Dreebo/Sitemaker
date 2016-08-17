@@ -61,7 +61,8 @@ function LoadScript() {
                     var image = $(this);
                     cloudinary.openUploadWidget(
                         {
-                            cloud_name: 'dgy6x5krf', upload_preset: 'ntblzmxf', 'theme': 'purple'
+                            cloud_name: 'dgy6x5krf', upload_preset: 'ntblzmxf', 'theme': 'purple',
+                            cropping: 'server'
                         }, function (error, result) {
                                 image.empty();
                                 image.append("<img style=\"width:100%; height:100%;\" src=\"" + result[0].secure_url + "\"/>");

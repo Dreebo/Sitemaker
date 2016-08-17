@@ -1,4 +1,5 @@
 ﻿@model Sitemaker.Models.Site
+@using System.Web.Script.Serialization;
 @{
     ViewBag.Title = "CreateSite";
 }
@@ -33,9 +34,11 @@
         .thumbMenu img.selected {
             border: 2px solid #55c5e9;
         }
+
+
 </style>
-
-
+<link href="~/Content/jquery.tag-editor.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.tag-editor.min.js"></script>
 @Scripts.Render("~/bundles/createSlideShow")
 <table>
     <tr><td><p>Введите название сайта :</p></td></tr>
@@ -61,6 +64,9 @@
         <td></td>
     </tr>
 
+    <td>
+        <div class="ui-front" style="margin-top: 10px"><label>Tags</label><br /><textarea id="tags"></textarea></div>
+    </td>
 
     <tr><td><p>Выберите тему сайта :</p></td></tr>
 
@@ -75,12 +81,9 @@
 
     <td>
         <div class="thumbMenu">
-
             <img class="top" align="left" data-id="1" alt="Меню" src="http://res.cloudinary.com/dgy6x5krf/image/upload/v1469969081/oiyngrnh1utelwzvmihv.jpg" style="width: 350px; height: 320px; " />
             <img class="side" align="left" data-id="2" alt="Меню" src="http://res.cloudinary.com/dgy6x5krf/image/upload/v1469969833/%D0%91%D0%B5%D0%B7%D1%8B%D0%BC%D1%8F%D0%BD%D0%BD%D1%8B%D0%B9_f1pxjm.jpg" style="width: 350px; height: 320px; " />
-
-
-            <div>
+        </div>
     </td>
 
 
@@ -93,4 +96,20 @@
 </table>
 
 
+@{
+    JavaScriptSerializer jss = new JavaScriptSerializer();
+    string output = jss.Serialize(Model.Tags.Select(x => x.Name));
+    string source = jss.Serialize(ViewBag.Tags);
+}
 
+<script>
+    $('#tags').tagEditor({ 
+        initialTags: @Html.Raw(output), 
+        autocomplete: { 
+            delay: 0, // show suggestions immediately 
+            position: { collision: 'flip' }, // automatic menu position up/down 
+            source: @Html.Raw(source)}, 
+        forceLowercase: false, 
+        placeholder: 'теги здесь ...' 
+    });
+</script>

@@ -1,12 +1,6 @@
 ﻿@model Sitemaker.Models.Page
 @{Layout = null;}
 
-@if (Model.Site.UserName != (string)Session["CurrentUserName"])
-{
-@Styles.Render("~/Content/PageLayout")
-}
-
-
 
 <html class="no-js" lang="en">
 
