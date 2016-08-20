@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 
 namespace Sitemaker.Models
 {
@@ -18,6 +19,7 @@ namespace Sitemaker.Models
             // Add custom user claims here
             return userIdentity;
         }
+        public string PhotoUrl { get; set; }
     }
 
 

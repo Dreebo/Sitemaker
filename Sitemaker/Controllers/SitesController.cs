@@ -16,6 +16,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using PagedList.Mvc;
 using PagedList;
+using MvcLuceneSampleApp.Search;
+using CloudinaryDotNet.Actions;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace Sitemaker.Controllers
 {
@@ -27,35 +30,19 @@ namespace Sitemaker.Controllers
         // GET: Sites
         public ActionResult Index(int? page)
         {
-            //Medal medal = new Medal();
-            //using (MyDbContext db = new MyDbContext())
-            //{
-            //        medal.Description = "5s";
-            //        db.Medals.Add(medal);
-            //        db.SaveChanges();
-            //        medal.Description = "10s";
-            //        db.Medals.Add(medal);
-            //        db.SaveChanges();
-            //        medal.Description = "20s";
-            //        db.Medals.Add(medal);
-            //        db.SaveChanges();
-            //        medal.Description = "maxkomment";
-            //        db.Medals.Add(medal);
-            //        db.SaveChanges();
-            //        medal.Description = "topsite";
-            //        db.Medals.Add(medal);
-            //        db.SaveChanges();
-            //}
+            
             List<Site> sites;
             sites = new List<Site>();
-            foreach (var x in db.Sites.Include(s => s.Pages).Include(s => s.Ratings))
+            foreach (var x in db.Sites.Include(s => s.Pages).Include(s => s.Ratings).Include(s => s.Tags))
             {
                 if (x.Pablish == true)
                 {
-                    sites.Add(x);
+                    sites.Insert(0, x);
                 }
             }
-                int pageSize = 5;
+            LuceneSearch.ClearLuceneIndex();
+            LuceneSearch.AddUpdateLuceneIndex(db.Sites.Include("Comments").Include("Tags"));
+            int pageSize = 9;
             int pageNumber = (page ?? 1);
             string userName = User.Identity.GetUserName();
             if (userName != "")
@@ -156,6 +143,9 @@ namespace Sitemaker.Controllers
             }
             Site site = db.Sites
                     .Include(s => s.Pages)
+                    .Include(s => s.Comments)
+                    .Include(s => s.Medals)
+                    .Include(s => s.Tags)
                     .Where(p => p.Id == id)
                     .SingleOrDefault();
             if (site == null)
@@ -172,6 +162,9 @@ namespace Sitemaker.Controllers
         {
             Site site = db.Sites
                    .Include(s => s.Pages)
+                   .Include(s => s.Comments)
+                    .Include(s => s.Medals)
+                    .Include(s => s.Tags)
                    .Where(p => p.Id == id)
                    .SingleOrDefault();
             db.Sites.Remove(site);
@@ -198,6 +191,21 @@ namespace Sitemaker.Controllers
             Session["CurrentUserName"] = Name;
             return View("ShowMySite", db.Sites.Where(p => p.UserName == Name).ToList());
         }
+        
+        [HttpPost]
+        public void SaveChangeSite(Site site)
+        {
+            Site currentSite;
+            using (MyDbContext db = new MyDbContext())
+            {
+                currentSite = db.Sites.Where(p => p.Id == site.Id).FirstOrDefault();
+                currentSite.Name = site.Name;
+                currentSite.About = site.About;
+                currentSite.Logo = Upload(site.Logo);
+                currentSite.Date = DateTime.Now;
+                db.SaveChanges();
+            }
+        }
 
         public ActionResult ShowUser(string userName, string siteCreator)
         {
@@ -206,10 +214,21 @@ namespace Sitemaker.Controllers
             Name = Name.Remove(position);
             Session["CurrentUserName"] = Name;
             UserRating user;
+            List<Site> sites;
+            sites = new List<Site>();         
             using (MyDbContext db = new MyDbContext())
             {
-                user = db.Ratings.Include(m => m.Medals).Include(s => s.Sites).Where(p => p.UserName == siteCreator).FirstOrDefault();
-                user.Medals = CheckMedal(siteCreator).Medals;
+                foreach (var x in db.Sites.Include(s => s.Pages).Include(s => s.Ratings).Include(s => s.Tags).Where(p => p.UserName == siteCreator))
+                {
+                    if (x.Pablish == true)
+                    {
+                        sites.Insert(0, x);
+                    }
+                }
+                user = db.Ratings.Include(m => m.Medals).Include(m => m.Sites).Where(p => p.UserName == siteCreator).FirstOrDefault();
+                if (CheckMedal(siteCreator) != null)
+                    user.Medals = CheckMedal(siteCreator).Medals;
+                user.Sites = sites;
             }
             return View("ShowUser", user);
         }
@@ -230,7 +249,7 @@ namespace Sitemaker.Controllers
             }
 
             Page page = site.Pages.FirstOrDefault();
-            return View("OpenSite", page);
+            return View("Site", page);
         }
 
 
@@ -463,10 +482,23 @@ namespace Sitemaker.Controllers
 
 
         [HttpPost]
-        public ActionResult SaveSite(Site site)
+        public ActionResult SaveSite(Site site, string[] tagsArray)
         {
             using (MyDbContext db = new MyDbContext())
             {
+                Tag tag;
+                List<Tag> tags = new List<Tag>();
+                foreach (var x in tagsArray)
+                {
+                    var temp = db.Tags.FirstOrDefault(t => t.Name.Equals(x));
+                    if (temp == null)
+                    {
+                        temp = new Tag();
+                        temp.Name = x;
+                        db.Tags.Add(temp);
+                    }
+                    tags.Add(temp);        
+                }
                 string user = User.Identity.GetUserName();
                 int position = user.IndexOf("@");
                 user = user.Remove(position);
@@ -475,10 +507,15 @@ namespace Sitemaker.Controllers
                 site.Date = DateTime.Now;
                 string userId = User.Identity.GetUserId();
                 site.CreaterId = userId;
+                site.Tags = tags;
                 db.Sites.Add(site);
+                var usr = System.Web.HttpContext.Current.GetOwinContext().
+                GetUserManager<ApplicationUserManager>().
+                FindById(System.Web.HttpContext.
+                Current.User.Identity.GetUserId());
+               // usr.Site.Add(site);
                 //db.Menus.Add(site.Menu);
                 db.SaveChanges();
-
             }
             //return Json(new { result = "Redirect", url = Url.Action("CreateSite", "Sites", new { userName = site.UserName, id = site.Id }) });
             //return Json(new {result="Redirect", Url=Url.Action("FillSite","Sites",)})
@@ -552,6 +589,7 @@ namespace Sitemaker.Controllers
                 site = db.Sites
                     .Include(s => s.Comments)
                     .Include(s => s.Ratings)
+                    .Include(s => s.Tags)
                     .Where(p => p.Id == id)
                     .SingleOrDefault(); 
             }
@@ -691,7 +729,69 @@ namespace Sitemaker.Controllers
             Response.Cookies.Add(cookie);
             return Redirect(returnUrl);
         }
-    }
 
+        public PartialViewResult Search(string SearchValue)
+        {
+            string user = User.Identity.GetUserName();
+            int position = user.IndexOf("@");
+            user = user.Remove(position);
+            List<Site> resultSearch = new List<Site>();
+            var result = LuceneSearch.Search(SearchValue);
+            foreach (var x in result)
+            {
+                using (MyDbContext db = new MyDbContext())
+                {
+                    Site site = db.Sites.Include(s => s.Comments).Include(m => m.Pages).Include(n => n.Ratings).Where(p => p.Id == x.Id).FirstOrDefault();
+                    if(site.Pablish == true)
+                    resultSearch.Add(site);
+                }
+            };          
+            TempData["sites"] = resultSearch;
+            return PartialView("TableSearch", new PagedList<Site>(resultSearch, 1, 99));
+        }
+
+        public PartialViewResult SearchTags(string SearchValue)
+        {
+            string user = User.Identity.GetUserName();
+            int position = user.IndexOf("@");
+            user = user.Remove(position);
+            List<Site> resultSearch = new List<Site>();
+            var result = LuceneSearch.Search(SearchValue, "Tags");
+            foreach (var x in result)
+            {
+                using (MyDbContext db = new MyDbContext())
+                {
+                    Site site = db.Sites.Include(s => s.Comments).Include(m => m.Pages).Include(n => n.Ratings).Where(p => p.Id == x.Id).FirstOrDefault();
+                    if (site.Pablish == true)
+                        resultSearch.Insert(0, site);
+                }
+            };
+            TempData["sites"] = resultSearch;
+            return PartialView("TableSearch", new PagedList<Site>(resultSearch, 1, 9));
+        }
+
+        [HttpPost]
+        public JsonResult ChangePhoto(string data, string userName)
+        {
+            var dbContext = new ApplicationDbContext();
+            var account = new Account("dgy6x5krf", "949232162798767", "oxvzYd03K1i8lEIi5MA2ByIf590");
+
+            var cloudinary = new Cloudinary(account);
+
+            var uploadParams = new ImageUploadParams
+            {
+                File = new FileDescription(data)
+            };
+            var uploadResult = cloudinary.Upload(uploadParams);
+            UserRating user = db.Ratings.Where(p => p.UserName == userName).FirstOrDefault();
+            user.PhotoUrl = uploadResult.SecureUri.ToString();
+
+
+            //System.Web.HttpContext.Current.GetOwinContext().
+            //    GetUserManager<ApplicationUserManager>().Update(user);
+            dbContext.SaveChanges();
+            return new JsonResult();
+        }
+    }
 }
 

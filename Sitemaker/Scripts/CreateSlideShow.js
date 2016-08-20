@@ -23,6 +23,7 @@
         let model = {
             name: $("#Name").val(),
             about: $("#Textarea").val(),
+            tags: $("#tags").val().split(','),
             selectedTemplate: null,
             selectedMenu: null,
             isTopBarExist: false,
@@ -54,7 +55,7 @@
         var reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = function () {
-            var dataObject = JSON.stringify({
+            var site = {
                 'Name': model.name,
                 'About': model.about,
                 'TemplateId': model.selectedTemplate,
@@ -64,13 +65,15 @@
                 },
                 'MenuTypeId': model.selectedMenu,
                 "Logo": reader.result
+            };
 
-            });
+            var tagsArray = model.tags;
 
             $.ajax({
                 url: 'SaveSite',
                 type: 'POST',
                 contentType: 'application/json',
+                traditional: true,
                 success: function (response) {
                     if (response.result == 'Redirect')
                         window.location = response.url;
@@ -78,7 +81,7 @@
                 fail: function () {
                     alert(data);
                 },
-                data: dataObject
+                data: JSON.stringify({site : site, tagsArray : tagsArray})
             });
         }
 

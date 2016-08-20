@@ -4,23 +4,25 @@
  }
 
 <style>
-    .text {
-        z-index: 2;
-        position: relative;
-        font-weight: bold;
-        color: darkorchid;
-        width: 100px;
-        height: 120px;
-        top: 82px;
-        left: 46px;
-    }
+    .medal p { 
+position: relative; 
+margin: 0; 
+top: -55px; 
+left: 40px; 
+font-weight: bold; 
+z-index: 2; 
+ color:#fff;
+ text-shadow:0px 0px 20px #00c6ff; 
+ font-size:30px
+}
 
     .medal {
-        top: 50px;
+        z-index: 1;
+        top: 0px;
         width: 100px;
         height: 120px;
-        z-index: 1;
-        position: absolute;
+        display: inline-block;
+        position: relative;
     }
 
     .ribbon {
@@ -28,6 +30,7 @@
         height: 70px;
         margin: 0 auto;
         position: relative;
+
     }
 
         .ribbon:before,
@@ -72,20 +75,24 @@
             border-radius: inherit;
             box-shadow: 0 0 0 9px #D9B867;
         } 
+       
 </style>
 
-        @foreach (var item in Model.Medals)
-        { 
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.."></script>
-                <div class="text">@item.Description</div>
-                <div class="medal">
-                    <div class="ribbon"></div>
-                    <div class="coin"></div>
-                </div>
+
+
+
+    @if (Model.Medals != null)
+    {
+        foreach (var item in Model.Medals)
+        {
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.."></script>
+            <div class="medal">
+                <div class="ribbon"></div>
+                <div class="coin"></div>
+                <p>@item.Description</p>
+            </div>
         }
-
-
-
+    }
 
 
 <table class="table">
@@ -110,4 +117,6 @@
         </tr>
     }
 </table>
+
+
 

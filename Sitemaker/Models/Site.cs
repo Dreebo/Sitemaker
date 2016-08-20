@@ -26,12 +26,13 @@ namespace Sitemaker.Models
 
         public virtual ICollection<UserRating> Ratings { get; set; }
         public virtual ICollection<Medal> Medals { get; set; }
+        public virtual ICollection<Tag> Tags { get; set; }
 
         public Site()
         { 
             Ratings = new List<UserRating>();
             Pages = new List<Page>();
-            
+            Tags = new List<Tag>();
         }
     }
 }

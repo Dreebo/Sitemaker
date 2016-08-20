@@ -1,9 +1,144 @@
 ﻿@model Sitemaker.Models.Site
+@using System.Web.Script.Serialization;
 @{
     ViewBag.Title = "CreateSite";
 }
 
 <style>
+    	/*h2 {
+		color: #2d94b6;
+		text-shadow: 0 1px 0 rgba(0, 0, 0, 0.47);
+	}
+	.s1,.s2 {
+		float: left;
+	}
+	.s2 {
+		margin-left: 100px;
+	}
+	.customsselects {
+		margin: 20px auto;
+		width: 550px;
+	}
+	.customsselects:after {
+		content: "";
+		display: block;
+		clear: left;
+	}
+	.select {
+		position: relative;		
+		width: 200px;
+		box-shadow: 1px 0px 5px 0 rgba(0, 0, 0, 0.11);
+		border-radius: 5px;
+	}
+	.select input{
+		position:absolute;
+		left:-9999px;
+	}
+	.toggle + label {
+		z-index: 2;
+		width: 200px;
+		height: 40px;
+		display: block;
+		background: #2d94b6;
+		line-height: 40px;
+		text-indent: 5px;
+		border-radius: 5px 5px;
+		color: #305563;
+		position: relative;
+		text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.13);
+		box-shadow: inset 0px 1px 0 rgba(255, 255, 255, 0.4), 0px 1px 0 0 #305563;
+		-webkit-transition: all 200ms linear;
+		-moz-transition: all 200ms linear;
+		-ms-transition: all 200ms linear;
+		-o-transition: all 200ms linear;
+		transition: all 200ms linear;
+	}
+	.toggle + label::before {
+		content: "";
+		background: #427586;
+		height: 24px;
+		width: 24px;
+		position: absolute;
+		border-radius: 50%;
+		box-shadow: inset 0px 1px 0 0 #305563,inset 0px -1px 0 0 rgba(255, 255, 255, 0.4);
+		right: 5px;
+		top: 9px;
+		cursor:pointer;
+	}
+	.toggle + label::after {
+		content: "";
+		background: #2d94b6;
+		height: 12px;
+		width: 12px;
+		position: absolute;
+		border-radius: 50% 0 50% 50%;
+		box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.4), 1px 1px 0 0 #305563;
+		right: 11px;
+		top: 15px;
+		-webkit-transform: rotate(45deg);
+		-webkit-transition: all 200ms linear;
+		-moz-transition: all 200ms linear;
+		-ms-transition: all 200ms linear;
+		-o-transition: all 200ms linear;
+		transition: all 200ms linear;
+	}
+	.toggle:checked + label::after {		
+		-webkit-transform: rotate(135deg);
+		box-shadow: inset 0px -1px 0 rgba(255, 255, 255, 0.4), 0px -1px 0 0 #305563;
+	}
+	.toggle:checked + label {
+		border-radius: 5px 5px 0 0;
+		box-shadow:inset 0px 1px 0 rgba(255, 255, 255, 0.4),0 1px 0 0 rgba(0, 0, 0, 0.01), 0 2px 0 0 rgba(255, 255, 255, 0.44);
+	}
+	.select ul {
+		margin: 0;
+		list-style: none;
+		padding: 0;
+		max-height: 0px;
+		overflow: hidden;
+		position: relative;	
+		-webkit-transition: all 700ms linear;
+		-moz-transition: all 700ms linear;
+		-ms-transition: all 700ms linear;
+		-o-transition: all 700ms linear;
+		transition: all 700ms linear;
+		background:#ecf2f4;	
+		width: 200px;
+		border-radius: 0 0 5px 5px;
+	}
+
+	.toggle:checked ~ ul {
+		max-height: 1000px;
+	}
+
+	.select-option label {
+		display: block;
+		padding: 10px;
+		cursor: pointer;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.01);
+		box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.44);
+		-webkit-transition: all 200ms linear;
+		-moz-transition: all 200ms linear;
+		-ms-transition: all 200ms linear;
+		-o-transition: all 200ms linear;
+		transition: all 200ms linear;
+	}
+	.select-option label:hover {
+		background: rgb(193, 217, 226);
+	}
+	.select ul li:nth-last-child(1) label{
+		border-radius: 0 0 5px 5px;
+	}
+	.select-option label:active {
+		background: rgb(151, 196, 213);
+		outline: none;
+	}
+	.select-option input:checked + label {
+		background: rgb(151, 196, 213);
+		text-indent: 5px;
+		box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.09),0 -1px 2px 0 rgba(0, 0, 0, 0.09);
+	}*/
+
     .thumb {
         display: inline-block;
     }
@@ -34,19 +169,20 @@
             border: 2px solid #55c5e9;
         }
 </style>
-
 @Styles.Render("~/Content/ImagePreview")
+<link href="~/Content/jquery.tag-editor.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.tag-editor.min.js"></script>
 @Scripts.Render("~/bundles/createSlideShow")
 <table>
     <tr><td><p>Введите название сайта :</p></td></tr>
     <tr>
-        <td><input type="text" id="Name" value=@Model.Name /> </td>
+        <td><input class="form-control" type="text" id="Name" value=@Model.Name /> </td>
     </tr>
     <tr>
         <td><p>Описание :</p></td>
     </tr>
     <tr>
-        <td><textarea cols="100" id="Textarea" rows="5">@Model.About </textarea></td>
+        <td><textarea class="form-control" id="Textarea" rows="5">@Model.About </textarea></td>
     </tr>
     <tr>
         <td>
@@ -58,22 +194,23 @@
                     <div class="input-file-row-1">
 
                         <div class="upload-file-container">
-                            <img id="image" alt=""/>
+                            <img id="image" alt="" />
                             <div class="upload-file-container-text">
                                 <span>Add<br />photo</span>
-                                <input type="file" name="upload" id="uploadFile" class="photo"/>
+                                <input type="file" name="upload" id="uploadFile" class="photo" />
                             </div>
                         </div>
 
                     </div>
                 </fieldset>
-
-               
             </p>
         </td>
         <td></td>
     </tr>
 
+    <td>
+        <div class="ui-front" style="margin-top: 10px"><label>Tags</label><br /><textarea  id="tags"></textarea></div>
+    </td>
 
     <tr><td><p>Выберите тему сайта :</p></td></tr>
 
@@ -81,27 +218,31 @@
         <div class="thumb">
             <img align="left" id="1" alt="Тема" src="http://res.cloudinary.com/dgy6x5krf/image/upload/v1469968200/QyCaGKpK8Ag_ftpqqx.jpg" style="width: 450px; height: 320px; " />
             <img align="left" id="2" alt="Тема" src="http://res.cloudinary.com/dgy6x5krf/image/upload/v1469968200/gtaLFel2tl4_j7nugp.jpg" style="width: 450px; height: 320px; " />
-            <div>
+        </div>
     </td>
 
     <tr><td><p>Выберите шаблон меню :</p></td></tr>
 
     <td>
+        @*<div class="s1">
+            <div class="select">
+                <input type="checkbox" id="toggle" class="toggle"> <label for="toggle">Choose something</label>
+                <ul>
+                    <li class="select-option"><input type="radio" name="choice" id="c1" value="c1"><label for="c1">Horizontal</label></li>
+                    <li class="select-option"><input type="radio" name="choice" id="c2" value="c2"><label for="c2">Left</label></li>
+                    <li class="select-option"><input type="radio" name="choice" id="c3" value="c3"><label for="c3">Horizontal and left</label></li>
+                </ul>
+            </div>
+        </div>*@
         <div class="thumbMenu">
-
             <img class="top" align="left" data-id="1" alt="Меню" src="http://res.cloudinary.com/dgy6x5krf/image/upload/v1469969081/oiyngrnh1utelwzvmihv.jpg" style="width: 350px; height: 320px; " />
             <img class="side" align="left" data-id="2" alt="Меню" src="http://res.cloudinary.com/dgy6x5krf/image/upload/v1469969833/%D0%91%D0%B5%D0%B7%D1%8B%D0%BC%D1%8F%D0%BD%D0%BD%D1%8B%D0%B9_f1pxjm.jpg" style="width: 350px; height: 320px; " />
-
-
-            <div>
+        </div>
     </td>
-
-
-
-    <tr>
-        <td><input id="save" type="button" class="btn btn-success" value="Сохранить" /> </td>
-        <td></td>
-    </tr>
+        <tr>
+            <td><input id="save" type="button" class="btn btn-success" value="Сохранить" /> </td>
+            <td></td>
+        </tr>
 
 </table>
 
@@ -115,11 +256,28 @@
             reader.onload = function (e) {
                 $('#image').attr('src', e.target.result);
             };
-
             reader.readAsDataURL(input.files[0]);
         }
     }
+    </script>
+@{
+    JavaScriptSerializer jss = new JavaScriptSerializer();
+    string output = jss.Serialize(Model.Tags.Select(x => x.Name));
+    string source = jss.Serialize(ViewBag.Tags);
+}
 
+<script>
+    $('#tags').tagEditor({ 
+        initialTags: @Html.Raw(output), 
+        autocomplete: { 
+            delay: 0, // show suggestions immediately 
+            position: { collision: 'flip' }, // automatic menu position up/down 
+            source: @Html.Raw(source)}, 
+        forceLowercase: false, 
+        placeholder: 'теги здесь ...' 
+    });
+    </script>
+<script>
     $("#uploadFile").change(function () {
         readURL(this);
     });

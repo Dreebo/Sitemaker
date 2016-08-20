@@ -12,6 +12,7 @@ namespace Sitemaker.Models
         public int Star { get; set; }
         public virtual ICollection<Site> Sites { get; set; }
         public virtual ICollection<Medal> Medals { get; set; }
+        public string PhotoUrl { get; set; }
 
         public UserRating()
         {

@@ -1,23 +1,30 @@
 ﻿@using Microsoft.AspNet.Identity
+<link href="~/Content/DropDownMenu.css" rel="stylesheet" />
+
 @if (Request.IsAuthenticated)
 {
+    using (Html.BeginForm("ChangeCulture", "Sites"))
+    {
+            <input type= image src="~/img/en.png" style="width: 30px; height: 30px; top:10px; position:relative;" name="submit" value="en">
+            <input type= image src="~/img/ru.png" style="width: 30px; height: 30px; top:10px; position:relative;"  name="submit" value="ru">
+    }
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
     @Html.AntiForgeryToken()
 
-
-        <div class="btn-group" style="margin-top:9px">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                @User.Identity.GetUserName() <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-                <li>@Html.ActionLink("Личный кабинет", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })<li>
-                <li><a href="@Url.Action("ShowMySite", "Sites", new { userName = (string)Session["CurrentUserName"]})">Show My Site</a></li>
-               <li><a href="@Url.Action("CreateSite", "Sites", new { userId = (string)Session["CurrentUserName"]})">Create Site</a></li>
-                <li class="divider"></li>
-                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        <nav role="navigation">
+            <ul class="navar">
+                <li>
+                    <a class="has-submenu">@User.Identity.GetUserName()</a>
+                    <ul class="submenu">
+                        <li>@Html.ActionLink("Личный кабинет", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
+                        <li><a href="@Url.Action("ShowMySite", "Sites", new { userName = (string)Session["CurrentUserName"]})">Show My Site</a></li>
+                        <li><a href="@Url.Action("CreateSite", "Sites", new { userId = (string)Session["CurrentUserName"]})">Create Site</a></li>
+                        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                    </ul>
+                </li>
             </ul>
-        </div>
+        </nav>
     }
 }
 else
@@ -26,4 +33,6 @@ else
         <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
+
+        
 }

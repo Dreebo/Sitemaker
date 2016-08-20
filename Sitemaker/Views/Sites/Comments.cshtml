@@ -1,4 +1,5 @@
 ﻿@model Sitemaker.Models.Site
+@using System.Web.Script.Serialization;
 @{
     ViewBag.Title = "Comments";
 }
@@ -69,6 +70,71 @@
     });
 </script>
 
+<style>
+    .tags {
+  list-style: none;
+  margin: 0;
+  overflow: hidden; 
+  padding: 0;
+}
+
+.tags li {
+  float: left; 
+}
+
+.tag {
+  background: #eee;
+  border-radius: 3px 0 0 3px;
+  color: #999;
+  display: inline-block;
+  height: 26px;
+  line-height: 26px;
+  padding: 0 20px 0 23px;
+  position: relative;
+  margin: 0 10px 10px 0;
+  text-decoration: none;
+  -webkit-transition: color 0.2s;
+}
+
+.tag::before {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+  content: '';
+  height: 6px;
+  left: 10px;
+  position: absolute;
+  width: 6px;
+  top: 10px;
+}
+
+.tag::after {
+  background: #fff;
+  border-bottom: 13px solid transparent;
+  border-left: 10px solid #eee;
+  border-top: 13px solid transparent;
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.tag:hover {
+  background-color: crimson;
+  color: white;
+}
+
+.tag:hover::after {
+   border-left-color: crimson; 
+}
+</style>
+@{
+    JavaScriptSerializer jss = new JavaScriptSerializer();
+    string output = jss.Serialize(Model.Tags.Select(x => x.Name));
+    string source = jss.Serialize(ViewBag.Tags);
+}
+
+<div class="jumbotron">
 <table class="table">
     <tr></tr>
 
@@ -94,6 +160,14 @@
                         </form>
                     </div>
                 </p>
+                <p>
+                    <ul class="tags">
+                        @foreach (var item in Model.Tags)
+                        {
+                            <li><a href="@Url.Action("SearchTags", "Sites", new {SearchValue = @item.Name})" class="tag">@item.Name</a></li>
+                        }
+                    </ul>
+                </p>
                     <ul itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
                         <li >Rating:<strong class="AverageRating" itemprop="average">@Model.AverageRating</strong></li>
                         <li>based on: <strong itemprop="count">@Model.RatingCount</strong> reviews</li>
@@ -103,8 +177,8 @@
                 @Model.About
             </td>
             <td id="signature"><a href="@Url.Action("ShowUser", "Sites", new {userName = (string)Session["CurrentUserName"], siteCreator = Model.UserName })">@Model.UserName</a>, @Model.Date</td>
-        </tr>
 </table>
+</div>
 
 <body>
     <div class="container">
@@ -124,13 +198,13 @@
 {
     <article class="message">
         <a class="message-img" href="#non">
-            <img src="" alt="" width="50" height="50">
+            <img src="~/img/userIcon.png"  width="50" height="50">
         </a>
         <div class="message-body">
             <div class="text">
                 <p>@item.UserComment</p>
             </div>
-            <p class="attribution">by <a href="@Url.Action("ShowUser", "Sites", new {userName = (string)Session["CurrentUserName"], siteCreator = item.UserName })">@item.UserName</a> @item.Date</p>
+            <p class="attribution"><a href="@Url.Action("ShowUser", "Sites", new {userName = (string)Session["CurrentUserName"], siteCreator = item.UserName })">@item.UserName</a>, @item.Date</p>
         </div>
     </article>
 }  

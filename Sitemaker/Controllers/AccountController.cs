@@ -76,7 +76,7 @@ namespace Sitemaker.Controllers
                     if (user.EmailConfirmed == true)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Index", "Sites");
                     }
                     else
                     {
@@ -327,7 +327,7 @@ namespace Sitemaker.Controllers
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
-            {
+            {             
                 return RedirectToAction("Login");
             }
 
@@ -395,7 +395,7 @@ namespace Sitemaker.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Site");
+            return RedirectToAction("Index", "Sites");
         }
 
         //
@@ -452,7 +452,7 @@ namespace Sitemaker.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Sites");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

@@ -1,0 +1,191 @@
+﻿@model PagedList.IPagedList<Sitemaker.Models.Site>
+@using PagedList.Mvc
+@{ 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/Rating")
+<style>
+    #signature {
+        padding-top: 20%;
+    }
+
+    #commet {
+        padding-top: 18.5%;
+    }
+
+    .tags {
+        list-style: none;
+        margin: 0;
+        overflow: hidden;
+        padding: 0;
+    }
+
+        .tags li {
+            float: left;
+        }
+
+    .tag {
+        background: #eee;
+        border-radius: 3px 0 0 3px;
+        color: #999;
+        display: inline-block;
+        height: 26px;
+        line-height: 26px;
+        padding: 0 20px 0 23px;
+        position: relative;
+        margin: 0 10px 10px 0;
+        text-decoration: none;
+        -webkit-transition: color 0.2s;
+    }
+
+        .tag::before {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+            content: '';
+            height: 6px;
+            left: 10px;
+            position: absolute;
+            width: 6px;
+            top: 10px;
+        }
+
+        .tag::after {
+            background: #fff;
+            border-bottom: 13px solid transparent;
+            border-left: 10px solid #eee;
+            border-top: 13px solid transparent;
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .tag:hover {
+            background-color: crimson;
+            color: white;
+        }
+
+            .tag:hover::after {
+                border-left-color: crimson;
+            }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".stars").each(function (i, mainelement) {
+            let id = $(mainelement.children).attr("id");
+            let averageRating = +(id);
+            let label = $(mainelement.children).children();
+            $(label).each(function (i, element) {
+                if (mainelement.children.form == element.parentElment) {
+                    if (i / 2 < +(averageRating)) $(element).addClass("selected")
+                    else return false;
+                }
+            });
+            if (+(averageRating) == 5) $(label).addClass("max");
+        });
+    });
+</script>
+
+<meta charset="utf-8">
+<style>
+    #wrapper {
+        width: 920px;
+        margin: 0 auto;
+    }
+
+    #wrapper-bl {
+        width: 280px;
+        height: 400px;
+        background-color: rgb(250,250,250);
+        border: 1px solid rgba(0,0,0,.1);
+        box-shadow: 2px 2px 15px rgba(0,0,0,.2);
+        display: inline-block;
+        margin-left: 20px;
+        margin-top: 20px;
+    }
+
+        #wrapper-bl h2 {
+            color: rgb(100,100,100);
+            font-size: 40px;
+            text-align: center;
+            margin: 15px 0 0 0;
+        }
+
+        #wrapper-bl .logo {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            border-radius: 50%;
+            margin: 10px auto 0 auto;
+            background: url(grand_theft_auto_grand_theft_auto_online_gta_5_102136_1920x1080.jpg) repeat;
+        }
+
+        #wrapper-bl p {
+            font-family: "Comic Sans MS", serif;
+            font-size: 12px;
+            color: rgb(100,100,100);
+            font-style: italic;
+            width: 200px;
+            margin: 15px auto 0 auto;
+        }
+
+        #wrapper-bl .button {
+            display: block;
+            margin: 20px auto 0 auto;
+            width: 150px;
+            height: 40px;
+            background: rgb(120,120,120);
+            color: rgb(245,245,245);
+            text-decoration: none;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 4px;
+            box-shadow: 0 -3px rgb(150,150,150) inset;
+            transition: 0.3s;
+        }
+
+            #wrapper-bl .button:hover {
+                background: rgb(215,215,215);
+                color: rgb(100,100,100);
+            }
+
+        #wrapper-bl .line {
+            width: 200px;
+            height: 1px;
+            margin: 20px auto 0 auto;
+            background: rgb(230,230,230);
+        }
+</style>
+<div  id="wrapper">
+    @foreach (var item in Model)
+    {
+        <div id="wrapper-bl">
+            <h2><a href="@Url.Action("OpenSite", "Sites", new { userName = (string)Session["CurrentUserName"], id = item.Id })">@item.Name</a></h2>
+            <div class="logo"><img style="width:100px; height:100px" src="@item.Logo" /></div>
+            <a href="@Url.Action("Comments", "Sites", new { userName = (string)Session["CurrentUserName"], id = item.Id })" class="button">Comments</a>
+            <div class="line"></div>
+            <div class="stars" id="@item.Id" style="left: 100px">
+                <div class="rating" style="display:none" id="@item.AverageRating"></div>
+                <form action="" class="formstars">
+                    <input class="star star-1" id="1" type="radio" name="star" />
+                    <label class="star star-1" for="1"></label>
+                    <input class="star star-2" id="2" type="radio" name="star" />
+                    <label class="star star-2" for="2"></label>
+                    <input class="star star-3" id="3" type="radio" name="star" />
+                    <label class="star star-3" for="3"></label>
+                    <input class="star star-4" id="4" type="radio" name="star" />
+                    <label class="star star-4" for="4"></label>
+                    <input class="star star-5" id="5" type="radio" name="star" />
+                    <label class="star star-5" for="5"></label>
+                </form>
+            </div>
+            <div class="line" style="position:absolute"></div>
+            <a href="@Url.Action("ShowUser", "Sites", new { userName = (string)Session["CurrentUserName"], siteCreator = item.UserName }) " style="text-align: center; padding:1%;">   @item.UserName</a>, @item.Date
+        </div>
+    }
+</div>
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+

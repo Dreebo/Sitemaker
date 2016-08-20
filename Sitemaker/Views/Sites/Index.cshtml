@@ -1,74 +1,14 @@
 ﻿@model PagedList.IPagedList<Sitemaker.Models.Site>
-    @using PagedList.Mvc
+@using PagedList.Mvc
 
 @{
     ViewBag.Title = "Index";
 }
-@Styles.Render("~/Content/Rating")
 
-<style type='text/css'>
-    #signature {
-padding-top:20%;
-    }
-    #commet {
-        padding-top:18.5%;
-    }
-</style>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(".stars").each(function (i, mainelement) {
-            let id = $(mainelement.children).attr("id");
-            let averageRating = +(id);
-            let label = $(mainelement.children).children();
-            $(label).each(function (i, element) {
-                if (mainelement.children.form == element.parentElment) {
-                    if (i / 2 < +(averageRating)) $(element).addClass("selected")
-                    else return false;
-                }
-            });
-            if (+(averageRating) == 5) $(label).addClass("max");
-        });
-    });
-</script>
-
-<table class="table">
-    <tr>
-    </tr>
-  @foreach (var item in Model.Reverse())
-  {
-        <tr>
-            <td>
-                <h2><a href="@Url.Action("Site", "Sites", new { userName =item.UserName, id = item.Id })">@item.Name</a></h2>
-                <p>
-                    <img style="width:120px; height:120px" src="@item.Logo" />
-                </p>
-            <p>
-                <div class="stars" id="@item.Id">
-                    <div class="rating" style="display:none" id="@item.AverageRating"></div>
-                    <form action="" class="formstars">
-                        <input class="star star-1" id="1" type="radio" name="star" />
-                        <label class="star star-1" for="1"></label>
-                        <input class="star star-2" id="2" type="radio" name="star" />
-                        <label class="star star-2" for="2"></label>
-                        <input class="star star-3" id="3" type="radio" name="star" />
-                        <label class="star star-3" for="3"></label>
-                        <input class="star star-4" id="4" type="radio" name="star" />
-                        <label class="star star-4" for="4"></label>
-                        <input class="star star-5" id="5" type="radio" name="star" />
-                        <label class="star star-5" for="5"></label>
-                    </form>
-                </div>               
-            </p>
-                </td>
-               <td> 
-                   @item.About
-               </td>
-            <td id="commet"><a href="@Url.Action("Comments", "Sites", new { userName = (string)Session["CurrentUserName"], id = item.Id })" class="btn btn-primary">Comments</a></td>
-            <td id="signature"><a href="@Url.Action("ShowUser", "Sites", new { userName = (string)Session["CurrentUserName"], siteCreator = item.UserName })">@item.UserName</a>, @item.Date</td>
-        </tr>
-  }
-</table>
+<div id="updatetarget">
+    @{ Html.RenderPartial("TableSearch", Model);}
+</div>
 Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
-
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
