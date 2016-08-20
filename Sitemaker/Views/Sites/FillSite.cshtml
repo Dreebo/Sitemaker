@@ -28,7 +28,7 @@
                 <li><a href="@Url.Action("Page", "Sites", new { id = Model.Id, pageId = @x.Id })" class="btn btn-primary">@x.Id</a></li>
             }
             <tr>
-                <td><a href="@Url.Action("CreatePage1", "Sites", new {userName = Model.UserName, id = Model.Id})" class="btn btn-primary">Create Page</a></td>
+                <td><a href="@Url.Action("LoadPage", "Sites", new {userName = Model.UserName, id = Model.Id})" class="btn btn-primary">Create Page</a></td>
                 <td><a href="@Url.Action("CreateMenu", "Sites", new {userName = Model.UserName, id = Model.Id})" class="btn btn-primary">Create Menu</a></td>
                 <td><input id="saveChange" type="button" class="btn btn-success" value="Сохранить изменения" /> </td>
             </tr>

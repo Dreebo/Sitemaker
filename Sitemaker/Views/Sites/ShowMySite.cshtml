@@ -24,11 +24,10 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.About)
+                @item.GetSubDescription()
             </td>
             <td>
 
-                @*@Html.ActionLink("Edit", "Edit", new { userName = (string)Session["CurrentUserName"], id = item.Id }) |*@
                 <a href="@Url.Action("Details", "Sites", new {userName = (string) Session["CurrentUserName"], id = item.Id})" class="btn btn-default">Details</a>
                 <a href="@Url.Action("Delete", "Sites", new {userName = (string) Session["CurrentUserName"], id = item.Id})" class="btn btn-default">Delete</a>
                 

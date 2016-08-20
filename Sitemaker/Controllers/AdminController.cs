@@ -82,6 +82,7 @@ namespace Sitemaker.Controllers
                     .Include(s => s.Menu)
                     .Include(s => s.Menu.TopBar)
                     .Include(s => s.Menu.SideBar)
+                    .Include(s => s.Medals)
                     .Where(x => x.CreaterId.Equals(id)).ToList();
                     db.Sites.RemoveRange(site);
                 }

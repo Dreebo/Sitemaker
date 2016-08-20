@@ -495,7 +495,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Sites\Index123.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -529,7 +528,6 @@
     <Content Include="Views\Shared\template\template6.cshtml" />
     <Content Include="Views\Shared\template\template7.cshtml" />
     <Content Include="Views\Shared\template\MenuEditor.cshtml" />
-    <Content Include="Views\Sites\Create.cshtml" />
     <Content Include="Views\Sites\Delete.cshtml" />
     <Content Include="Views\Sites\Details.cshtml" />
     <Content Include="Views\Sites\Edit.cshtml" />
@@ -537,22 +535,19 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Sites\Page.cshtml" />
     <Content Include="Views\Sites\ShowMySite.cshtml" />
-    <Content Include="Views\Sites\OpenSite.cshtml" />
     <Content Include="Views\Sites\ShowUser.cshtml" />
     <Content Include="Views\Sites\Comments.cshtml" />
     <Content Include="Views\Sites\CreateMenu.cshtml" />
     <Content Include="Views\Sites\FillSite.cshtml" />
-    <Content Include="Views\Sites\PageView.cshtml" />
     <Content Include="Views\Shared\Menu.cshtml" />
     <Content Include="Views\Sites\Site.cshtml" />
     <Content Include="Views\Sites\CreateMenu.cshtml" />
     <Content Include="Views\Sites\FillSite.cshtml" />
-    <Content Include="Views\Sites\PageView.cshtml" />
     <Content Include="Views\Sites\Search.cshtml" />
     <Content Include="Views\Sites\_TableSearch.cshtml" />
     <Content Include="Views\Sites\TableSearch.cshtml" />
-    <Content Include="Views\Sites\ChangePhoto.cshtml" />
     <Content Include="Views\Admin\Users.cshtml" />
+    <Content Include="Views\Sites\PageView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

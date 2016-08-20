@@ -1,6 +1,6 @@
-﻿@model Sitemaker.Models.Site
+﻿@model Sitemaker.Models.Page
 @{Layout = null;}
-@{ if (Model.TemplateId == 1)
+@{ if ((int) Session["TemplateId"] == 1)
             { @Styles.Render("~/Content/StyleGray")}
         else
   { @Styles.Render("~/Content/StyleWhight")}
