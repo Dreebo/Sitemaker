@@ -15,7 +15,8 @@ using Microsoft.AspNet.Identity;
 using PagedList.Mvc;
 using PagedList;
 using MvcLuceneSampleApp.Search;
-
+using CloudinaryDotNet.Actions;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace Sitemaker.Controllers
 {
@@ -133,6 +134,9 @@ namespace Sitemaker.Controllers
             }
             Site site = db.Sites
                     .Include(s => s.Pages)
+                    .Include(s => s.Comments)
+                    .Include(s => s.Medals)
+                    .Include(s => s.Tags)
                     .Where(p => p.Id == id)
                     .SingleOrDefault();
             if (site == null)
@@ -149,6 +153,9 @@ namespace Sitemaker.Controllers
         {
             Site site = db.Sites
                    .Include(s => s.Pages)
+                   .Include(s => s.Comments)
+                    .Include(s => s.Medals)
+                    .Include(s => s.Tags)
                    .Where(p => p.Id == id)
                    .SingleOrDefault();
             db.Sites.Remove(site);
@@ -173,6 +180,21 @@ namespace Sitemaker.Controllers
             Name = Name.Remove(position);
             Session["CurrentUserName"] = Name;
             return View("ShowMySite", db.Sites.Where(p => p.UserName == Name).ToList());
+        }
+        
+        [HttpPost]
+        public void SaveChangeSite(Site site)
+        {
+            Site currentSite;
+            using (MyDbContext db = new MyDbContext())
+            {
+                currentSite = db.Sites.Where(p => p.Id == site.Id).FirstOrDefault();
+                currentSite.Name = site.Name;
+                currentSite.About = site.About;
+                currentSite.Logo = Upload(site.Logo);
+                currentSite.Date = DateTime.Now;
+                db.SaveChanges();
+            }
         }
 
         public ActionResult ShowUser(string userName, string siteCreator)
@@ -217,7 +239,7 @@ namespace Sitemaker.Controllers
             }
 
             Page page = site.Pages.FirstOrDefault();
-            return View("OpenSite", page);
+            return View("Site", page);
         }
 
 
@@ -451,10 +473,14 @@ namespace Sitemaker.Controllers
                 List<Tag> tags = new List<Tag>();
                 foreach (var x in tagsArray)
                 {
-                    tag = new Tag();
-                    tag.Name = x;
-                    tags.Add(tag);
-                    db.Tags.Add(tag);
+                    var temp = db.Tags.FirstOrDefault(t => t.Name.Equals(x));
+                    if (temp == null)
+                    {
+                        temp = new Tag();
+                        temp.Name = x;
+                        db.Tags.Add(temp);
+                    }
+                    tags.Add(temp);        
                 }
                 string user = User.Identity.GetUserName();
                 int position = user.IndexOf("@");
@@ -464,6 +490,11 @@ namespace Sitemaker.Controllers
                 site.Date = DateTime.Now;
                 site.Tags = tags;
                 db.Sites.Add(site);
+                var usr = System.Web.HttpContext.Current.GetOwinContext().
+                GetUserManager<ApplicationUserManager>().
+                FindById(System.Web.HttpContext.
+                Current.User.Identity.GetUserId());
+               // usr.Site.Add(site);
                 //db.Menus.Add(site.Menu);
                 db.SaveChanges();
             }
@@ -697,7 +728,7 @@ namespace Sitemaker.Controllers
                 }
             };          
             TempData["sites"] = resultSearch;
-            return PartialView("TableSearch", new PagedList<Site>(resultSearch, 1, 10));
+            return PartialView("TableSearch", new PagedList<Site>(resultSearch, 1, 99));
         }
 
         public PartialViewResult SearchTags(string SearchValue)
@@ -713,18 +744,35 @@ namespace Sitemaker.Controllers
                 {
                     Site site = db.Sites.Include(s => s.Comments).Include(m => m.Pages).Include(n => n.Ratings).Where(p => p.Id == x.Id).FirstOrDefault();
                     if (site.Pablish == true)
-                        resultSearch.Add(site);
+                        resultSearch.Insert(0, site);
                 }
             };
             TempData["sites"] = resultSearch;
             return PartialView("TableSearch", new PagedList<Site>(resultSearch, 1, 9));
         }
 
+        [HttpPost]
+        public JsonResult ChangePhoto(string data, string userName)
+        {
+            var dbContext = new ApplicationDbContext();
+            var account = new Account("dgy6x5krf", "949232162798767", "oxvzYd03K1i8lEIi5MA2ByIf590");
+
+            var cloudinary = new Cloudinary(account);
+
+            var uploadParams = new ImageUploadParams
+            {
+                File = new FileDescription(data)
+            };
+            var uploadResult = cloudinary.Upload(uploadParams);
+            UserRating user = db.Ratings.Where(p => p.UserName == userName).FirstOrDefault();
+            user.PhotoUrl = uploadResult.SecureUri.ToString();
 
 
-
+            //System.Web.HttpContext.Current.GetOwinContext().
+            //    GetUserManager<ApplicationUserManager>().Update(user);
+            dbContext.SaveChanges();
+            return new JsonResult();
+        }
     }
-
-
 }
 

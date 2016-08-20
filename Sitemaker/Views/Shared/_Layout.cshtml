@@ -16,19 +16,6 @@
 
 
 <body>
-
-    @*<div>
-            @using (Html.BeginForm("ChangeCulture", "Home"))
-            {
-                <select name="lang">
-                    <option disabled selected>@Resources.Resource.ChooseLang</option>
-                    <option value="ru">Русский</option>
-                    <option value="en">English</option>
-                </select>
-                <input type="submit" name="submit" value="@Resources.Resource.ChooseLang">
-            }
-        </div>*@
-
     <style>
         .cf:before, .cf:after {
             content: "";
@@ -148,25 +135,11 @@
     
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <div class="navbar-header">
-               
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                
-                </button>
+            <div class="navbar-header">       
                 @Html.ActionLink("Site", "Index", "Sites", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-               
-                @Html.Partial("_LoginPartial")
-               
+                @Html.Partial("_LoginPartial")    
             </div>
             @using (Ajax.BeginForm("Search", "Sites", new { }, new AjaxOptions() { UpdateTargetId = "updatetarget" }, new { @class = "search-wrapper cf" }))
             {

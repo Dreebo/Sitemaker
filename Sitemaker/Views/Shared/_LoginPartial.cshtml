@@ -3,6 +3,11 @@
 
 @if (Request.IsAuthenticated)
 {
+    using (Html.BeginForm("ChangeCulture", "Sites"))
+    {
+            <input type= image src="~/img/en.png" style="width: 30px; height: 30px; top:10px; position:relative;" name="submit" value="en">
+            <input type= image src="~/img/ru.png" style="width: 30px; height: 30px; top:10px; position:relative;"  name="submit" value="ru">
+    }
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
     @Html.AntiForgeryToken()
@@ -20,8 +25,6 @@
                 </li>
             </ul>
         </nav>
-
-        
     }
 }
 else

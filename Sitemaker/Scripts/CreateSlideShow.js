@@ -72,6 +72,7 @@
                 url: 'SaveSite',
                 type: 'POST',
                 contentType: 'application/json',
+                traditional: true,
                 success: function (response) {
                     if (response.result == 'Redirect')
                         window.location = response.url;

@@ -2,9 +2,12 @@
 @{
     ViewBag.Title = "Manage";
 }
-
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div>
+    <div id="userActions">
+        <p>Photo</p>
+        <img id="imgPrime" type="file" id="fileUpload" src="@Model.PhotoUrl" width="300" height="300" />
+    </div>
     <h4>Change your account settings</h4>
     <hr />
     <dl class="dl-horizontal">
@@ -28,3 +31,4 @@
         </dd>
     </dl>
 </div>
+<script src="~/Scripts/ChangePhoto.js"></script>

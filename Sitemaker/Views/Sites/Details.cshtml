@@ -1,47 +1,110 @@
 ﻿@model Sitemaker.Models.Site
-
 @{
     ViewBag.Title = "Details";
 }
-
 <h2>Details</h2>
-
+@Styles.Render("~/Content/ImagePreview")
 <div>
-    <h4>Site</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Logo)
-        </dt>
+    <dl class="dl-horizontal row">
+        <div class="col-md-4">
+            <p>Name :</p>
+            <input class="form-control" type="text" id="Name" value=@Model.Name />
+            <p></p>
+            <p>Description :</p>
+            <textarea class="form-control" id="Textarea" rows="5">@Model.About </textarea>
+        </div>
 
-        <dd>
-            <img style="width:120px; height:120px" src="@Model.Logo" />
-        </dd>
+        @*<dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.About)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.About)
+            </dd>*@
+        <div class="col-md-offset-4">
+            <p>Logo :</p>
+            <div class="input-file-row-1">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.About)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.About)
-        </dd>
+                <div class="upload-file-container">
+                    <img id="image" src="@Model.Logo"  alt="" />
+                    <div class="upload-file-container-text">
+                        <span>Add<br />photo</span>
+                        <input type="file" name="upload" id="uploadFile" class="photo" />
+                    </div>
+                </div>
+            </div>
+        </div>
     </dl>
 </div>
+@foreach (var x in Model.Pages)
+{
+    <a href="@Url.Action("Page", "Sites", new {userName = Model.UserName, id = Model.Id, pageId = @x.Id })" class="btn btn-primary">@x.Id</a>
+}
 
-    @foreach (var x in Model.Pages)
-    {
-            <a href="@Url.Action("Page", "Sites", new {userName = Model.UserName, id = Model.Id, pageId = @x.Id })" class="btn btn-primary">@x.Id</a>
-    }
+<p><input id="save" type="button" class="btn btn-success col-md-offset-4" value="Сохранить" /> </p>
 
 <p>
     @Html.ActionLink("Edit", "Edit", new { userName = (string)Session["CurrentUserName"], id = Model.Id }) |
     @Html.ActionLink("Back to List", "ShowMySite")
 </p>
+
+<script>
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#image').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#uploadFile").change(function () {
+        readURL(this);
+    });
+
+    $("#save").click(
+    function () {
+        var url = window.location.href;
+        let position = url.lastIndexOf("/");
+        let id = url.slice(position + 1);
+        let model = {
+            id: id,
+            name: $("#Name").val(),
+            about: $("#Textarea").val(),
+        }
+
+        let file = $("#uploadFile")[0].files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = function () {
+            var site = JSON.stringify({
+                'Id': model.id,
+                'Name': model.name,
+                'About': model.about,
+                "Logo": reader.result
+            });
+
+            $.ajax({
+                url: '/Sites/SaveChangeSite',
+                type: 'POST',
+                dataType: 'text',
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                        window.location.replase = window.location.href;
+                },
+                fail: function () {
+                    alert(data);
+                },
+                data: site
+            });
+        }
+    });
+</script>

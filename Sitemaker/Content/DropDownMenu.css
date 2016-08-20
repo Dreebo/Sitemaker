@@ -7,6 +7,7 @@
 /* 
   mark item with differing style 
 */
+
 .mark {
   font-weight: 400;
 }
@@ -15,8 +16,11 @@
   navigation bar
 */
 .navar {
+    top:2px;
+    right:300px;
+    position:absolute;
     padding: 5px; 
-  list-style: none;
+    list-style: none;
 }
 
 /* 
@@ -26,6 +30,7 @@
   2. needed for absolute positioning of   submenu
 */
 .navar li {
+    list-style-type:none;
   float: left; /*1*/
   position: relative; /*2*/
   background: #34495e;
