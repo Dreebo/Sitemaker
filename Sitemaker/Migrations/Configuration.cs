@@ -5,14 +5,15 @@ namespace Sitemaker.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Sitemaker.MyDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Sitemaker.Models.ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            ContextKey = "Sitemaker.Models.ApplicationDbContext";
         }
 
-        protected override void Seed(Sitemaker.MyDbContext context)
+        protected override void Seed(Sitemaker.Models.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

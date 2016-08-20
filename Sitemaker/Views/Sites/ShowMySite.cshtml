@@ -29,9 +29,14 @@
             <td>
 
                 @*@Html.ActionLink("Edit", "Edit", new { userName = (string)Session["CurrentUserName"], id = item.Id }) |*@
-                @Html.ActionLink("Details", "Details", new { userName = (string)Session["CurrentUserName"],  id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { userName = (string)Session["CurrentUserName"],  id = item.Id }) |
-                @Html.ActionLink("Publish site", "PublishSite", new { userName = (string)Session["CurrentUserName"], id = item.Id }) 
+                <a href="@Url.Action("Details", "Sites", new {userName = (string) Session["CurrentUserName"], id = item.Id})" class="btn btn-default">Details</a>
+                <a href="@Url.Action("Delete", "Sites", new {userName = (string) Session["CurrentUserName"], id = item.Id})" class="btn btn-default">Delete</a>
+                
+                @if (!item.Pablish)
+                {
+                    <a href="@Url.Action("PublishSite", "Sites", new { userName = (string)Session["CurrentUserName"], id = item.Id })" class="btn btn-default">Publish</a>
+                
+                }
             </td>
         </tr>
     }

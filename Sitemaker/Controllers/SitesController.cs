@@ -440,15 +440,7 @@ namespace Sitemaker.Controllers
                 site = new Site();
             }
 
-            Session.Add("TemplateId",site.TemplateId);
-            Session.Add("Menu",site.Menu);
-            //if(pageId!=null)
-            //        Session.Add("pageId",pageId);
-
-            //else if(site.Pages.Count>0)
-            //{
-            //    Session.Add("pageId", site.Pages.ElementAt(0).Id);
-            //}
+            
             Page page=null;
             if(pageId!=null)
                 page = site.Pages.Where(s => s.Id == pageId).FirstOrDefault();
@@ -457,6 +449,8 @@ namespace Sitemaker.Controllers
                     page = site.Pages.FirstOrDefault();
                 else
                     page=new Page();
+            Session.Add("TemplateId", site.TemplateId);
+            Session.Add("Menu", site.Menu);
             return View("Site", page);
         }
 
