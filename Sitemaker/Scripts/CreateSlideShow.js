@@ -26,7 +26,8 @@
             selectedTemplate: null,
             selectedMenu: null,
             isTopBarExist: false,
-            isSideBarExist: false
+            isSideBarExist: false,
+            CreaterId:0
         }
         $(".thumb img.selected").each(function (index, element) {
             model.selectedTemplate = element.id;
@@ -63,6 +64,7 @@
                 },
                 'MenuTypeId': model.selectedMenu,
                 "Logo": reader.result
+
             });
 
             $.ajax({

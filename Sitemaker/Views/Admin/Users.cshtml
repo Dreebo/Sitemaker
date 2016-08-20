@@ -1,0 +1,64 @@
+﻿@model ICollection<Sitemaker.Models.ApplicationUser>
+
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <script>
+        $(document).ready(function () {
+            $("#block").change(function (event) {
+                var block = {
+                    BlockId: event.target.value,
+                    Block: event.target.checked
+                }
+                $.ajax({
+                    type: 'POST',
+                    url: '/Admin/ChangeBlock',
+                    
+                    data: JSON.stringify(block),
+                    contentType: 'application/json; charset=utf-8',
+                    
+                    success: function (data) {
+                        alert('success');
+                    }
+                });
+            });
+        });
+        
+        
+    </script>
+</head>
+<body>
+<div>
+    @using (Html.BeginForm("DeleteUsers", "Admin"))
+    {
+
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Block</th>
+                <th>Delete</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><a href="@Url.Action("ShowMySite", "Sites", new {userName = item.UserName})">@item.UserName</a></td>
+                    <td>
+                        <input type="checkbox" id="block" name="block" value="@item.Id" checked="@item.IsBlock"/>
+                    </td>
+                    <td><input type="checkbox" name="delete" value="@item.Id"/></td>
+
+                </tr>
+            }
+        </table>
+        <input type="submit" value="Save changes" class="btn btn-success"/>
+    }
+</div>
+</body>
+
+</html>

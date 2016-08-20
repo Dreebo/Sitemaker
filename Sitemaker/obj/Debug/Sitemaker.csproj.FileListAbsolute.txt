@@ -164,6 +164,8 @@ C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\Microsoft.ApplicationInsight
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\Microsoft.AspNet.Identity.Core.dll
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\Microsoft.Owin.dll
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\Microsoft.Owin.Host.SystemWeb.dll
@@ -202,6 +204,8 @@ C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\Microsoft.AI.ServerTelemetry
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\Microsoft.AI.Web.xml
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\Microsoft.ApplicationInsights.xml
+C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\PagedList.xml
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\PagedList.Mvc.xml
@@ -238,16 +242,6 @@ C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\ru\System.Web.Razor.resource
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\ru\System.Web.WebPages.resources.dll
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\ru\System.Web.WebPages.Deployment.resources.dll
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\bin\ru\System.Web.WebPages.Razor.resources.dll
-C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.asdasd.resources
-C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.comments.resources
-C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.rating.resources
-C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.rating1.resources
-C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.rating2.resources
-C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.werw.resources
-C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.updateraring.resources
-C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.medal.resources
-C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.medal1.resources
-C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.migr11.resources
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Resources.Resource.resources
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Resources.Resource.en.resources
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\obj\Debug\Sitemaker.csproj.GenerateResource.Cache
@@ -255,3 +249,5 @@ C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\obj\Debug\en\Sitemaker.resources
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\obj\Debug\Sitemaker.dll
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\obj\Debug\Sitemaker.pdb
 C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\obj\Debug\Sitemaker.csprojResolveAssemblyReference.cache
+C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.siteid1234556.resources
+C:\Users\B\Source\MenuRepos\Sitemaker\Sitemaker\obj\Debug\Sitemaker.Migrations.siteid12345567.resources

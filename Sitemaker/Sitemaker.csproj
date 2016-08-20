@@ -116,6 +116,14 @@
       <HintPath>..\packages\Microsoft.ApplicationInsights.2.1.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.1\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.1\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -252,6 +260,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SitesController.cs" />
@@ -259,48 +268,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201608101241479_asdasd.cs" />
-    <Compile Include="Migrations\201608101241479_asdasd.Designer.cs">
-      <DependentUpon>201608101241479_asdasd.cs</DependentUpon>
+    <Compile Include="Migrations\201608192020255_siteid1234556.cs" />
+    <Compile Include="Migrations\201608192020255_siteid1234556.Designer.cs">
+      <DependentUpon>201608192020255_siteid1234556.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201608101431061_comments.cs" />
-    <Compile Include="Migrations\201608101431061_comments.Designer.cs">
-      <DependentUpon>201608101431061_comments.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201608102056548_rating.cs" />
-    <Compile Include="Migrations\201608102056548_rating.Designer.cs">
-      <DependentUpon>201608102056548_rating.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201608111453391_rating1.cs" />
-    <Compile Include="Migrations\201608111453391_rating1.Designer.cs">
-      <DependentUpon>201608111453391_rating1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201608111458307_rating2.cs" />
-    <Compile Include="Migrations\201608111458307_rating2.Designer.cs">
-      <DependentUpon>201608111458307_rating2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201608111554310_werw.cs" />
-    <Compile Include="Migrations\201608111554310_werw.Designer.cs">
-      <DependentUpon>201608111554310_werw.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201608111755386_update raring.cs" />
-    <Compile Include="Migrations\201608111755386_update raring.Designer.cs">
-      <DependentUpon>201608111755386_update raring.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201608132144506_medal.cs" />
-    <Compile Include="Migrations\201608132144506_medal.Designer.cs">
-      <DependentUpon>201608132144506_medal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201608132238433_medal1.cs" />
-    <Compile Include="Migrations\201608132238433_medal1.Designer.cs">
-      <DependentUpon>201608132238433_medal1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201608141508398_migr11.cs" />
-    <Compile Include="Migrations\201608141508398_migr11.Designer.cs">
-      <DependentUpon>201608141508398_migr11.cs</DependentUpon>
+    <Compile Include="Migrations\201608192051473_siteid12345567.cs" />
+    <Compile Include="Migrations\201608192051473_siteid12345567.Designer.cs">
+      <DependentUpon>201608192051473_siteid12345567.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AppDbInitializer.cs" />
+    <Compile Include="Models\BlockInfo.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Comment.cs" />
@@ -313,6 +292,11 @@
     <Compile Include="Models\UserRating.cs" />
     <Compile Include="MyDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Resource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -451,6 +435,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="img\.DS_Store" />
+    <Content Include="ClassDiagram1.cd" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\CreateSlideShow.js" />
     <Content Include="Scripts\dropzone\basic.css" />
@@ -471,6 +460,8 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.12.0.js" />
     <Content Include="Scripts\jquery-ui-1.12.0.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.1.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.1.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -545,6 +536,7 @@
     <Content Include="Views\Sites\PageView.cshtml" />
     <Content Include="Views\Shared\Menu.cshtml" />
     <Content Include="Views\Sites\Site.cshtml" />
+    <Content Include="Views\Admin\Users.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -558,35 +550,11 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201608101241479_asdasd.resx">
-      <DependentUpon>201608101241479_asdasd.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201608192020255_siteid1234556.resx">
+      <DependentUpon>201608192020255_siteid1234556.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608101431061_comments.resx">
-      <DependentUpon>201608101431061_comments.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608102056548_rating.resx">
-      <DependentUpon>201608102056548_rating.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608111453391_rating1.resx">
-      <DependentUpon>201608111453391_rating1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608111458307_rating2.resx">
-      <DependentUpon>201608111458307_rating2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608111554310_werw.resx">
-      <DependentUpon>201608111554310_werw.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608111755386_update raring.resx">
-      <DependentUpon>201608111755386_update raring.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608132144506_medal.resx">
-      <DependentUpon>201608132144506_medal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608132238433_medal1.resx">
-      <DependentUpon>201608132238433_medal1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608141508398_migr11.resx">
-      <DependentUpon>201608141508398_migr11.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201608192051473_siteid12345567.resx">
+      <DependentUpon>201608192051473_siteid12345567.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Resource.en.resx">
       <CustomToolNamespace>Resources</CustomToolNamespace>

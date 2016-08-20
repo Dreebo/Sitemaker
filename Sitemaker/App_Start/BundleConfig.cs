@@ -42,6 +42,9 @@ namespace Sitemaker
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
+            bundles.Add(new ScriptBundle("~/bundles/aviary").Include(
+                      "~/url/feather.aviary.com/imaging/v3/editor.js"));
+            
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                         "~/Content/bootstrap.css",
