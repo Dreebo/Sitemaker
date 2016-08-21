@@ -23,10 +23,7 @@
                 <td><textarea cols="100" id="Textarea" rows="5" disabled="disabled">@Model.About </textarea></td>
             </tr>
             <img style="width:120px; height:120px" src="@Model.Logo" />
-            @foreach (var x in Model.Pages)
-            {
-                <li><a href="@Url.Action("Page", "Sites", new { id = Model.Id, pageId = @x.Id })" class="btn btn-primary">@x.Id</a></li>
-            }
+            
             <tr>
                 <td><a href="@Url.Action("LoadPage", "Sites", new {userName = Model.UserName, id = Model.Id})" class="btn btn-primary">Create Page</a></td>
                 <td><a href="@Url.Action("CreateMenu", "Sites", new {userName = Model.UserName, id = Model.Id})" class="btn btn-primary">Create Menu</a></td>

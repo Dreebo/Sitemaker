@@ -373,35 +373,6 @@ namespace Sitemaker.Controllers
             base.Dispose(disposing);
         }
 
-        //[HttpPost]
-        //public JsonResult UpdateImage(string data)
-        //{
-        //    var dbContext = new ApplicationDbContext();
-        //    var account = new Account(
-        //        "da40pd4iw",
-        //    "878111261769614",
-        //    "d_UzO32EJIqhtFnshPcdgalOFeg");
-
-        //    var cloudinary = new Cloudinary(account);
-
-        //    var uploadParams = new ImageUploadParams
-        //    {
-        //        File = new FileDescription(data)
-        //    };
-        //    var uploadResult = cloudinary.Upload(uploadParams);
-        //    var user = System.Web.HttpContext.Current.GetOwinContext().
-        //        GetUserManager<ApplicationUserManager>().
-        //        FindById(System.Web.HttpContext.
-        //        Current.User.Identity.GetUserId());
-        //    user.PhotoUrl = uploadResult.SecureUri.ToString();
-
-
-        //    System.Web.HttpContext.Current.GetOwinContext().
-        //        GetUserManager<ApplicationUserManager>().Update(user);
-        //    dbContext.SaveChanges();
-        //    return new JsonResult();
-        //}
-
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";

@@ -14,18 +14,6 @@
             <textarea class="form-control" id="Textarea" rows="5">@Model.About </textarea>
         </div>
 
-        @*<dt>
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.About)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.About)
-            </dd>*@
         <div class="col-md-offset-4">
             <p>Logo :</p>
             <div class="input-file-row-1">
@@ -43,7 +31,7 @@
 </div>
 @foreach (var x in Model.Pages)
 {
-    <a href="@Url.Action("Page", "Sites", new {userName = Model.UserName, id = Model.Id, pageId = @x.Id })" class="btn btn-primary">@x.Id</a>
+    <a href="@Url.Action("Site", "Sites", new {userName = Model.UserName, id = Model.Id, pageId = @x.Id })" class="btn btn-primary">@x.Id</a>
 }
 
 <p><input id="save" type="button" class="btn btn-success col-md-offset-4" value="Сохранить" /> </p>

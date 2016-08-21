@@ -435,6 +435,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="img\.DS_Store" />
+    <Content Include="lucene_index\segments.gen" />
+    <Content Include="lucene_index\segments_141" />
+    <Content Include="lucene_index\segments_14h" />
+    <Content Include="lucene_index\_la.cfs" />
+    <Content Include="lucene_index\_li.cfs" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ChangePhoto.js" />
     <Content Include="Scripts\CreateSlideShow.js" />
@@ -485,7 +490,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Sites\Index123.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -519,15 +523,11 @@
     <Content Include="Views\Shared\template\template6.cshtml" />
     <Content Include="Views\Shared\template\template7.cshtml" />
     <Content Include="Views\Shared\template\MenuEditor.cshtml" />
-    <Content Include="Views\Sites\Create.cshtml" />
     <Content Include="Views\Sites\Delete.cshtml" />
     <Content Include="Views\Sites\Details.cshtml" />
-    <Content Include="Views\Sites\Edit.cshtml" />
     <Content Include="Views\Sites\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Sites\Page.cshtml" />
     <Content Include="Views\Sites\ShowMySite.cshtml" />
-    <Content Include="Views\Sites\OpenSite.cshtml" />
     <Content Include="Views\Sites\ShowUser.cshtml" />
     <Content Include="Views\Sites\Comments.cshtml" />
     <Content Include="Views\Sites\CreateMenu.cshtml" />
@@ -535,19 +535,13 @@
     <Content Include="Views\Sites\PageView.cshtml" />
     <Content Include="Views\Shared\Menu.cshtml" />
     <Content Include="Views\Sites\Site.cshtml" />
-    <Content Include="Views\Sites\CreateMenu.cshtml" />
-    <Content Include="Views\Sites\FillSite.cshtml" />
-    <Content Include="Views\Sites\PageView.cshtml" />
-    <Content Include="Views\Sites\Search.cshtml" />
     <Content Include="Views\Sites\_TableSearch.cshtml" />
     <Content Include="Views\Sites\TableSearch.cshtml" />
-    <Content Include="Views\Sites\ChangePhoto.cshtml" />
     <Content Include="Views\Admin\Users.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Image\" />
-    <Folder Include="lucene_index\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

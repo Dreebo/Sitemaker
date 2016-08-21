@@ -25,26 +25,20 @@ namespace Sitemaker.Controllers
         [AllowAnonymous]
         public ActionResult Index(int? page)
         {   
-            List<Site> sites = db.Sites.Include(s => s.Pages).Include(s => s.Ratings).Include(s => s.Tags).Where(x => x.Pablish).ToList();
+            List<Site> sites = db.Sites.Include(s => s.Ratings).Where(x => x.Pablish).ToList();
             sites.Reverse();
             LuceneSearch.ClearLuceneIndex();
             LuceneSearch.AddUpdateLuceneIndex(db.Sites.Include("Comments").Include("Tags"));
-            int pageSize = 9;
-            int pageNumber = (page ?? 1);
             Session["CurrentUserName"] = GetUserName(User.Identity.GetUserName());
-            return View(sites.ToPagedList(pageNumber, pageSize));
+            return View(sites.ToPagedList((page ?? 1), 9));
         }
 
         private static string GetUserName(string userName)
         {
-            if (userName != "")
+            if (!"".Equals(userName))
             {
                 int position = userName.IndexOf("@");
                 userName = userName.Remove(position);
-            }
-            else
-            {
-                userName = "";
             }
             return userName;
         }
@@ -53,52 +47,10 @@ namespace Sitemaker.Controllers
         public ActionResult Details(string userName, int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Site site = db.Sites
-                    .Include(s => s.Pages)
-                    .Where(p => p.Id == id)
-                    .SingleOrDefault(); 
+            Site site = db.Sites.SingleOrDefault(p => p.Id == id); 
             if (site == null)
-            {
                 return HttpNotFound();
-            }
-            return View(site);
-        }
-
-
-
-        // GET: Sites/Edit/5
-        
-        public ActionResult Edit(string userName, int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Site site = db.Sites.Find(id);
-            if (site == null)
-            {
-                return HttpNotFound();
-            }
-            return View(site);
-        }
-
-        // POST: Sites/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        
-        public ActionResult Edit([Bind(Include = "Id,UserName,Logo,Name,About,TemplateId,MenuId")] Site site)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(site).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
             return View(site);
         }
 
@@ -107,20 +59,15 @@ namespace Sitemaker.Controllers
         public ActionResult Delete(string userName, int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Site site = db.Sites
                     .Include(s => s.Pages)
                     .Include(s => s.Comments)
                     .Include(s => s.Medals)
                     .Include(s => s.Tags)
-                    .Where(p => p.Id == id)
-                    .SingleOrDefault();
+                    .SingleOrDefault(p => p.Id == id);
             if (site == null)
-            {
                 return HttpNotFound();
-            }
             return View(site);
         }
 
@@ -134,8 +81,7 @@ namespace Sitemaker.Controllers
                    .Include(s => s.Comments)
                     .Include(s => s.Medals)
                     .Include(s => s.Tags)
-                   .Where(p => p.Id == id)
-                   .SingleOrDefault();
+                   .SingleOrDefault(p => p.Id == id);
             db.Sites.Remove(site);
             db.SaveChanges();
             return RedirectToAction("ShowMySite");
@@ -155,7 +101,7 @@ namespace Sitemaker.Controllers
         {
             string Name = GetUserName(User.Identity.GetUserName());
             Session["CurrentUserName"] = Name;
-            return View("ShowMySite", db.Sites.Where(p => p.UserName == Name).ToList());
+            return View("ShowMySite", db.Sites.Where(p => p.UserName.Equals(Name)).ToList());
         }
         
         [HttpPost]
@@ -164,7 +110,7 @@ namespace Sitemaker.Controllers
             Site currentSite;
             using (MyDbContext db = new MyDbContext())
             {
-                currentSite = db.Sites.Where(p => p.Id == site.Id).FirstOrDefault();
+                currentSite = db.Sites.FirstOrDefault(p => p.Id == site.Id);
                 currentSite.Name = site.Name;
                 currentSite.About = site.About;
                 currentSite.Logo = Upload(site.Logo);
@@ -176,23 +122,18 @@ namespace Sitemaker.Controllers
         [AllowAnonymous]
         public ActionResult ShowUser(string userName, string siteCreator)
         {
-            string Name = GetUserName(User.Identity.GetUserName());
-            Session["CurrentUserName"] = Name;
+            Session["CurrentUserName"] = GetUserName(User.Identity.GetUserName());
             UserRating user;
             List<Site> sites;
-            
             using (MyDbContext db = new MyDbContext())
             {
-                sites =
-                    db.Sites.Include(s => s.Pages)
+                sites =db.Sites
                         .Include(s => s.Ratings)
-                        .Include(s => s.Tags)
-                        .Where(p => p.UserName == siteCreator)
-                        .Where(x=>x.Pablish).ToList();
+                        .Where(p => p.UserName.Equals(siteCreator)&& p.Pablish).ToList();
                 sites.Reverse();
-                user = db.Ratings.Include(m => m.Medals).Include(m => m.Sites).Where(p => p.UserName == siteCreator).FirstOrDefault();
-                if (CheckMedal(siteCreator) != null)
-                    user.Medals = CheckMedal(siteCreator).Medals;
+                user = db.Ratings.Include(m => m.Medals).Include(m => m.Sites).FirstOrDefault(p => p.UserName.Equals(siteCreator));
+                UserRating userRating = CheckMedal(siteCreator);
+                user.Medals = userRating != null ? CheckMedal(siteCreator).Medals:user.Medals;
                 user.Sites = sites;
             }
             return View("ShowUser", user);
@@ -206,15 +147,10 @@ namespace Sitemaker.Controllers
             Site site;
             using (var db = new MyDbContext())
             {
-                site = db.Sites
-                    .Include(s => s.Pages)
-                    .Where(p => p.Id == id)
-                    .SingleOrDefault();
+                site = db.Sites.SingleOrDefault(p => p.Id == id);
             }
             if (site == null)
-            {
                 site = new Site(); 
-            }
             return View("CreateSite", site);
         }
 
@@ -236,7 +172,7 @@ namespace Sitemaker.Controllers
             Site site;
             using (var db = new MyDbContext())
             {
-                site = db.Sites.Where(p => p.Id == id).SingleOrDefault();
+                site = db.Sites.SingleOrDefault(p => p.Id == id);
                 if (site != null)
                 {
                     Page page = new Page();
@@ -251,56 +187,48 @@ namespace Sitemaker.Controllers
         public ActionResult CreatePage(string userName, int id, int? pageId)
         {
             if (pageId == null)
-            {
                 return RedirectToAction("CreateSite", new { id = id });
-            }
             Site site;
             using (var db = new MyDbContext())
             {
                 site = db.Sites
                     .Include(s => s.Pages)
-                    .Where(p => p.Id == id)
-                    .SingleOrDefault();
+                    .SingleOrDefault(p => p.Id == id);
             }
             if (site == null)
             {
                 throw new Exception("idi naxyi pidr");
             }
             Session.Add("TemplateId",site.TemplateId);
-            Page page = site.Pages.Where(p => p.Id == pageId).SingleOrDefault();
+            Page page = site.Pages.SingleOrDefault(p => p.Id == pageId);
             return View("CreatePage", page);
         }
 
 
 
-        public ActionResult Page(string userName, int id, int? pageId)
-        {
-            Site site;
-            using (var db = new MyDbContext())
-            {
-                site = db.Sites
-                    .Include(s => s.Pages)
-                    .Where(p => p.Id == id)
-                    .SingleOrDefault();
-            }
-            Page page = site.Pages.Where(p => p.Id == pageId).FirstOrDefault();
-            Session.Add("TemplateId",site.TemplateId);
-            return View("Page", page);
-            //return RedirectToAction("ShowPage", new { userName = site.UserName, id = id, pageId = page.Id });
-            //return Json(new { result = "Redirect", url = Url.Action("FillSite", "Sites", new { userName = site.UserName, id = site.Id }) });
-        }
+        //public ActionResult Page(string userName, int id, int? pageId)
+        //{
+        //    Site site;
+        //    using (var db = new MyDbContext())
+        //    {
+        //        site = db.Sites
+        //            .Include(s => s.Pages)
+        //            .SingleOrDefault(p => p.Id == id);
+        //    }
+        //    Page page = site.Pages.FirstOrDefault(p => p.Id == pageId);
+        //    Session.Add("TemplateId",site.TemplateId);
+        //    return View("Page", page);
+        //}
 
         public ActionResult PageView(string userName, int id, int? pageId)
         {
-            Site site;
+            Page page;
             using (var db = new MyDbContext())
             {
-                site = db.Sites
+                page = db.Sites
                     .Include(s => s.Pages)
-                    .Where(p => p.Id == id)
-                    .SingleOrDefault();
+                    .SingleOrDefault(p => p.Id == id).Pages.FirstOrDefault(p => p.Id == pageId);
             }
-            Page page = site.Pages.Where(p => p.Id == pageId).FirstOrDefault();
             return View("PageView", page);
         }
 
@@ -315,13 +243,10 @@ namespace Sitemaker.Controllers
                     .Include(s => s.Menu)
                     .Include(s => s.Menu.TopBar)
                     .Include(s => s.Menu.SideBar)
-                    .Where(p => p.Id == id)
-                    .SingleOrDefault();
+                    .SingleOrDefault(p => p.Id == id);
             }
             if (site == null)
-            {
                 site = new Site();
-            }
 
             return View("CreateMenu", site);
         }
@@ -332,12 +257,10 @@ namespace Sitemaker.Controllers
             Site site;
             using (var db = new MyDbContext())
             {
-                site = db.Sites.Where(p => p.Id == id).SingleOrDefault();
+                site = db.Sites.SingleOrDefault(p => p.Id == id);
             }
             if (site == null)
-            {
                 site = new Site();
-            }
             return View("FillSite", site);
         }
 
@@ -352,21 +275,13 @@ namespace Sitemaker.Controllers
                     .Include(s => s.Menu)
                     .Include(s => s.Menu.TopBar)
                     .Include(s => s.Menu.SideBar)
-                    .Where(p => p.Id == id)
-                    .SingleOrDefault();
+                    .SingleOrDefault(p => p.Id == id);
             }
             if (site == null)
-            {
                 site = new Site();
-            }
-            Page page=null;
-            if(pageId!=null)
-                page = site.Pages.Where(s => s.Id == pageId).FirstOrDefault();
-            if(page==null)
-                if (site.Pages.Count > 0)
-                    page = site.Pages.FirstOrDefault();
-                else
-                    page=new Page();
+            Page page= pageId != null? site.Pages.FirstOrDefault(s => s.Id == pageId) : null;
+            if (page == null)
+                page = site.Pages.Count > 0 ? site.Pages.FirstOrDefault() : new Page();
             Session.Add("TemplateId", site.TemplateId);
             Session.Add("Menu", site.Menu);
             return View("Site", page);
@@ -376,18 +291,12 @@ namespace Sitemaker.Controllers
         public ActionResult PageResult(int id, int? pageId)
         {
             Site site;
+            Page page;
             using (var db = new MyDbContext())
             {
-                site = db.Sites.Where(p => p.Id == id).SingleOrDefault();
+                site = db.Sites.SingleOrDefault(p => p.Id == id);
+                page = pageId == null ? site.Pages.FirstOrDefault() : site.Pages.SingleOrDefault(p => p.Id == pageId);
             }
-            if (site == null)
-            {
-                site = new Site();
-            }
-            Page page;
-            if (pageId == null)
-                page = site.Pages.FirstOrDefault();
-            else page = site.Pages.Where(p => p.Id == pageId).SingleOrDefault();
             return Json(page);
         }
 
@@ -398,7 +307,6 @@ namespace Sitemaker.Controllers
         {
             using (MyDbContext db = new MyDbContext())
             {
-                Tag tag;
                 List<Tag> tags = new List<Tag>();
                 foreach (var x in tagsArray)
                 {
@@ -431,15 +339,9 @@ namespace Sitemaker.Controllers
         [HttpPost]
         public void SavePage(Page savePage)
         {
-            Page page;
             using (MyDbContext db = new MyDbContext())
             {
-                page = db.Pages.Where(p => p.Id == savePage.Id).SingleOrDefault();
-                if (page.HtmlCode != null)
-                {
-                    page.HtmlCode = null;
-                }
-                page.HtmlCode = savePage.HtmlCode;
+                db.Pages.SingleOrDefault(p => p.Id == savePage.Id).HtmlCode = savePage.HtmlCode;
                 db.SaveChanges();
             }
         }
@@ -450,7 +352,7 @@ namespace Sitemaker.Controllers
             Menu menu;
             using (MyDbContext db = new MyDbContext())
             {
-                menu = db.Menus.Include(c => c.TopBar).Include(s => s.SideBar).Where(p => p.Id == saveMenu.Id).SingleOrDefault();
+                menu = db.Menus.Include(c => c.TopBar).Include(s => s.SideBar).SingleOrDefault(p => p.Id == saveMenu.Id);
                 menu.TopBar.Clear();
                 menu.SideBar.Clear();
                 saveMenu.TopBar.CopyItemsTo(menu.TopBar);
@@ -470,10 +372,7 @@ namespace Sitemaker.Controllers
             Site site;
             using (MyDbContext db = new MyDbContext())
             {
-                site = db.Sites
-                    .Include(s => s.Pages)
-                    .Where(p => p.Id == id)
-                    .SingleOrDefault(); ;
+                site = db.Sites.SingleOrDefault(p => p.Id == id);
                 site.Pablish = true;
                 site.Date = DateTime.Now;
                 db.SaveChanges();
@@ -491,8 +390,7 @@ namespace Sitemaker.Controllers
                     .Include(s => s.Comments)
                     .Include(s => s.Ratings)
                     .Include(s => s.Tags)
-                    .Where(p => p.Id == id)
-                    .SingleOrDefault(); 
+                    .SingleOrDefault(p => p.Id == id); 
             }
             return View("Comments", site);
         }
@@ -501,17 +399,14 @@ namespace Sitemaker.Controllers
         public void AddComment(int Id, string UserName, string Comment)
         {
             Comment comment = new Comment();
-            Site site;
             using (MyDbContext db = new MyDbContext())
             {
-                site = db.Sites
-                    .Include(s => s.Comments)
-                    .Where(p => p.Id == Id)
-                    .SingleOrDefault();
                 comment.Date = DateTime.Now;
                 comment.UserComment = Comment;
                 comment.UserName = GetUserName(User.Identity.GetUserName());
-                comment.Site = site;
+                comment.Site = db.Sites
+                    .Include(s => s.Comments)
+                    .SingleOrDefault(p => p.Id == Id); 
                 db.Comments.Add(comment);
                 db.SaveChanges();
             }
@@ -528,13 +423,10 @@ namespace Sitemaker.Controllers
             {
                 site = db.Sites
                     .Include(s => s.Ratings)
-                    .Where(p => p.Id == id)
-                    .SingleOrDefault();
+                    .SingleOrDefault(p => p.Id == id);
                 foreach (var x in site.Ratings)
-                {
-                    if (x.UserName == user) { result = true; break; }
-                }
-                if (result == false)
+                    if (x.UserName.Equals(user)) { result = true; break; }
+                if (!result)
                 {
                     site.RatingCount++;
                     site.AverageRating = Math.Round((site.AverageRating*(site.RatingCount-1) + Int32.Parse(rating)) / site.RatingCount);
@@ -552,14 +444,12 @@ namespace Sitemaker.Controllers
             UserRating userMedal;
             using (MyDbContext db = new MyDbContext())
             {
-                userMedal = db.Ratings.Include(s => s.Medals).Where(p => p.UserName == userName).FirstOrDefault();
-                int count = db.Sites.Where(x => x.UserName.Equals(userName)).Where(t=>t.Pablish).Count();
+                userMedal = db.Ratings.Include(s => s.Medals).FirstOrDefault(p => p.UserName.Equals(userName));
+                int count = db.Sites.Where(x => x.UserName.Equals(userName)&&x.Pablish).Count();
                 for (int i = 5; i <= 20; i *= 2)
                 {
                     if (count >= i)
-                    {
                         Medal(userMedal, i);
-                    }
                     else
                     {
                         List<Medal> medal =userMedal.Medals.Where(x => x.Description.Equals(i.ToString())).ToList();
@@ -576,63 +466,46 @@ namespace Sitemaker.Controllers
         {
             List<Medal> medal = userMedal.Medals.Where(x => medalId.ToString().Equals(x.Description)).ToList();
             if (medal.Count<=0)
-            {
                 userMedal.Medals.Add(new Medal()
                 { Description = medalId.ToString() });
-            }
             
         }
 
         [AllowAnonymous]
         public ActionResult ChangeCulture(string lang)
         {
-            string returnUrl = Request.UrlReferrer.AbsolutePath;
-            List<string> cultures = new List<string>() { "ru", "en", "de" };
-            if (!cultures.Contains(lang))
-            {
-                lang = "ru";
-            }
+            List<string> cultures = new List<string>() { "ru", "en" };
+            lang = !cultures.Contains(lang) ? "ru" : lang;
             HttpCookie cookie = Request.Cookies["lang"];
             if (cookie != null)
                 cookie.Value = lang;
             else
             {
-                cookie = new HttpCookie("lang");
+                cookie = new HttpCookie("lang",lang);
                 cookie.HttpOnly = false;
-                cookie.Value = lang;
                 cookie.Expires = DateTime.Now.AddYears(1);
             }
             Response.Cookies.Add(cookie);
-            return Redirect(returnUrl);
+            return Redirect(Request.UrlReferrer.AbsolutePath);
         }
 
         [AllowAnonymous]
         public PartialViewResult Search(string SearchValue, bool tagSearch)
         {
             List<Site> resultSearch = new List<Site>();
-            IEnumerable<Site> result;
-            if (tagSearch)
-            {
-                result = LuceneSearch.Search(SearchValue, "Tags");
-            }
-            else
-            {
-                result = LuceneSearch.Search(SearchValue);
-            }
+            IEnumerable<Site> result = tagSearch? LuceneSearch.Search(SearchValue, "Tags"): LuceneSearch.Search(SearchValue);
             using (MyDbContext db = new MyDbContext())
             {
                 foreach (var x in result)
                 {
-
                     Site site =db.Sites.Include(s => s.Comments)
                             .Include(m => m.Pages)
                             .Include(n => n.Ratings)
-                            .Where(p => p.Id == x.Id)
-                            .Where(t=>t.Pablish)
-                            .FirstOrDefault();
+                            .FirstOrDefault(p => p.Id == x.Id && p.Pablish);
+                    if(site!=null)
                         resultSearch.Add(site);
                 }
-            };          
+            }
             TempData["sites"] = resultSearch;
             return PartialView("TableSearch", new PagedList<Site>(resultSearch, 1, 99));
         }
@@ -650,7 +523,7 @@ namespace Sitemaker.Controllers
                 File = new FileDescription(data)
             };
             var uploadResult = cloudinary.Upload(uploadParams);
-            UserRating user = db.Ratings.Where(p => p.UserName == userName).FirstOrDefault();
+            UserRating user = db.Ratings.FirstOrDefault(p => p.UserName.Equals(userName));
             user.PhotoUrl = uploadResult.SecureUri.ToString();
             
             dbContext.SaveChanges();
