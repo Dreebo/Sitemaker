@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Админ.
+        /// </summary>
+        public static string Admin {
+            get {
+                return ResourceManager.GetString("Admin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Выберите страну.
         /// </summary>
         public static string ChooseLang {
@@ -97,6 +106,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Создать сайт.
+        /// </summary>
+        public static string CreateSite {
+            get {
+                return ResourceManager.GetString("CreateSite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Список пользователей.
         /// </summary>
         public static string IndexHeader {
@@ -120,6 +138,15 @@ namespace Resources {
         public static string NameRequired {
             get {
                 return ResourceManager.GetString("NameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Мои сайты.
+        /// </summary>
+        public static string ShowMySite {
+            get {
+                return ResourceManager.GetString("ShowMySite", resourceCulture);
             }
         }
     }

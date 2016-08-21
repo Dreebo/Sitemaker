@@ -93,8 +93,9 @@
         }
 </style>
 <div  id="wrapper">
-    @foreach (var item in Model)
-    {
+    @{ 
+        foreach (var item in Model)
+        {
         <div id="wrapper-bl">
             <h2><a href="@Url.Action("Site", "Sites", new { userName = @item.UserName, id = @item.Id })">@item.Name</a></h2>
             <div class="logo"><img style="width:100px; height:100px" src="@item.Logo" /></div>
@@ -118,7 +119,8 @@
             <div class="line" style="position:absolute"></div>
             <a href="@Url.Action("ShowUser", "Sites", new { userName = (string)Session["CurrentUserName"], siteCreator = item.UserName }) " style="text-align: center; padding:1%;">   @item.UserName</a>, @item.Date
         </div>
-    }
+            }
+        }
 </div>
 
     <script src="~/Scripts/jquery.validate.min.js"></script>

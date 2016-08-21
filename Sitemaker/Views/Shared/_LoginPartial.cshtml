@@ -3,11 +3,17 @@
 
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("ChangeCulture", "Sites"))
-    {
-            <input type= image src="~/img/en.png" style="width: 30px; height: 30px; top:10px; position:relative;" name="submit" value="en">
-            <input type= image src="~/img/ru.png" style="width: 30px; height: 30px; top:10px; position:relative;"  name="submit" value="ru">
-    }
+
+    <div class="lang-container">
+        <a href="@Url.Action("ChangeCulture", "Sites", new {lang = "ru" })">
+            <img src="~/img/ru.png" class="lang-icon" />
+        </a>
+        <a href="@Url.Action("ChangeCulture", "Sites", new {lang = "en" })">
+            <img src="~/img/en.png" class="lang-icon" />
+        </a>
+    </div>
+
+
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
     @Html.AntiForgeryToken()

@@ -136,6 +136,7 @@ namespace Sitemaker.Controllers
             //Session["CurrentUserName"] = GetUserName(User.Identity.GetUserName());
             UserRating user;
             List<Site> sites;
+            
             using (MyDbContext db = new MyDbContext())
             {
                 sites =db.Sites
@@ -429,7 +430,7 @@ namespace Sitemaker.Controllers
             }
         }
 
-        bool result;
+        
         [Authorize]
         public void AddRating(int id, string rating)
         {
@@ -438,6 +439,7 @@ namespace Sitemaker.Controllers
             UserRating num = new UserRating();
             using (MyDbContext db = new MyDbContext())
             {
+                bool result = false;
                 site = db.Sites
                     .Include(s => s.Ratings)
                     .SingleOrDefault(p => p.Id == id);
