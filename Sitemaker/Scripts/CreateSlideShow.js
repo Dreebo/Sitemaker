@@ -3,6 +3,7 @@
         $(".thumb").children().each((i, element) =>
             $(element).removeClass("selected"))
         $(this).addClass("selected");
+        
     });
 
     $(".thumbMenu img").click(function () {
