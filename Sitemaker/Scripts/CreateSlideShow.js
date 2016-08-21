@@ -3,6 +3,7 @@
         $(".thumb").children().each((i, element) =>
             $(element).removeClass("selected"))
         $(this).addClass("selected");
+        $(this).add;
     });
 
     $(".thumbMenu img").click(function () {
@@ -27,7 +28,8 @@
             selectedTemplate: null,
             selectedMenu: null,
             isTopBarExist: false,
-            isSideBarExist: false
+            isSideBarExist: false,
+            CreaterId:0
         }
         $(".thumb img.selected").each(function (index, element) {
             model.selectedTemplate = element.id;

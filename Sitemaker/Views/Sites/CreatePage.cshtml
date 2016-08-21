@@ -5,6 +5,8 @@
         else
   { @Styles.Render("~/Content/StyleWhight")}
 }
+
+
 @Scripts.Render("~/bundles/locationContent")
 @Scripts.Render("~/bundles/loadTemplate")
 @Styles.Render("~/Content/Layout")
@@ -21,6 +23,7 @@
 <html class="no-js" id="mainPage" lang="en">
  <!--<![endif]-->
 <head>
+    
     <style>
         .input-formName, .input-formLink, .input-formNameSide, .input-formLinkSide {
             height: 2em;
@@ -32,29 +35,52 @@
             margin: 3px;
         }
 
-            .inputs ul li {
-                padding: 2px;
-                margin: 0;
-            }
+        .inputs ul li {
+            padding: 2px;
+            margin: 0;
+        }
     </style>
 
 
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
 
-        <title>Sitemaker</title>
+    <title>Sitemaker</title>
 
     @*<a href="@Url.Action("Index", "Sites", new { userId = (string)Session["CurrentUserName"] })" class="back">Back to list </a>*@
 
-        <link rel="shortcut icon" type="image/png" href="favicon.png">
-        <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
-        <script src='https://cdn.tinymce.com/4/tinymce.min.js'></script>
-        <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+    <script src='https://cdn.tinymce.com/4/tinymce.min.js'></script>
+    <link rel="stylesheet" href="css/style.css">
 
-        <!--[if lt IE 9]>
+
+    <!--[if lt IE 9]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+    <![endif]-->
+    <!-- Load Feather code -->
+    <script type="text/javascript" src="http://feather.aviary.com/imaging/v3/editor.js"></script>
+
+    <!-- Instantiate Feather -->
+    <script type='text/javascript'>
+        var featherEditor = new Aviary.Feather({
+            apiKey: '1234567',
+            onSave: function (imageID, newURL) {
+                //var img = document.getElementById(imageID);
+                //img.src = newURL;
+                image.src = newURL;
+            }
+        });
+
+        function launchEditor(image, src) {
+            featherEditor.launch({
+                imageID: image,
+                newURL: src
+            });
+            return false;
+        }
+    </script>
 </head>
 
 <body>
@@ -129,7 +155,9 @@
     <script type="text/javascript">
             $(document).ready(function() {
                 LoadMenuEditor();             
-        });
+            });
+            
+
     </script>
 </body>
 </html>

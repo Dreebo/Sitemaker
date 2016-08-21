@@ -6,12 +6,14 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebPages;
 using Sitemaker;
 using Sitemaker.Models;
 using CloudinaryDotNet;
 using Microsoft.Ajax.Utilities;
 using Sitemaker.Filters;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using PagedList.Mvc;
 using PagedList;
 using MvcLuceneSampleApp.Search;
@@ -26,6 +28,7 @@ namespace Sitemaker.Controllers
         private MyDbContext db = new MyDbContext();
 
         // GET: Sites
+        [AllowAnonymous]
         public ActionResult Index(int? page)
         {
             
@@ -72,6 +75,7 @@ namespace Sitemaker.Controllers
         }
 
         // GET: Sites/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -82,10 +86,13 @@ namespace Sitemaker.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "Id,UserName,Logo,Name,About,TemplateId,MenuId")] Site site)
         {
             if (ModelState.IsValid)
             {
+                string userId = User.Identity.GetUserId();
+                site.CreaterId = userId;
                 db.Sites.Add(site);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -95,6 +102,7 @@ namespace Sitemaker.Controllers
         }
 
         // GET: Sites/Edit/5
+        
         public ActionResult Edit(string userName, int? id)
         {
             if (id == null)
@@ -114,6 +122,7 @@ namespace Sitemaker.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        
         public ActionResult Edit([Bind(Include = "Id,UserName,Logo,Name,About,TemplateId,MenuId")] Site site)
         {
             if (ModelState.IsValid)
@@ -126,6 +135,7 @@ namespace Sitemaker.Controllers
         }
 
         // GET: Sites/Delete/5
+        
         public ActionResult Delete(string userName, int? id)
         {
             if (id == null)
@@ -176,6 +186,7 @@ namespace Sitemaker.Controllers
         public ActionResult ShowMySite(string userName)
         {
             string Name = User.Identity.GetUserName();
+            //string Name = userName;
             int position = Name.IndexOf("@");
             Name = Name.Remove(position);
             Session["CurrentUserName"] = Name;
@@ -223,6 +234,7 @@ namespace Sitemaker.Controllers
             return View("ShowUser", user);
         }
 
+        [AllowAnonymous]
         public ActionResult OpenSite(string userName, int id)
         {
             Site site;
@@ -243,7 +255,6 @@ namespace Sitemaker.Controllers
         }
 
 
-        [Authorize]
         public ActionResult CreateSite(string userName, int? id )
         {
             // TODO check is author.
@@ -369,7 +380,7 @@ namespace Sitemaker.Controllers
             return View("PageView", page);
         }
 
-
+        [Authorize]
         public ActionResult CreateMenu(string userName, int id)
         {
             Site site;
@@ -388,9 +399,17 @@ namespace Sitemaker.Controllers
                 site = new Site();
             }
 
+            //if (User.IsInRole("admin") || User.Identity.Name.Equals(site.UserName))
+            //{
+                
+            //}
+            //Response.StatusCode=401;
+            //return View();
+
             return View("CreateMenu", site);
         }
 
+        [AllowAnonymous]
         public ActionResult FillSite(string userName, int id)
         {
             Site site;
@@ -405,6 +424,7 @@ namespace Sitemaker.Controllers
             return View("FillSite", site);
         }
 
+        [AllowAnonymous]
         public ActionResult Site(string userName, int id, int? pageId)
         {
             Site site;
@@ -423,15 +443,7 @@ namespace Sitemaker.Controllers
                 site = new Site();
             }
 
-            Session.Add("TemplateId",site.TemplateId);
-            Session.Add("Menu",site.Menu);
-            //if(pageId!=null)
-            //        Session.Add("pageId",pageId);
-
-            //else if(site.Pages.Count>0)
-            //{
-            //    Session.Add("pageId", site.Pages.ElementAt(0).Id);
-            //}
+            
             Page page=null;
             if(pageId!=null)
                 page = site.Pages.Where(s => s.Id == pageId).FirstOrDefault();
@@ -440,6 +452,8 @@ namespace Sitemaker.Controllers
                     page = site.Pages.FirstOrDefault();
                 else
                     page=new Page();
+            Session.Add("TemplateId", site.TemplateId);
+            Session.Add("Menu", site.Menu);
             return View("Site", page);
         }
 
@@ -488,6 +502,8 @@ namespace Sitemaker.Controllers
                 site.UserName = user;
                 site.Logo = Upload(site.Logo);
                 site.Date = DateTime.Now;
+                string userId = User.Identity.GetUserId();
+                site.CreaterId = userId;
                 site.Tags = tags;
                 db.Sites.Add(site);
                 var usr = System.Web.HttpContext.Current.GetOwinContext().

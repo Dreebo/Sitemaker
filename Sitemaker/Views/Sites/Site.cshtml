@@ -1,5 +1,6 @@
-﻿@using Sitemaker.Models
-@model Sitemaker.Models.Page
+﻿@model Sitemaker.Models.Page
+@using Sitemaker.Models
+
     @{
         Layout = null;
         var Menu =(Menu) Session["Menu"];
@@ -17,11 +18,13 @@
         else
         { @Styles.Render("~/Content/StyleWhight")}
     }
-    @Styles.Render("~/Content/PageLayout")
+
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/dropzone")
+    @Styles.Render("~/Content/Layout")
 
 </head>
 <body>
@@ -42,7 +45,7 @@
         </div>
     }
 
-    <div class="works-page main grid-wrap">
+    <div class="home-page main">
         <hr>
         @if (Menu.IsSideBarExicist)
         {

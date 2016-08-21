@@ -64,8 +64,11 @@ function LoadScript() {
                             cloud_name: 'dgy6x5krf', upload_preset: 'ntblzmxf', 'theme': 'purple',
                             cropping: 'server'
                         }, function (error, result) {
+                            launchEditor(1, result[0].secure_url);
+                            //image.Id
                                 image.empty();
-                                image.append("<img style=\"width:100%; height:100%;\" src=\"" + result[0].secure_url + "\"/>");
+                                image.append("<img  src=\"" + result[0].secure_url + "\"/>");
+                                
                                 var contentImage = result[0].secure_url;
                             }
                         );
@@ -127,5 +130,4 @@ function SavePage() {
         }
     });
 };
-
 

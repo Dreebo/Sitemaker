@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -21,6 +22,7 @@ namespace Sitemaker.Models
         public int RatingCount { get; set; }
         public double AverageRating { get; set; }
         public virtual Menu Menu { get; set; }
+        public string CreaterId { get; set; }
 
         public virtual ICollection<UserRating> Ratings { get; set; }
         public virtual ICollection<Medal> Medals { get; set; }

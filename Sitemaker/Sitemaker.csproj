@@ -266,6 +266,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SampleDataRepository .cs" />
@@ -276,12 +277,18 @@
     </Compile>
     <Compile Include="HtmlHelperGravatar.cs" />
     <Compile Include="LuceneSearch.cs" />
-    <Compile Include="Migrations\201608192003509_sdsdf.cs" />
-    <Compile Include="Migrations\201608192003509_sdsdf.Designer.cs">
-      <DependentUpon>201608192003509_sdsdf.cs</DependentUpon>
+    <Compile Include="Migrations\201608192001571_InitialCreate.cs" />
+    <Compile Include="Migrations\201608192001571_InitialCreate.Designer.cs">
+      <DependentUpon>201608192001571_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608201548070_migr.cs" />
+    <Compile Include="Migrations\201608201548070_migr.Designer.cs">
+      <DependentUpon>201608201548070_migr.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AppDbInitializer.cs" />
+    <Compile Include="Models\BlockInfo.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Comment.cs" />
@@ -460,6 +467,8 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.12.0.js" />
     <Content Include="Scripts\jquery-ui-1.12.0.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.1.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.1.min.js" />
     <Content Include="Scripts\jquery.tag-editor.js" />
     <Content Include="Scripts\jquery.tag-editor.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -543,6 +552,7 @@
     <Content Include="Views\Sites\_TableSearch.cshtml" />
     <Content Include="Views\Sites\TableSearch.cshtml" />
     <Content Include="Views\Sites\ChangePhoto.cshtml" />
+    <Content Include="Views\Admin\Users.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -557,8 +567,11 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201608192003509_sdsdf.resx">
-      <DependentUpon>201608192003509_sdsdf.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201608192001571_InitialCreate.resx">
+      <DependentUpon>201608192001571_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608201548070_migr.resx">
+      <DependentUpon>201608201548070_migr.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Resource.en.resx">
       <CustomToolNamespace>Resources</CustomToolNamespace>

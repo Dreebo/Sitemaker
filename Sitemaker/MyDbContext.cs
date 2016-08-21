@@ -29,6 +29,10 @@ namespace Sitemaker
                 .Map(t => t.MapLeftKey("SiteId")
                 .MapRightKey("RatingId")
                 .ToTable("SiteUserRating"));
+            
+            
+            
         }
+
     }
 }

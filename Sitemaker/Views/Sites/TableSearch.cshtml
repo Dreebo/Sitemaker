@@ -161,7 +161,7 @@
     @foreach (var item in Model)
     {
         <div id="wrapper-bl">
-            <h2><a href="@Url.Action("OpenSite", "Sites", new { userName = (string)Session["CurrentUserName"], id = item.Id })">@item.Name</a></h2>
+            <h2><a href="@Url.Action("Site", "Sites", new { userName = @item.UserName, id = @item.Id })">@item.Name</a></h2>
             <div class="logo"><img style="width:100px; height:100px" src="@item.Logo" /></div>
             <a href="@Url.Action("Comments", "Sites", new { userName = (string)Session["CurrentUserName"], id = item.Id })" class="button">Comments</a>
             <div class="line"></div>
