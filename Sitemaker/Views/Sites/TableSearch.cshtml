@@ -99,7 +99,7 @@
         <div id="wrapper-bl">
             <h2><a href="@Url.Action("Site", "Sites", new { userName = @item.UserName, id = @item.Id })">@item.Name</a></h2>
             <div class="logo"><img style="width:100px; height:100px" src="@item.Logo" /></div>
-            <a href="@Url.Action("Comments", "Sites", new { userName = (string)Session["CurrentUserName"], id = item.Id })" class="button">Comments</a>
+            <a href="@Url.Action("Comments", "Sites", new { userName = User.Identity.IsAuthenticated?(string)Session["CurrentUserName"]: "Anonymous", id = item.Id })" class="button">Comments</a>
             <div class="line"></div>
             <div class="stars" id="@item.Id" style="left: 100px">
                 <div class="rating" style="display:none" id="@item.AverageRating"></div>

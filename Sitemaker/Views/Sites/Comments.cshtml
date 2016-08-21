@@ -180,17 +180,20 @@
 </table>
 </div>
 
-<body>
+@if (User.Identity.IsAuthenticated)
+{
+    <body>
     <div class="container">
         <form role="form">
             <div class="form-group">
                 <label for="comment">Comment:</label>
-                <textarea class="form-control"  rows="5" id="comment"></textarea>
+                <textarea class="form-control" rows="5" id="comment"></textarea>
                 <input type="button" id="addComment" class="btn btn-primary" value="Add">
             </div>
         </form>
     </div>
-</body>
+    </body>
+}
 
 
 <section class="messages">

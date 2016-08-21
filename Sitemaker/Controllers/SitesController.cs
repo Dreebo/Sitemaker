@@ -288,16 +288,12 @@ namespace Sitemaker.Controllers
             }
             if (site == null)
                 site = new Site();
-            if (User.IsInRole("admin") || User.Identity.GetUserId().Equals(site.CreaterId))
-            {
                 Page page = pageId != null ? site.Pages.FirstOrDefault(s => s.Id == pageId) : null;
                 if (page == null)
                     page = site.Pages.Count > 0 ? site.Pages.FirstOrDefault() : new Page();
                 Session.Add("TemplateId", site.TemplateId);
                 Session.Add("Menu", site.Menu);
                 return View("Site", page);
-            }
-            return HttpNotFound();
         }
 
         [AllowAnonymous]

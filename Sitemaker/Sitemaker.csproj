@@ -275,7 +275,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="HtmlHelperGravatar.cs" />
     <Compile Include="LuceneSearch.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -441,6 +440,10 @@
     <Content Include="lucene_index\segments_14h" />
     <Content Include="lucene_index\_la.cfs" />
     <Content Include="lucene_index\_li.cfs" />
+    <Content Include="lucene_index\_mw.cfs" />
+    <Content Include="lucene_index\_nc.cfs" />
+    <Content Include="lucene_index\segments_179" />
+    <Content Include="lucene_index\segments_185" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ChangePhoto.js" />
     <Content Include="Scripts\CreateSlideShow.js" />
@@ -478,7 +481,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
