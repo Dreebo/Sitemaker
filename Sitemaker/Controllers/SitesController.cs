@@ -1,24 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.WebPages;
-using Sitemaker;
 using Sitemaker.Models;
 using CloudinaryDotNet;
 using Microsoft.Ajax.Utilities;
 using Sitemaker.Filters;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using PagedList.Mvc;
 using PagedList;
 using MvcLuceneSampleApp.Search;
 using CloudinaryDotNet.Actions;
-using Microsoft.AspNet.Identity.Owin;
 
 namespace Sitemaker.Controllers
 {
@@ -179,6 +173,7 @@ namespace Sitemaker.Controllers
             }
         }
 
+        [AllowAnonymous]
         public ActionResult ShowUser(string userName, string siteCreator)
         {
             string Name = GetUserName(User.Identity.GetUserName());
@@ -377,6 +372,7 @@ namespace Sitemaker.Controllers
             return View("Site", page);
         }
 
+        [AllowAnonymous]
         public ActionResult PageResult(int id, int? pageId)
         {
             Site site;
@@ -415,26 +411,14 @@ namespace Sitemaker.Controllers
                     }
                     tags.Add(temp);        
                 }
-                string user = User.Identity.GetUserName();
-                int position = user.IndexOf("@");
-                user = user.Remove(position);
-                site.UserName = user;
+                site.UserName = GetUserName(User.Identity.GetUserName());
                 site.Logo = Upload(site.Logo);
                 site.Date = DateTime.Now;
-                string userId = User.Identity.GetUserId();
-                site.CreaterId = userId;
+                site.CreaterId = User.Identity.GetUserId();
                 site.Tags = tags;
                 db.Sites.Add(site);
-                var usr = System.Web.HttpContext.Current.GetOwinContext().
-                GetUserManager<ApplicationUserManager>().
-                FindById(System.Web.HttpContext.
-                Current.User.Identity.GetUserId());
-               // usr.Site.Add(site);
-                //db.Menus.Add(site.Menu);
                 db.SaveChanges();
             }
-            //return Json(new { result = "Redirect", url = Url.Action("CreateSite", "Sites", new { userName = site.UserName, id = site.Id }) });
-            //return Json(new {result="Redirect", Url=Url.Action("FillSite","Sites",)})
             return Json(new { result = "Redirect", url = Url.Action("FillSite", "Sites", new { userName = site.UserName, id = site.Id }) });
         }
 
@@ -497,6 +481,7 @@ namespace Sitemaker.Controllers
             return RedirectToAction("Index");
         }
 
+        [AllowAnonymous]
         public ActionResult Comments(string userName, int id)
         {
             Site site;
@@ -509,7 +494,6 @@ namespace Sitemaker.Controllers
                     .Where(p => p.Id == id)
                     .SingleOrDefault(); 
             }
-           // Comment comment = site.Comments.Where(p => p.Id == id).SingleOrDefault();
             return View("Comments", site);
         }
 
@@ -526,7 +510,7 @@ namespace Sitemaker.Controllers
                     .SingleOrDefault();
                 comment.Date = DateTime.Now;
                 comment.UserComment = Comment;
-                comment.UserName = UserName;
+                comment.UserName = GetUserName(User.Identity.GetUserName());
                 comment.Site = site;
                 db.Comments.Add(comment);
                 db.SaveChanges();
@@ -537,9 +521,7 @@ namespace Sitemaker.Controllers
         [Authorize]
         public void AddRating(int id, string rating)
         {
-            string user = User.Identity.GetUserName();
-            int position = user.IndexOf("@");
-            user = user.Remove(position);
+            string user = GetUserName(User.Identity.GetUserName());
             Site site;
             UserRating num = new UserRating();
             using (MyDbContext db = new MyDbContext())
@@ -601,6 +583,7 @@ namespace Sitemaker.Controllers
             
         }
 
+        [AllowAnonymous]
         public ActionResult ChangeCulture(string lang)
         {
             string returnUrl = Request.UrlReferrer.AbsolutePath;
@@ -623,6 +606,7 @@ namespace Sitemaker.Controllers
             return Redirect(returnUrl);
         }
 
+        [AllowAnonymous]
         public PartialViewResult Search(string SearchValue, bool tagSearch)
         {
             List<Site> resultSearch = new List<Site>();
@@ -652,28 +636,6 @@ namespace Sitemaker.Controllers
             TempData["sites"] = resultSearch;
             return PartialView("TableSearch", new PagedList<Site>(resultSearch, 1, 99));
         }
-
-        //public PartialViewResult SearchTags(string SearchValue)
-        //{
-        //    List<Site> resultSearch = new List<Site>();
-        //    var result = LuceneSearch.Search(SearchValue, "Tags");
-        //    using (MyDbContext db = new MyDbContext())
-        //    {
-        //        foreach (var x in result)
-        //        {
-
-        //            Site site =db.Sites.Include(s => s.Comments)
-        //                    .Include(m => m.Pages)
-        //                    .Include(n => n.Ratings)
-        //                    .Where(p => p.Id == x.Id)
-        //                    .Where(t=>t.Pablish)
-        //                    .FirstOrDefault();
-        //                resultSearch.Insert(0, site);
-        //        }
-        //    };
-        //    TempData["sites"] = resultSearch;
-        //    return PartialView("TableSearch", new PagedList<Site>(resultSearch, 1, 9));
-        //}
 
         [HttpPost]
         public JsonResult ChangePhoto(string data, string userName)

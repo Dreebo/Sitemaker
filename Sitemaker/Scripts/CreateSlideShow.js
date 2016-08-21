@@ -1,14 +1,13 @@
 ﻿$(function () {
     $(".thumb img").click(function () {
-        $(".thumb").children().each((i, element) =>
-            $(element).removeClass("selected"))
+        $(".thumb")
+            .children()
+            .each((i, element) =>
+                $(element).removeClass("selected"));
         $(this).addClass("selected");
     });
 
     $(".thumbMenu img").click(function () {
-        //$(".thumbMenu").children().each((i, element) =>
-        //    $(element).removeClass("selected"))
-        //$(this).addClass("selected");
         if ($(this).hasClass("selected")) {
             $(this).removeClass("selected");
         } else {
@@ -44,12 +43,8 @@
             if ($(element).hasClass("side")) {
                 model.isSideBarExist = true;
             }
-            //model.isTopBarExist = true;
         })
-        //$(".thumbMenu side img.selected").each(function (index, element) {
-        //    model.isSideBarExist = true;
-        //})
-
+        
 
         let file = $("#uploadFile")[0].files[0];
         var reader = new FileReader();
