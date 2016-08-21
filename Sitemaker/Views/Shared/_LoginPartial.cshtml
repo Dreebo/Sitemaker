@@ -20,6 +20,7 @@
                         <li>@Html.ActionLink("Личный кабинет", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
                         <li><a href="@Url.Action("ShowMySite", "Sites", new { userName = (string)Session["CurrentUserName"]})">Show My Site</a></li>
                         <li><a href="@Url.Action("CreateSite", "Sites", new { userId = (string)Session["CurrentUserName"]})">Create Site</a></li>
+                        <li><a href="@Url.Action("Users", "Admin")">Admin</a></li>
                         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
                     </ul>
                 </li>

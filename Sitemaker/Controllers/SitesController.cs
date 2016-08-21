@@ -28,6 +28,7 @@ namespace Sitemaker.Controllers
         private MyDbContext db = new MyDbContext();
 
         // GET: Sites
+        [AllowAnonymous]
         public ActionResult Index(int? page)
         {   
             List<Site> sites = db.Sites.Include(s => s.Pages).Include(s => s.Ratings).Include(s => s.Tags).Where(x => x.Pablish).ToList();
@@ -330,6 +331,7 @@ namespace Sitemaker.Controllers
             return View("CreateMenu", site);
         }
 
+        [AllowAnonymous]
         public ActionResult FillSite(string userName, int id)
         {
             Site site;
@@ -344,6 +346,7 @@ namespace Sitemaker.Controllers
             return View("FillSite", site);
         }
 
+        [AllowAnonymous]
         public ActionResult Site(string userName, int id, int? pageId)
         {
             Site site;

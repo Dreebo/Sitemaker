@@ -14,29 +14,11 @@ namespace Sitemaker.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: Admin
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
-
+        [Authorize(Roles ="admin")]
         public ActionResult Users()
         {
 
             List<ApplicationUser> users = new List<ApplicationUser>();
-            //using (MyDbContext db = new MyDbContext())
-            //{
-            //    if (!db.Database.Exists())
-            //    {
-            //    }
-            //    MembershipUserCollection userCollection = Membership.GetAllUsers();
-            //    foreach (MembershipUser user in userCollection)
-            //    {
-            //        users.Add(user);
-            //    }
-            //}
-
-
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 IDbSet<ApplicationUser> usersDb = db.Users;
@@ -50,7 +32,7 @@ namespace Sitemaker.Controllers
             return View("Users",users);
         }
 
-
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult DeleteUsers()
         {
@@ -83,6 +65,8 @@ namespace Sitemaker.Controllers
                     .Include(s => s.Menu.TopBar)
                     .Include(s => s.Menu.SideBar)
                     .Include(s => s.Medals)
+                    .Include(s => s.Ratings)
+                    .Include(s => s.Tags)
                     .Where(x => x.CreaterId.Equals(id)).ToList();
                     db.Sites.RemoveRange(site);
                 }
@@ -92,19 +76,19 @@ namespace Sitemaker.Controllers
         }
 
         [HttpPost]
-        public ActionResult ChangeBlock(BlockInfo block)
+        public ActionResult ChangeBlock(string blockId, bool block)
         {
             //string blockId = Request["blockId"];
             //bool block = Boolean.Parse(Request["block"]);
 
-            
+
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                ApplicationUser user = db.Users.Where(x => x.Id.Equals(block.BlockId)).First();
-                user.IsBlock = block.Block;
+                ApplicationUser user = db.Users.Where(x => x.Id.Equals(blockId)).First();
+                user.IsBlock = block;
                 db.SaveChanges();
             }
-            
+
             return RedirectToAction("Users", new { });
         }
     }

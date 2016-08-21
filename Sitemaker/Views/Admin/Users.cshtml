@@ -12,15 +12,13 @@
     <script>
         $(document).ready(function () {
             $("#block").change(function (event) {
-                var block = {
-                    BlockId: event.target.value,
-                    Block: event.target.checked
-                }
+                let blockId = event.target.value;
+                let block = event.target.checked;
                 $.ajax({
                     type: 'POST',
                     url: '/Admin/ChangeBlock',
-                    
-                    data: JSON.stringify(block),
+                    datatype: "text",
+                    data: JSON.stringify({blockId, block}),
                     contentType: 'application/json; charset=utf-8',
                     
                     success: function (data) {
