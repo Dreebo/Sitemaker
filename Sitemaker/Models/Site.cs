@@ -34,5 +34,15 @@ namespace Sitemaker.Models
             Pages = new List<Page>();
             Tags = new List<Tag>();
         }
+
+        public string GetSubDescription()
+        {
+            if(About.Length>100)
+                return About.Substring(0, 100);
+            else
+            {
+                return About;
+            }
+        }
     }
 }

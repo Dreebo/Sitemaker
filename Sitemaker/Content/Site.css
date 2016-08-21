@@ -22,3 +22,9 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.lang-container, .lang-container img
+{
+    margin: 5px;
+    height: 30px;
+}

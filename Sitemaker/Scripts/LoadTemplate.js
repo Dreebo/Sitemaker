@@ -12,20 +12,20 @@
 }
 
 
-    function LoadMenuEditor() {
-        $.ajax({
-            type: 'POST',
-            url: "/Sites/LoadMenuEditor",
-            success: function (data) {
-                $("#allbutId").empty();
-                $("#allbutId").append(data);
-                setTimeout(function () {
-                    LoadScript();
-                }, 1);
-            }
-        });
-      
-    }
+function LoadMenuEditor() {
+    $.ajax({
+        type: 'POST',
+        url: "/Sites/LoadMenuEditor",
+        success: function (data) {
+            $("#allbutId").empty();
+            $("#allbutId").append(data);
+            setTimeout(function () {
+                LoadScript();
+            }, 1);
+        }
+    });
+
+}
 
 function LoadScript() {
     $("#dragg1").draggable({ helper: "clone", scope: "push" });
@@ -66,13 +66,13 @@ function LoadScript() {
                         }, function (error, result) {
                             launchEditor(1, result[0].secure_url);
                             //image.Id
-                                image.empty();
-                                image.append("<img  src=\"" + result[0].secure_url + "\"/>");
-                                
-                                var contentImage = result[0].secure_url;
-                            }
+                            image.empty();
+                            image.append("<img  src=\"" + result[0].secure_url + "\"/>");
+
+                            var contentImage = result[0].secure_url;
+                        }
                         );
-                   
+
                 }
 
                 if (draggableId == "dragg3") {
@@ -91,7 +91,7 @@ function LoadScript() {
                         }],
                         resizable: false
                     });
-                   
+
                 }
             }
         });
@@ -104,7 +104,7 @@ function SavePage() {
     id = id.slice(position + 1);
     //let html = $(".no-js").html();
     let html = $("#content").html();
-    var savePage = { 
+    var savePage = {
         Id: id,
         HtmlCode: html
     }
@@ -117,16 +117,16 @@ function SavePage() {
         contentType: "application/json; charset=utf-8",
         traditional: true,
         success: function (data) {
-          let  urlId = window.location.href;
-          let pos = urlId.lastIndexOf("/");
-          urlId = urlId.slice(0, pos);
-          pos = urlId.lastIndexOf("/");
-          let userName = urlId.slice(0, pos);
-          let userNamePos = userName.lastIndexOf("/");
-          userName = userName.slice(userNamePos + 1);
-          urlId = urlId.slice(pos + 1);
-            
-          window.location.replace("https://localhost:44396/Sites/FillSite/" + userName + "/" + urlId);
+            let urlId = window.location.href;
+            let pos = urlId.lastIndexOf("/");
+            urlId = urlId.slice(0, pos);
+            pos = urlId.lastIndexOf("/");
+            let userName = urlId.slice(0, pos);
+            let userNamePos = userName.lastIndexOf("/");
+            userName = userName.slice(userNamePos + 1);
+            urlId = urlId.slice(pos + 1);
+
+            window.location.replace("https://localhost:44396/Sites/FillSite/" + userName + "/" + urlId);
         }
     });
 };

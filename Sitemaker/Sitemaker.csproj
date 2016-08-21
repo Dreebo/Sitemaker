@@ -104,7 +104,7 @@
       <HintPath>..\packages\Knoema.Localization.Mvc.0.1.88\lib\net45\Knoema.Localization.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lucene.Net, Version=3.0.3.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+    <Reference Include="Lucene.Net">
       <HintPath>..\packages\Lucene.Net.3.0.3\lib\NET40\Lucene.Net.dll</HintPath>
       <Private>True</Private>
     </Reference>
@@ -277,18 +277,9 @@
     </Compile>
     <Compile Include="HtmlHelperGravatar.cs" />
     <Compile Include="LuceneSearch.cs" />
-    <Compile Include="Migrations\201608192001571_InitialCreate.cs" />
-    <Compile Include="Migrations\201608192001571_InitialCreate.Designer.cs">
-      <DependentUpon>201608192001571_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201608201548070_migr.cs" />
-    <Compile Include="Migrations\201608201548070_migr.Designer.cs">
-      <DependentUpon>201608201548070_migr.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AppDbInitializer.cs" />
-    <Compile Include="Models\BlockInfo.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Comment.cs" />
@@ -301,7 +292,6 @@
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\TestClassa.cs" />
     <Compile Include="Models\UserRating.cs" />
-    <Compile Include="Models\ViewModel.cs" />
     <Compile Include="MyDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.Designer.cs">
@@ -495,7 +485,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Sites\Index123.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -567,12 +556,6 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201608192001571_InitialCreate.resx">
-      <DependentUpon>201608192001571_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608201548070_migr.resx">
-      <DependentUpon>201608201548070_migr.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Resource.en.resx">
       <CustomToolNamespace>Resources</CustomToolNamespace>
       <Generator>PublicResXFileCodeGenerator</Generator>

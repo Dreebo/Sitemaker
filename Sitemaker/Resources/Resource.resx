@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Admin" xml:space="preserve">
+    <value>Админ</value>
+  </data>
   <data name="ChooseLang" xml:space="preserve">
     <value>Выберите страну</value>
   </data>
@@ -129,6 +132,9 @@
   <data name="CreateLink" xml:space="preserve">
     <value>Добавить нового пользователя</value>
   </data>
+  <data name="CreateSite" xml:space="preserve">
+    <value>Создать сайт</value>
+  </data>
   <data name="IndexHeader" xml:space="preserve">
     <value>Список пользователей</value>
   </data>
@@ -137,5 +143,8 @@
   </data>
   <data name="NameRequired" xml:space="preserve">
     <value>Поле "Имя" должно быть заполнено </value>
+  </data>
+  <data name="ShowMySite" xml:space="preserve">
+    <value>Мои сайты</value>
   </data>
 </root>

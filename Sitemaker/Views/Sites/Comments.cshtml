@@ -164,7 +164,7 @@
                     <ul class="tags">
                         @foreach (var item in Model.Tags)
                         {
-                            <li><a href="@Url.Action("SearchTags", "Sites", new {SearchValue = @item.Name})" class="tag">@item.Name</a></li>
+                            <li><a href="@Url.Action("Search", "Sites", new {SearchValue = @item.Name, tagSearch=true})" class="tag">@item.Name</a></li>
                         }
                     </ul>
                 </p>

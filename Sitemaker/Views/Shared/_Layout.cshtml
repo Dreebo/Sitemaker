@@ -144,6 +144,7 @@
             @using (Ajax.BeginForm("Search", "Sites", new { }, new AjaxOptions() { UpdateTargetId = "updatetarget" }, new { @class = "search-wrapper cf" }))
             {
                 <input type="text" id="searchValue" placeholder="Search here..." required="" name="SearchValue">
+                <input type="hidden" id="tagSearch" name="tagSearch" value="false" />
                 <button class="search" type="submit">Search</button>
             }
         </div>
