@@ -2,19 +2,38 @@
 @{
     ViewBag.Title = "ShowUser";
  }
-
+<link href="~/Content/rating.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(document)
+        .ready(function() {
+            $(".stars")
+                .each(function(i, mainelement) {
+                    let id = $(mainelement.children).attr("id");
+                    let averageRating = +(id);
+                    let label = $(mainelement.children).children();
+                    $(label)
+                        .each(function(i, element) {
+                            if (mainelement.children.form == element.parentElment) {
+                                if (i / 2 < +(averageRating)) $(element).addClass("selected")
+                                else return false;
+                            }
+                        });
+                    if (+(averageRating) == 5) $(label).addClass("max");
+                });
+        });
+</script>
 <style>
-    .medal p { 
-position: relative; 
-margin: 0; 
-top: -55px; 
-left: 40px; 
-font-weight: bold; 
-z-index: 2; 
- color:#fff;
- text-shadow:0px 0px 20px #00c6ff; 
- font-size:30px
-}
+     .medal p {
+         position: relative;
+         margin: 0;
+         top: -55px;
+         left: 40px;
+         font-weight: bold;
+         z-index: 2;
+         color:#fff;
+         text-shadow:0px 0px 20px #00c6ff;
+         font-size:30px
+     }
 
     .medal {
         z-index: 1;
@@ -33,25 +52,25 @@ z-index: 2;
 
     }
 
-        .ribbon:before,
-        .ribbon:after {
-            content: '';
-            position: absolute;
-            width: 35px;
-            height: 100%;
-            top: 0;
-        }
+    .ribbon:before,
+    .ribbon:after {
+        content: '';
+        position: absolute;
+        width: 35px;
+        height: 100%;
+        top: 0;
+    }
 
-        .ribbon:before {
-            right: 0;
-            background: #30110E;
-            transform: skew(-28deg);
-        }
+    .ribbon:before {
+        right: 0;
+        background: #30110E;
+        transform: skew(-28deg);
+    }
 
-        .ribbon:after {
-            background: #EF7E76;
-            transform: skew(28deg);
-        }
+    .ribbon:after {
+        background: #EF7E76;
+        transform: skew(28deg);
+    }
 
     .coin {
         border: 1px solid #CA5D3E;
@@ -64,21 +83,18 @@ z-index: 2;
         box-shadow: 0px 0px 3px 0px #989898;
     }
 
-        .coin:after {
-            content: '';
-            position: absolute;
-            transform: translate(-50%, -50%);
-            top: 50%;
-            left: 50%;
-            width: 35px;
-            height: 35px;
-            border-radius: inherit;
-            box-shadow: 0 0 0 9px #D9B867;
-        } 
-       
+    .coin:after {
+        content: '';
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+        width: 35px;
+        height: 35px;
+        border-radius: inherit;
+        box-shadow: 0 0 0 9px #D9B867;
+    }
 </style>
-
-
 
 
     @if (Model.Medals != null)
@@ -101,6 +117,12 @@ z-index: 2;
             Name
         </th>
         <th>
+            Raiting
+        </th>
+        <th>
+            Coments
+        </th>
+        <th>
             Description
         </th>
         <th></th>
@@ -109,10 +131,30 @@ z-index: 2;
     {
         <tr>
             <td>
-                 <a href="@Url.Action("OpenSite", "Sites", new {userName = (string)Session["CurrentUserName"], id = item.Id, indicator = true})">@item.Name</a>
+                <a href="@Url.Action("Site", "Sites", new {userName = item.UserName, id = item.Id, indicator = true})">@item.Name</a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.About)
+                <div class="stars" id="@item.Id" style="left: 100px">
+                    <div class="rating" style="display: none" id="@item.AverageRating"></div>
+                    <form action="" class="formstars">
+                        <input class="star star-1" id="1" type="radio" name="star"/>
+                        <label class="star star-1" for="1"></label>
+                        <input class="star star-2" id="2" type="radio" name="star"/>
+                        <label class="star star-2" for="2"></label>
+                        <input class="star star-3" id="3" type="radio" name="star"/>
+                        <label class="star star-3" for="3"></label>
+                        <input class="star star-4" id="4" type="radio" name="star"/>
+                        <label class="star star-4" for="4"></label>
+                        <input class="star star-5" id="5" type="radio" name="star"/>
+                        <label class="star star-5" for="5"></label>
+                    </form>
+                </div>
+            </td>
+            <td>
+                <a href="@Url.Action("Comments", "Sites", new { userName = (string)Session["CurrentUserName"], id = item.Id })" class="button">Comments</a>
+            </td>
+            <td>
+                @item.GetSubDescription()
             </td>
         </tr>
     }

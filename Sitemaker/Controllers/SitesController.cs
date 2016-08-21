@@ -51,7 +51,9 @@ namespace Sitemaker.Controllers
             Site site = db.Sites.SingleOrDefault(p => p.Id == id); 
             if (site == null)
                 return HttpNotFound();
-            return View(site);
+            if (User.IsInRole("admin") || User.Identity.GetUserId().Equals(site.CreaterId))
+                return View(site);
+            return HttpNotFound();
         }
 
         // GET: Sites/Delete/5
@@ -68,7 +70,9 @@ namespace Sitemaker.Controllers
                     .SingleOrDefault(p => p.Id == id);
             if (site == null)
                 return HttpNotFound();
-            return View(site);
+            if (User.IsInRole("admin") || User.Identity.GetUserId().Equals(site.CreaterId))
+                return View(site);
+            return HttpNotFound();
         }
 
         // POST: Sites/Delete/5
@@ -82,9 +86,13 @@ namespace Sitemaker.Controllers
                     .Include(s => s.Medals)
                     .Include(s => s.Tags)
                    .SingleOrDefault(p => p.Id == id);
-            db.Sites.Remove(site);
-            db.SaveChanges();
-            return RedirectToAction("ShowMySite");
+            if (User.IsInRole("admin") || User.Identity.GetUserId().Equals(site.CreaterId))
+            {
+                db.Sites.Remove(site);
+                db.SaveChanges();
+                return RedirectToAction("ShowMySite", new { userName= site.UserName});
+            }
+            return HttpNotFound();
         }
 
         protected override void Dispose(bool disposing)
@@ -99,30 +107,33 @@ namespace Sitemaker.Controllers
         [Authorize]
         public ActionResult ShowMySite(string userName)
         {
-            string Name = GetUserName(User.Identity.GetUserName());
-            Session["CurrentUserName"] = Name;
-            return View("ShowMySite", db.Sites.Where(p => p.UserName.Equals(Name)).ToList());
+            if (User.IsInRole("admin"))
+                return View("ShowMySite", db.Sites.Where(p => p.UserName.Equals(userName)).ToList());
+            return View("ShowMySite", db.Sites.Where(p =>p.UserName.Equals(userName)).ToList());
         }
         
         [HttpPost]
         public void SaveChangeSite(Site site)
         {
-            Site currentSite;
-            using (MyDbContext db = new MyDbContext())
+            if (User.IsInRole("admin") || User.Identity.GetUserId().Equals(site.CreaterId))
             {
-                currentSite = db.Sites.FirstOrDefault(p => p.Id == site.Id);
-                currentSite.Name = site.Name;
-                currentSite.About = site.About;
-                currentSite.Logo = Upload(site.Logo);
-                currentSite.Date = DateTime.Now;
-                db.SaveChanges();
+                Site currentSite;
+                using (MyDbContext db = new MyDbContext())
+                {
+                    currentSite = db.Sites.FirstOrDefault(p => p.Id == site.Id);
+                    currentSite.Name = site.Name;
+                    currentSite.About = site.About;
+                    currentSite.Logo = Upload(site.Logo);
+                    currentSite.Date = DateTime.Now;
+                    db.SaveChanges();
+                }
             }
         }
 
         [AllowAnonymous]
         public ActionResult ShowUser(string userName, string siteCreator)
         {
-            Session["CurrentUserName"] = GetUserName(User.Identity.GetUserName());
+            //Session["CurrentUserName"] = GetUserName(User.Identity.GetUserName());
             UserRating user;
             List<Site> sites;
             using (MyDbContext db = new MyDbContext())
@@ -169,16 +180,19 @@ namespace Sitemaker.Controllers
 
         public ActionResult LoadPage(string userName, int id)
         {
-            Site site;
+                Site site;
             using (var db = new MyDbContext())
             {
                 site = db.Sites.SingleOrDefault(p => p.Id == id);
                 if (site != null)
                 {
-                    Page page = new Page();
-                    site.Pages.Add(page);
-                    db.SaveChanges();
-                    return RedirectToAction("CreatePage", new { userName = site.UserName , id = id, pageId = page.Id });
+                    if (User.IsInRole("admin") || User.Identity.GetUserId().Equals(site.CreaterId))
+                    {
+                        Page page = new Page();
+                        site.Pages.Add(page);
+                        db.SaveChanges();
+                        return RedirectToAction("CreatePage", new {userName = site.UserName, id = id, pageId = page.Id});
+                    }
                 }
             }
             throw new Exception("idi naxyi pidr");
@@ -199,26 +213,16 @@ namespace Sitemaker.Controllers
             {
                 throw new Exception("idi naxyi pidr");
             }
-            Session.Add("TemplateId",site.TemplateId);
-            Page page = site.Pages.SingleOrDefault(p => p.Id == pageId);
-            return View("CreatePage", page);
+            if (User.IsInRole("admin") || User.Identity.GetUserId().Equals(site.CreaterId))
+            {
+                Session.Add("TemplateId", site.TemplateId);
+                Page page = site.Pages.SingleOrDefault(p => p.Id == pageId);
+                return View("CreatePage", page);
+            }
+            return HttpNotFound();
         }
 
-
-
-        //public ActionResult Page(string userName, int id, int? pageId)
-        //{
-        //    Site site;
-        //    using (var db = new MyDbContext())
-        //    {
-        //        site = db.Sites
-        //            .Include(s => s.Pages)
-        //            .SingleOrDefault(p => p.Id == id);
-        //    }
-        //    Page page = site.Pages.FirstOrDefault(p => p.Id == pageId);
-        //    Session.Add("TemplateId",site.TemplateId);
-        //    return View("Page", page);
-        //}
+        
 
         public ActionResult PageView(string userName, int id, int? pageId)
         {
@@ -235,6 +239,7 @@ namespace Sitemaker.Controllers
         [Authorize]
         public ActionResult CreateMenu(string userName, int id)
         {
+
             Site site;
             using (var db = new MyDbContext())
             {
@@ -247,8 +252,9 @@ namespace Sitemaker.Controllers
             }
             if (site == null)
                 site = new Site();
-
-            return View("CreateMenu", site);
+            if (User.IsInRole("admin") || User.Identity.GetUserId().Equals(site.CreaterId))
+                return View("CreateMenu", site);
+            return HttpNotFound();
         }
 
         [AllowAnonymous]
@@ -261,7 +267,9 @@ namespace Sitemaker.Controllers
             }
             if (site == null)
                 site = new Site();
-            return View("FillSite", site);
+            if (User.IsInRole("admin") || User.Identity.GetUserId().Equals(site.CreaterId))
+                return View("FillSite", site);
+            return HttpNotFound();
         }
 
         [AllowAnonymous]
@@ -279,12 +287,16 @@ namespace Sitemaker.Controllers
             }
             if (site == null)
                 site = new Site();
-            Page page= pageId != null? site.Pages.FirstOrDefault(s => s.Id == pageId) : null;
-            if (page == null)
-                page = site.Pages.Count > 0 ? site.Pages.FirstOrDefault() : new Page();
-            Session.Add("TemplateId", site.TemplateId);
-            Session.Add("Menu", site.Menu);
-            return View("Site", page);
+            if (User.IsInRole("admin") || User.Identity.GetUserId().Equals(site.CreaterId))
+            {
+                Page page = pageId != null ? site.Pages.FirstOrDefault(s => s.Id == pageId) : null;
+                if (page == null)
+                    page = site.Pages.Count > 0 ? site.Pages.FirstOrDefault() : new Page();
+                Session.Add("TemplateId", site.TemplateId);
+                Session.Add("Menu", site.Menu);
+                return View("Site", page);
+            }
+            return HttpNotFound();
         }
 
         [AllowAnonymous]
@@ -339,6 +351,7 @@ namespace Sitemaker.Controllers
         [HttpPost]
         public void SavePage(Page savePage)
         {
+
             using (MyDbContext db = new MyDbContext())
             {
                 db.Pages.SingleOrDefault(p => p.Id == savePage.Id).HtmlCode = savePage.HtmlCode;
@@ -373,9 +386,13 @@ namespace Sitemaker.Controllers
             using (MyDbContext db = new MyDbContext())
             {
                 site = db.Sites.SingleOrDefault(p => p.Id == id);
-                site.Pablish = true;
-                site.Date = DateTime.Now;
-                db.SaveChanges();
+                if (User.IsInRole("admin") || User.Identity.GetUserId().Equals(site.CreaterId))
+                {
+                    site.Pablish = true;
+                    site.Date = DateTime.Now;
+                    db.SaveChanges();
+                }
+                else return HttpNotFound();
             }
             return RedirectToAction("Index");
         }

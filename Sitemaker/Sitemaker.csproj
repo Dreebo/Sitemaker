@@ -341,6 +341,7 @@
     <Content Include="Content\PageLayout2.css" />
     <Content Include="Content\PageLayout3.css" />
     <Content Include="Content\rating.css" />
+    <Content Include="Content\tags.css" />
     <Content Include="Content\style_gray.css" />
     <Content Include="Content\style_white.css" />
     <Content Include="Content\themes\base\accordion.css" />
