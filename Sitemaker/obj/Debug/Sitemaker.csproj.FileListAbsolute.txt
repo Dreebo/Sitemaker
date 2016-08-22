@@ -127,8 +127,6 @@ D:\itransition\Sitemaker\Sitemaker\obj\Debug\en\Sitemaker.resources.dll
 D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.dll
 D:\itransition\Sitemaker\Sitemaker\obj\Debug\Sitemaker.pdb
 D:\itransition\Sitemaker-admin\Sitemaker\obj\Debug\Sitemaker.csprojResolveAssemblyReference.cache
-D:\itransition\Sitemaker-admin\Sitemaker\obj\Debug\Sitemaker.Migrations.InitialCreate.resources
-D:\itransition\Sitemaker-admin\Sitemaker\obj\Debug\Sitemaker.Migrations.migr.resources
 D:\itransition\Sitemaker-admin\Sitemaker\obj\Debug\Sitemaker.Resources.Resource.resources
 D:\itransition\Sitemaker-admin\Sitemaker\obj\Debug\Sitemaker.Resources.Resource.en.resources
 D:\itransition\Sitemaker-admin\Sitemaker\obj\Debug\Sitemaker.csproj.GenerateResource.Cache

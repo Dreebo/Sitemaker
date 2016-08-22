@@ -5,16 +5,22 @@
     right: 0;
     left: 0;
     overflow: hidden;
+
 }
+
 .square {
     position: relative;
     margin-left: 3.3%;
-    margin-top: 3.3%;
     float: left;
     height: 45%;
     width: 45%;
     overflow: hidden;
     background: transparent;
+        overflow: auto;
+}
+.square .imaga{
+    max-height:100%;
+    max-width:100%;
 }
 .skew1 {
     position: absolute;
@@ -24,6 +30,7 @@
     overflow: hidden;
     -webkit-clip-path: polygon(2% 2%, 98% 2%, 98% 92%, 2% 72%);
     clip-path: polygon(2% 2%, 98% 2%, 98% 92%, 2% 72%);
+        overflow: auto;
 }
 
 .unskew1 {
@@ -31,6 +38,7 @@
     width: 100%;
     -webkit-clip-path: polygon(2% 2%, 98% 2%, 98% 92%, 2% 72%);
     clip-path: polygon(2% 2%, 98% 2%, 98% 92%, 2% 72%);
+        overflow: auto;
 }
 
 .skew2 {
@@ -41,6 +49,7 @@
     overflow: hidden;
     -webkit-clip-path: polygon(2% 8%, 98% 28%, 98% 98%, 2% 98%);
     clip-path: polygon(2% 8%, 98% 28%, 98% 98%, 2% 98%);
+        overflow: auto;
 }
 
 .unskew2 {
@@ -48,12 +57,19 @@
     width: 100%;
     -webkit-clip-path: polygon(2% 8%, 98% 28%, 98% 98%, 2% 98%);
     clip-path: polygon(2% 8%, 98% 28%, 98% 98%, 2% 98%);
+        overflow: auto;
 }
 
 .rectangle {
     position: relative;
     float: left;
     overflow: hidden;
+    width:60%;
+}
+
+.rectangle .imaga{
+    max-height:100%;
+    max-width:100%;
 }
 
 .rect {
@@ -61,6 +77,7 @@
     width: 93.4%;
     margin-left: 3.3%;
     margin-top: 3.3%;
+    overflow: auto;
 }
 
 .rect-vertical {

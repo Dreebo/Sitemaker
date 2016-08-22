@@ -1,0 +1,41 @@
+﻿<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='http://www.goat1000.com/jquery.tagcanvas.min.js'></script>
+
+<div id="myCanvasContainer" style="margin-left: 30%;">
+    <canvas width="500" height="500" id="myCanvas">
+    </canvas>
+</div>
+<div id="tags" style="font-size: 50%; display:none;">
+    @foreach (var tags in ViewBag.Tags)
+    {
+        <a class="cloud" href="@Url.Action("Search", "Sites", new {SearchValue = @tags, tagSearch=true})" style="font-size: 2.83ex">@tags</a>
+    }
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        if (!$('#myCanvas').tagcanvas({
+            //textColour: '#ff0000',
+            outlineColour: '#ff00ff',
+            reverse: true,
+            depth: 0.8,
+            maxSpeed: 0.05,
+            textFont: null,
+            textColour: null,
+            weightMode: 'both',
+            weight: true,
+            weightGradient: {
+           0: '#f00', // red
+            //0.33: '#ff0', // yellow
+            //0.66: '#0f0', // green
+           1: '#00f'  // blue
+        }
+        }, 'tags')) {
+            // something went wrong, hide the canvas container
+            $('#myCanvasContainer').hide();
+        }
+    });
+
+</script>
+

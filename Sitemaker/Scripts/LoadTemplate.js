@@ -21,7 +21,7 @@ function LoadMenuEditor() {
             $("#allbutId").append(data);
             setTimeout(function () {
                 LoadScript();
-            }, 1);
+            }, 20);
         }
     });
 
@@ -53,6 +53,7 @@ function LoadScript() {
                             word = tinyMCE.get("link").getContent();
                             text.empty();
                             text.append(word);
+                            text.addClass(".selected");
                         });
                 }
 
@@ -61,15 +62,14 @@ function LoadScript() {
                     var image = $(this);
                     cloudinary.openUploadWidget(
                         {
-                            cloud_name: 'dgy6x5krf', upload_preset: 'ntblzmxf', 'theme': 'purple',
-                            cropping: 'server'
+                            cloud_name: 'dgy6x5krf', upload_preset: 'ntblzmxf', 'theme': 'purple'
                         }, function (error, result) {
                             //image.Id
                             //launchEditor("uploadImg", result[0].secure_url);
                             image.empty();
-                            image.append("<img  src=\"" + result[0].secure_url + "\" id=\"drImg\"/>");
+                            var contentImage = result[0].secure_url;
+                            $(image).append("<img class=\"imaga\" src=\"" + contentImage + "\"  />");
                             
-                            //var contentImage = result[0].secure_url;
                         }
                         );
 
@@ -84,7 +84,7 @@ function LoadScript() {
                             text: "OK", click: function () {
                                 link = $("#linkvideo").val();
                                 if (link !== null) {
-                                    $(video).append("<iframe width=\"100%\" height=\"100%\" src=\"" + link + "\" frameborder=\"0\" allowfullscreen></iframe>");
+                                    $(video).append("<iframe width=\"100%\" height=\"99%\" src=\"" + link + "\" frameborder=\"0\" allowfullscreen></iframe>");
                                 }
                                 $(this).dialog("close")
                             }
@@ -103,7 +103,7 @@ function SavePage() {
     let position = id.lastIndexOf("/");
     id = id.slice(position + 1);
     //let html = $(".no-js").html();
-    let html = $("#content").html();
+    let html = $("#main-form").html();
     var savePage = {
         Id: id,
         HtmlCode: html

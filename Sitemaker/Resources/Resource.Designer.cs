@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Дабавить.
+        /// </summary>
+        public static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Админ.
         /// </summary>
         public static string Admin {
@@ -70,11 +79,38 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Вернуться к списку.
+        /// </summary>
+        public static string BackToList {
+            get {
+                return ResourceManager.GetString("BackToList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Проголосовало.
+        /// </summary>
+        public static string BaseOn {
+            get {
+                return ResourceManager.GetString("BaseOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Выберите страну.
         /// </summary>
         public static string ChooseLang {
             get {
                 return ResourceManager.GetString("ChooseLang", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Комментарии.
+        /// </summary>
+        public static string Comment {
+            get {
+                return ResourceManager.GetString("Comment", resourceCulture);
             }
         }
         
@@ -106,6 +142,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Создать меню.
+        /// </summary>
+        public static string CreateMenu {
+            get {
+                return ResourceManager.GetString("CreateMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Создать страницу.
+        /// </summary>
+        public static string CreatePage {
+            get {
+                return ResourceManager.GetString("CreatePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Создать сайт.
         /// </summary>
         public static string CreateSite {
@@ -115,11 +169,74 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Описание сайта.
+        /// </summary>
+        public static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Подробнее.
+        /// </summary>
+        public static string Details {
+            get {
+                return ResourceManager.GetString("Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Список пользователей.
         /// </summary>
         public static string IndexHeader {
             get {
                 return ResourceManager.GetString("IndexHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Логотип.
+        /// </summary>
+        public static string Logo {
+            get {
+                return ResourceManager.GetString("Logo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выберите логотип.
+        /// </summary>
+        public static string LogoChoose {
+            get {
+                return ResourceManager.GetString("LogoChoose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выйти.
+        /// </summary>
+        public static string LogOff {
+            get {
+                return ResourceManager.GetString("LogOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Меню.
+        /// </summary>
+        public static string Menu {
+            get {
+                return ResourceManager.GetString("Menu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выберите расположение меню.
+        /// </summary>
+        public static string MenuSelection {
+            get {
+                return ResourceManager.GetString("MenuSelection", resourceCulture);
             }
         }
         
@@ -142,11 +259,119 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Введите имя сайта.
+        /// </summary>
+        public static string NameSite {
+            get {
+                return ResourceManager.GetString("NameSite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Страница.
+        /// </summary>
+        public static string Page {
+            get {
+                return ResourceManager.GetString("Page", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Личный кабинет.
+        /// </summary>
+        public static string PersonalArea {
+            get {
+                return ResourceManager.GetString("PersonalArea", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Опубликовать.
+        /// </summary>
+        public static string Publish {
+            get {
+                return ResourceManager.GetString("Publish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Рейтинг.
+        /// </summary>
+        public static string Raiting {
+            get {
+                return ResourceManager.GetString("Raiting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Рейтинг.
+        /// </summary>
+        public static string Rating {
+            get {
+                return ResourceManager.GetString("Rating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Удалить.
+        /// </summary>
+        public static string Remove {
+            get {
+                return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сохранить.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сохранить меню.
+        /// </summary>
+        public static string SaveMenu {
+            get {
+                return ResourceManager.GetString("SaveMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Поиск.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Мои сайты.
         /// </summary>
         public static string ShowMySite {
             get {
                 return ResourceManager.GetString("ShowMySite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Теги.
+        /// </summary>
+        public static string Tags {
+            get {
+                return ResourceManager.GetString("Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выберите шаблон сайта.
+        /// </summary>
+        public static string ThemeSelection {
+            get {
+                return ResourceManager.GetString("ThemeSelection", resourceCulture);
             }
         }
     }

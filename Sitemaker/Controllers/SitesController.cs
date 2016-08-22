@@ -40,7 +40,9 @@ namespace Sitemaker.Controllers
             }
             LuceneSearch.ClearLuceneIndex();
             LuceneSearch.AddUpdateLuceneIndex(db.Sites.Include("Comments").Include("Tags"));
-            Session["CurrentUserName"] = GetUserName();
+            Session["CurrentUserName"] = GetUserName(User.Identity.GetUserName());
+            Session.Add("Author", false);
+            ViewBag.Tags = tags;
             return View(sites.ToPagedList((page ?? 1), 9));
         }
 
@@ -267,6 +269,7 @@ namespace Sitemaker.Controllers
         [Authorize]
         public ActionResult CreateMenu(string userName, int id)
         {
+
             Site site;
             using (MyDbContext db = new MyDbContext())
             {
@@ -509,7 +512,11 @@ namespace Sitemaker.Controllers
             if (cookie != null)
                 cookie.Value = lang;
             else
-                cookie = new HttpCookie("lang", lang) { HttpOnly = false, Expires = DateTime.Now.AddYears(1) };
+            {
+                cookie = new HttpCookie("lang",lang);
+                cookie.HttpOnly = false;
+                cookie.Expires = DateTime.Now.AddYears(1);
+            }
             Response.Cookies.Add(cookie);
             return Redirect(Request.UrlReferrer.AbsolutePath);
         }
@@ -517,7 +524,7 @@ namespace Sitemaker.Controllers
         [AllowAnonymous]
         public ActionResult SortByDate()
         {
-            Session.Add("sort","date");
+            Session.Add("sort", "date");
             return Redirect(Request.UrlReferrer.AbsolutePath);
         }
 
@@ -540,7 +547,7 @@ namespace Sitemaker.Controllers
                     Site site = db.Sites.Include(s => s.Comments)
                             .Include(m => m.Pages).Include(n => n.Ratings)
                             .FirstOrDefault(p => p.Id == x.Id && p.Pablish);
-                    if (site != null)
+                    if(site!=null)
                         resultSearch.Add(site);
                 }
             }
