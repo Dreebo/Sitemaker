@@ -37,12 +37,9 @@ namespace Sitemaker.Models
 
         public string GetSubDescription()
         {
-            if(About.Length>100)
-                return About.Substring(0, 100);
-            else
-            {
+            if(About.Length>50)
+                return About.Substring(0, 50);
                 return About;
-            }
         }
     }
 }

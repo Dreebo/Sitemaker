@@ -5,12 +5,38 @@
 
 <h2>ShowMySite</h2>
 
+<link href="~/Content/rating.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(document)
+        .ready(function() {
+            $(".stars")
+                .each(function(i, mainelement) {
+                    let id = $(mainelement.children).attr("id");
+                    let averageRating = +(id);
+                    let label = $(mainelement.children).children();
+                    $(label)
+                        .each(function(i, element) {
+                            if (mainelement.children.form == element.parentElment) {
+                                if (i / 2 < +(averageRating)) $(element).addClass("selected")
+                                else return false;
+                            }
+                        });
+                    if (+(averageRating) == 5) $(label).addClass("max");
+                });
+        });
+</script>
 
 
 <table class="table">
     <tr>
         <th>
             @Resources.Resource.Name
+        </th>
+        <th>
+            @Resources.Resource.Raiting
+        </th>
+        <th>
+            @Resources.Resource.Comment
         </th>
         <th>
             @Resources.Resource.Description
@@ -21,10 +47,34 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                <a href="@Url.Action("Site", "Sites", new {userName = item.UserName, id = item.Id, indicator = true})">
+                    <h3>@item.Name</h3>
+                </a>
             </td>
             <td>
-                @item.GetSubDescription()
+                <div class="stars" id="@item.Id" style="left: 100px">
+                    <div class="rating" style="display: none" id="@item.AverageRating"></div>
+                    <form action="" class="formstars">
+                        <input class="star star-1" id="1" type="radio" name="star" />
+                        <label class="star star-1" for="1"></label>
+                        <input class="star star-2" id="2" type="radio" name="star" />
+                        <label class="star star-2" for="2"></label>
+                        <input class="star star-3" id="3" type="radio" name="star" />
+                        <label class="star star-3" for="3"></label>
+                        <input class="star star-4" id="4" type="radio" name="star" />
+                        <label class="star star-4" for="4"></label>
+                        <input class="star star-5" id="5" type="radio" name="star" />
+                        <label class="star star-5" for="5"></label>
+                    </form>
+                </div>
+            </td>
+            <td>
+                <a href="@Url.Action("Comments", "Sites", new {userName = (string) Session["CurrentUserName"], id = item.Id})" class="btn btn-default">
+                    <h4>Comments</h4>
+                </a>
+            </td>
+            <td>
+                <h3>@item.GetSubDescription()</h3>
             </td>
             <td>
 
