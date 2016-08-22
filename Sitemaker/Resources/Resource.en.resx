@@ -117,11 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
   <data name="Admin" xml:space="preserve">
     <value>Admin</value>
   </data>
+  <data name="BackToList" xml:space="preserve">
+    <value>Back to list</value>
+  </data>
+  <data name="BaseOn" xml:space="preserve">
+    <value>Base on</value>
+  </data>
   <data name="ChooseLang" xml:space="preserve">
     <value>Choose the Language</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comment</value>
   </data>
   <data name="Country" xml:space="preserve">
     <value>Country</value>
@@ -132,11 +144,38 @@
   <data name="CreateLink" xml:space="preserve">
     <value>Add new user</value>
   </data>
+  <data name="CreateMenu" xml:space="preserve">
+    <value>Create menu</value>
+  </data>
+  <data name="CreatePage" xml:space="preserve">
+    <value>Create page</value>
+  </data>
   <data name="CreateSite" xml:space="preserve">
     <value>Create Site</value>
   </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description of the site</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
   <data name="IndexHeader" xml:space="preserve">
     <value>UserList</value>
+  </data>
+  <data name="Logo" xml:space="preserve">
+    <value>Logo</value>
+  </data>
+  <data name="LogoChoose" xml:space="preserve">
+    <value>Choose logo</value>
+  </data>
+  <data name="LogOff" xml:space="preserve">
+    <value>Log off</value>
+  </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="MenuSelection" xml:space="preserve">
+    <value>Select location menu</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
@@ -144,7 +183,43 @@
   <data name="NameRequired" xml:space="preserve">
     <value>The field "Name" must be filled</value>
   </data>
+  <data name="NameSite" xml:space="preserve">
+    <value>Enter the name of the site</value>
+  </data>
+  <data name="Page" xml:space="preserve">
+    <value>Page</value>
+  </data>
+  <data name="PersonalArea" xml:space="preserve">
+    <value>Personal Area</value>
+  </data>
+  <data name="Publish" xml:space="preserve">
+    <value>Publish</value>
+  </data>
+  <data name="Raiting" xml:space="preserve">
+    <value>Raiting</value>
+  </data>
+  <data name="Rating" xml:space="preserve">
+    <value>Rating</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SaveMenu" xml:space="preserve">
+    <value>Save menu</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
   <data name="ShowMySite" xml:space="preserve">
     <value>My sites</value>
+  </data>
+  <data name="Tags" xml:space="preserve">
+    <value>Tags</value>
+  </data>
+  <data name="ThemeSelection" xml:space="preserve">
+    <value>Choose Template</value>
   </data>
 </root>

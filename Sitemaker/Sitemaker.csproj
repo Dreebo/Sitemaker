@@ -104,7 +104,7 @@
       <HintPath>..\packages\Knoema.Localization.Mvc.0.1.88\lib\net45\Knoema.Localization.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lucene.Net">
+    <Reference Include="Lucene.Net, Version=3.0.3.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
       <HintPath>..\packages\Lucene.Net.3.0.3\lib\NET40\Lucene.Net.dll</HintPath>
       <Private>True</Private>
     </Reference>
@@ -275,7 +275,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="HtmlHelperGravatar.cs" />
     <Compile Include="LuceneSearch.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -308,6 +307,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Comment.css" />
+    <Content Include="Content\daynght.css" />
     <Content Include="Content\DropDownMenu.css" />
     <Content Include="Content\Images\backgroundcell.jpg" />
     <Content Include="Content\Images\bg-dark.jpg" />
@@ -341,8 +341,11 @@
     <Content Include="Content\PageLayout2.css" />
     <Content Include="Content\PageLayout3.css" />
     <Content Include="Content\rating.css" />
+    <Content Include="Content\Card.css" />
+    <Content Include="Content\tags.css" />
     <Content Include="Content\style_gray.css" />
     <Content Include="Content\style_white.css" />
+    <Content Include="Content\TagsLink.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -427,6 +430,7 @@
     <Content Include="img\zoom.png" />
     <Content Include="img\video.png" />
     <Content Include="Scripts\AddComment.js" />
+    <Content Include="Scripts\AddRaitingOnComment.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -435,6 +439,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="img\.DS_Store" />
+    <Content Include="lucene_index\segments.gen" />
+    <Content Include="lucene_index\segments_141" />
+    <Content Include="lucene_index\segments_14h" />
+    <Content Include="lucene_index\_la.cfs" />
+    <Content Include="lucene_index\_li.cfs" />
+    <Content Include="lucene_index\_mw.cfs" />
+    <Content Include="lucene_index\_nc.cfs" />
+    <Content Include="lucene_index\segments_179" />
+    <Content Include="lucene_index\segments_185" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ChangePhoto.js" />
     <Content Include="Scripts\CreateSlideShow.js" />
@@ -447,6 +460,8 @@
     <Content Include="Scripts\dropzone\dropzone.min.css" />
     <Content Include="Scripts\dropzone\dropzone.min.js" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
+    <Content Include="Scripts\indexxxx.js" />
+    <Content Include="Scripts\RaitingOnCard.js" />
     <Content Include="Scripts\jquery-3.1.0.js" />
     <Content Include="Scripts\jquery-3.1.0.min.js" />
     <Content Include="Scripts\jquery-3.1.0.slim.js" />
@@ -469,10 +484,13 @@
     <Content Include="Scripts\locationContent.js" />
     <Content Include="Scripts\MenuDroppable.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\prefixfree.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -518,35 +536,26 @@
     <Content Include="Views\Shared\template\template6.cshtml" />
     <Content Include="Views\Shared\template\template7.cshtml" />
     <Content Include="Views\Shared\template\MenuEditor.cshtml" />
-    <Content Include="Views\Sites\Create.cshtml" />
     <Content Include="Views\Sites\Delete.cshtml" />
     <Content Include="Views\Sites\Details.cshtml" />
-    <Content Include="Views\Sites\Edit.cshtml" />
     <Content Include="Views\Sites\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Sites\Page.cshtml" />
     <Content Include="Views\Sites\ShowMySite.cshtml" />
-    <Content Include="Views\Sites\OpenSite.cshtml" />
     <Content Include="Views\Sites\ShowUser.cshtml" />
     <Content Include="Views\Sites\Comments.cshtml" />
-    <Content Include="Views\Sites\CreateMenu.cshtml" />
     <Content Include="Views\Sites\FillSite.cshtml" />
     <Content Include="Views\Sites\PageView.cshtml" />
     <Content Include="Views\Shared\Menu.cshtml" />
     <Content Include="Views\Sites\Site.cshtml" />
-    <Content Include="Views\Sites\CreateMenu.cshtml" />
-    <Content Include="Views\Sites\FillSite.cshtml" />
-    <Content Include="Views\Sites\PageView.cshtml" />
-    <Content Include="Views\Sites\Search.cshtml" />
     <Content Include="Views\Sites\_TableSearch.cshtml" />
     <Content Include="Views\Sites\TableSearch.cshtml" />
-    <Content Include="Views\Sites\ChangePhoto.cshtml" />
     <Content Include="Views\Admin\Users.cshtml" />
+    <Content Include="Views\Sites\CreateMenu.cshtml" />
+    <Content Include="Views\Sites\_CloudTags.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Image\" />
-    <Folder Include="lucene_index\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

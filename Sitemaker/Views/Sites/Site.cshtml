@@ -1,91 +1,172 @@
 ﻿@model Sitemaker.Models.Page
 @using Sitemaker.Models
+@{
+    Layout = null;
+    var Menu = (Menu)Session["Menu"];
+    var TemplateId = (int)Session["TemplateId"];
+    var Author = (bool)Session["Author"];
+}
+@if (Author != true)
+{
+    @Styles.Render("~/Content/PageLayout");
+}
+@Scripts.Render("~/bundles/loadTemplate")
+@{ if ((int)Session["TemplateId"] == 1)
+    { @Styles.Render("~/Content/StyleGray")}
+    else
+    { @Styles.Render("~/Content/StyleWhight")}
+}
 
-    @{
-        Layout = null;
-        var Menu =(Menu) Session["Menu"];
-        var TemplateId = (int) Session["TemplateId"];
+@Scripts.Render("~/bundles/locationContent")
+@Styles.Render("~/Content/Layout")
+@Scripts.Render("~/scripts/jquery-3.1.0.js")
 
-    }
 <!DOCTYPE html>
-<html>
+<html class="no-js" id="mainPage" lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @{ if (TemplateId == 1)
-            { @Styles.Render("~/Content/StyleGray")}
-        else
-        { @Styles.Render("~/Content/StyleWhight")}
-    }
 
-    <link href="~/Content/PageLayout.css" rel="stylesheet" />
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/dropzone")
-    @Styles.Render("~/Content/Layout")
-
-</head>
-<body>
-    @if (Menu.IsTopBarExicist)
-    {
-        <div class="container">
-            <header id="navtop">
-
-                <nav class="fright">
-                    <ul>
-                        @foreach (var item in Menu.TopBar)
-                        {
-                            <li><a href="@item.Link" class="navactive">@item.Name</a></li>
-                        }
-                    </ul>
-                </nav>
-            </header>
-        </div>
-    }
-
-    <div class="home-page main">
-        <hr>
-        @if (Menu.IsSideBarExicist)
-        {
-            <aside class="grid col-one-quarter mq2-col-full">
-                <menu>
-                    <p class="fleft">
-                        <h3>Menu</h3>
-                    </p>
-                    <ul>
-                        @foreach (var item in Menu.SideBar)
-                        {
-                            <li><a href="@item.Link">@item.Name</a></li>
-                        }
-                    </ul>
-                </menu>
-            </aside>
+    <style>
+        .input-formName, .input-formLink, .input-formNameSide, .input-formLinkSide {
+            height: 2em;
+            width: 7em;
         }
 
-        <section class="grid-wrap">
-            @if (Model.HtmlCode != null)
-            {
-                @Html.Raw(Model.HtmlCode)
+        .inputs ul {
+            padding: 4px;
+            margin: 3px;
+        }
+
+            .inputs ul li {
+                padding: 2px;
+                margin: 0;
             }
-            @*@{
-                var pageN = Session["pageId"];
-                if (pageN != null)
-                {
-                    var page = Model.Pages.Where(p => p.Id == (int) pageN).FirstOrDefault();
-                    if (page.HtmlCode != null)
-                    {
-                        Html.Raw(page.HtmlCode);
-                    }
-                }
-            }*@
+            .iamaga{
+                width: 10px;
+                height:10px;
+            }
+    </style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Sitemaker</title>
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+    <script src='https://cdn.tinymce.com/4/tinymce.min.js'></script>
+    <link rel="stylesheet" href="css/style.css">
+
+    <script type="text/javascript" src="http://feather.aviary.com/imaging/v3/editor.js"></script>
+    <script type='text/javascript'>
+        var featherEditor = new Aviary.Feather({
+            apiKey: '1234567',
+            onSave: function (imageID, newURL) {
+                image.src = newURL;
+            }
+        });
+
+        function launchEditor(image, src) {
+            featherEditor.launch({
+                imageID: image,
+                newURL: src
+            });
+            return false;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        @if (Menu.IsTopBarExicist)
+            {
+            <div>
+                <header id="navtop">
+                    <nav class="fright">
+                        <ul>
+                            @foreach (var item in Menu.TopBar)
+                            {
+                                <li><a href="@item.Link" class="navactive">@item.Name</a></li>
+                            }
+                        </ul>
+                    </nav>
+                </header>
+            </div>
+        }
+        <div class="home-page main">
+            <hr>
+            @if (Menu.IsSideBarExicist)
+            {
+                <aside class="grid col-one-quarter mq2-col-full">
+                    <menu>
+                        <p class="fleft">
+                            <h3>@Resources.Resource.Menu</h3>
+                        </p>
+                        <ul>
+                            @foreach (var item in Menu.SideBar)
+                            {
+                                <li><a href="@item.Link">@item.Name</a></li>
+                            }
+                        </ul>
+                    </menu>
+                </aside>
+            }
+            <div class="home-page main" id="content">
+                <section class="grid-wrap">
+                    <div class="wrapper">
+                        <div class="main-form center-block prokrutka" id="main-form">
+                            @if (Model.HtmlCode != null)
+                            {
+                                @Html.Raw(Model.HtmlCode)
+                            }
+                        </div>
+                    </div>
+                    <div class="allbut " id="allbutId">
+
+                    </div>
+                    <div id="dialog" class="dialog" style="display: none">
+                        <input type="text" class="mytext" />
+                    </div>
+                    <div id="inputtext" style="display: none">
+                        <div id="text" style="border: solid; height: 50px" class="content">
+                            <textarea type="text" id="link" class="form-control" rows="5"></textarea>
+                            <input type="button" class="mytext" id="textinput" />
+                        </div>
+                    </div>
+                    <div id="inputphoto" style="display: none">
+                        <div id="photo" style="border: solid; height: 50px" class="content">
+                            <input type="file" name="upload" id="uploadFiles" />
+                        </div>
+                    </div>
+                    <div id="inputvideo" style="display: none">
+                        <div id="linkall" style="border: solid; height: 50px" class="content">
+                            <input type="text" class="mytext" id="linkvideo" />
+                        </div>
+                    </div>
+
+                </section>
+                <hr>
+            </div>
+
+        </div>
+
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+    <script src="//widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.7.2.min.js"><\/script>')</script>
+    <script src="js/jquery.flexslider-min.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="//widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+    <script>
+  var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+                g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+                s.parentNode.insertBefore(g,s)}(document,'script'));
+    </script>
+    <script type="text/javascript">
+            $(document).ready(function() {
+                LoadMenuEditor();
+            });
 
 
-        </section>
-</div>
-
-
-        
+    </script>
 </body>
 </html>

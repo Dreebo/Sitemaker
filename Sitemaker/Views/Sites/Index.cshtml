@@ -6,9 +6,18 @@
 }
 
 <div id="updatetarget">
+
+    @Html.Partial("_CloudTags")
     @{ Html.RenderPartial("TableSearch", Model);}
 </div>
-Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
+@Resources.Resource.Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+
+
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+
+   
+

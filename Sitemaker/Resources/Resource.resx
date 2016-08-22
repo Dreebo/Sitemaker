@@ -117,11 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Дабавить</value>
+  </data>
   <data name="Admin" xml:space="preserve">
     <value>Админ</value>
   </data>
+  <data name="BackToList" xml:space="preserve">
+    <value>Вернуться к списку</value>
+  </data>
+  <data name="BaseOn" xml:space="preserve">
+    <value>Проголосовало</value>
+  </data>
   <data name="ChooseLang" xml:space="preserve">
     <value>Выберите страну</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Комментарии</value>
   </data>
   <data name="Country" xml:space="preserve">
     <value>Страна</value>
@@ -132,11 +144,38 @@
   <data name="CreateLink" xml:space="preserve">
     <value>Добавить нового пользователя</value>
   </data>
+  <data name="CreateMenu" xml:space="preserve">
+    <value>Создать меню</value>
+  </data>
+  <data name="CreatePage" xml:space="preserve">
+    <value>Создать страницу</value>
+  </data>
   <data name="CreateSite" xml:space="preserve">
     <value>Создать сайт</value>
   </data>
+  <data name="Description" xml:space="preserve">
+    <value>Описание сайта</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Подробнее</value>
+  </data>
   <data name="IndexHeader" xml:space="preserve">
     <value>Список пользователей</value>
+  </data>
+  <data name="Logo" xml:space="preserve">
+    <value>Логотип</value>
+  </data>
+  <data name="LogoChoose" xml:space="preserve">
+    <value>Выберите логотип</value>
+  </data>
+  <data name="LogOff" xml:space="preserve">
+    <value>Выйти</value>
+  </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Меню</value>
+  </data>
+  <data name="MenuSelection" xml:space="preserve">
+    <value>Выберите расположение меню</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Имя</value>
@@ -144,7 +183,43 @@
   <data name="NameRequired" xml:space="preserve">
     <value>Поле "Имя" должно быть заполнено </value>
   </data>
+  <data name="NameSite" xml:space="preserve">
+    <value>Введите имя сайта</value>
+  </data>
+  <data name="Page" xml:space="preserve">
+    <value>Страница</value>
+  </data>
+  <data name="PersonalArea" xml:space="preserve">
+    <value>Личный кабинет</value>
+  </data>
+  <data name="Publish" xml:space="preserve">
+    <value>Опубликовать</value>
+  </data>
+  <data name="Raiting" xml:space="preserve">
+    <value>Рейтинг</value>
+  </data>
+  <data name="Rating" xml:space="preserve">
+    <value>Рейтинг</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="SaveMenu" xml:space="preserve">
+    <value>Сохранить меню</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Поиск</value>
+  </data>
   <data name="ShowMySite" xml:space="preserve">
     <value>Мои сайты</value>
+  </data>
+  <data name="Tags" xml:space="preserve">
+    <value>Теги</value>
+  </data>
+  <data name="ThemeSelection" xml:space="preserve">
+    <value>Выберите шаблон сайта</value>
   </data>
 </root>

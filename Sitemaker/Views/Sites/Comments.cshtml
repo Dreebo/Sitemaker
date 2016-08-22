@@ -16,118 +16,13 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
-<style type='text/css'>
-    #signature {
-        padding-top: 20%;
-    }
-</style>
 
-<script type="text/javascript">
-    $(function () {
-        $(document).ready(function () {
-            let averageRating = +($(".AverageRating").text());
-            $(".star").each(function (i, element) {
-                if (i / 2 <= +(averageRating)) $(element).addClass("selected")
-                else return false;
-            });
-            if (+(averageRating) == 5) $(".star").addClass("max");
-            if (+(averageRating) == 1) $(".star-1").addClass("min");
-        });
-        let id = window.location.href;
-        let position = id.lastIndexOf("/");
-        id = id.slice(position + 1);
-        $(".stars label").click(function () { 
-            $(".star").removeClass("selected");
-            $(".star").removeClass("max");
-            $(".star").removeClass("min");
-            let model = {
-                Id: id, 
-                rating: null
-            }
-            let elem = $(this).attr("class");
-            $(".star").each(function (i, element) {
-                if (element.className == elem) {
-                    model.rating = element.id;
-                    return false;
-                }
-                $(element).addClass("selected")               
-            });
-            if (elem == "star star-1") { $(this).addClass("min") }
-            $(this).addClass("selected");
-            if (elem == "star star-5") { $(".star").addClass("max") }
 
-            $.ajax({
-                type: 'POST',
-                url: "/Sites/AddRating",
-                dataType: 'text',
-                data: model,
-                success: function (data) {
-                    window.location.replace(window.location.href);
-                }
-            });
-            
-        });
-    });
-</script>
+<script src="~/Scripts/AddRaitingOnComment.js"></script>
 
-<style>
-    .tags {
-  list-style: none;
-  margin: 0;
-  overflow: hidden; 
-  padding: 0;
-}
 
-.tags li {
-  float: left; 
-}
+<link href="~/Content/TagsLink.css" rel="stylesheet" />
 
-.tag {
-  background: #eee;
-  border-radius: 3px 0 0 3px;
-  color: #999;
-  display: inline-block;
-  height: 26px;
-  line-height: 26px;
-  padding: 0 20px 0 23px;
-  position: relative;
-  margin: 0 10px 10px 0;
-  text-decoration: none;
-  -webkit-transition: color 0.2s;
-}
-
-.tag::before {
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
-  content: '';
-  height: 6px;
-  left: 10px;
-  position: absolute;
-  width: 6px;
-  top: 10px;
-}
-
-.tag::after {
-  background: #fff;
-  border-bottom: 13px solid transparent;
-  border-left: 10px solid #eee;
-  border-top: 13px solid transparent;
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 0;
-}
-
-.tag:hover {
-  background-color: crimson;
-  color: white;
-}
-
-.tag:hover::after {
-   border-left-color: crimson; 
-}
-</style>
 @{
     JavaScriptSerializer jss = new JavaScriptSerializer();
     string output = jss.Serialize(Model.Tags.Select(x => x.Name));
@@ -169,8 +64,8 @@
                     </ul>
                 </p>
                     <ul itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
-                        <li >Rating:<strong class="AverageRating" itemprop="average">@Model.AverageRating</strong></li>
-                        <li>based on: <strong itemprop="count">@Model.RatingCount</strong> reviews</li>
+                        <li >@Resources.Resource.Rating:<strong class="AverageRating" itemprop="average">@Model.AverageRating</strong></li>
+                        <li>@Resources.Resource.BaseOn: <strong itemprop="count">@Model.RatingCount</strong> reviews</li>
                     </ul>
             </td>
             <td>
@@ -180,17 +75,20 @@
 </table>
 </div>
 
-<body>
+@if (User.Identity.IsAuthenticated)
+{
+    <body>
     <div class="container">
         <form role="form">
             <div class="form-group">
-                <label for="comment">Comment:</label>
-                <textarea class="form-control"  rows="5" id="comment"></textarea>
-                <input type="button" id="addComment" class="btn btn-primary" value="Add">
+                <label for="comment">@Resources.Resource.Comment:</label>
+                <textarea class="form-control" rows="5" id="comment"></textarea>
+                <input type="button" id="addComment" class="btn btn-primary" value="@Resources.Resource.Add">
             </div>
         </form>
     </div>
-</body>
+    </body>
+}
 
 
 <section class="messages">

@@ -3,31 +3,20 @@
     ViewBag.Title = "Details";
 }
 <h2>Details</h2>
+
 @Styles.Render("~/Content/ImagePreview")
 <div>
     <dl class="dl-horizontal row">
         <div class="col-md-4">
-            <p>Name :</p>
+            <p>@Resources.Resource.Name :</p>
             <input class="form-control" type="text" id="Name" value=@Model.Name />
             <p></p>
-            <p>Description :</p>
+            <p>@Resources.Resource.Description :</p>
             <textarea class="form-control" id="Textarea" rows="5">@Model.About </textarea>
         </div>
 
-        @*<dt>
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.About)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.About)
-            </dd>*@
         <div class="col-md-offset-4">
-            <p>Logo :</p>
+            <p>@Resources.Resource.Logo :</p>
             <div class="input-file-row-1">
 
                 <div class="upload-file-container">
@@ -46,11 +35,9 @@
     <a href="@Url.Action("Site", "Sites", new {userName = Model.UserName, id = Model.Id, pageId = @x.Id })" class="btn btn-primary">@x.Id</a>
 }
 
-<p><input id="save" type="button" class="btn btn-success col-md-offset-4" value="Сохранить" /> </p>
+<p><input id="save" type="button" class="btn btn-success col-md-offset-4" value="@Resources.Resource.Save" /> </p>
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { userName = (string)Session["CurrentUserName"], id = Model.Id }) |
-    @Html.ActionLink("Back to List", "ShowMySite")
 </p>
 
 <script>

@@ -10,10 +10,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Resources.Resource.Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.About)
+            @Resources.Resource.Description
         </th>
         <th></th>
     </tr>
@@ -28,12 +28,12 @@
             </td>
             <td>
 
-                <a href="@Url.Action("Details", "Sites", new {userName = (string) Session["CurrentUserName"], id = item.Id})" class="btn btn-default">Details</a>
-                <a href="@Url.Action("Delete", "Sites", new {userName = (string) Session["CurrentUserName"], id = item.Id})" class="btn btn-default">Delete</a>
+                <a href="@Url.Action("Details", "Sites", new {userName = (string) Session["CurrentUserName"], id = item.Id})" class="btn btn-default">@Resources.Resource.Details</a>
+                <a href="@Url.Action("Delete", "Sites", new {userName = (string) Session["CurrentUserName"], id = item.Id})" class="btn btn-default">@Resources.Resource.Remove</a>
                 
                 @if (!item.Pablish)
                 {
-                    <a href="@Url.Action("PublishSite", "Sites", new { userName = (string)Session["CurrentUserName"], id = item.Id })" class="btn btn-default">Publish</a>
+                    <a href="@Url.Action("PublishSite", "Sites", new { userName = (string)Session["CurrentUserName"], id = item.Id })" class="btn btn-default">@Resources.Resource.Publish</a>
                 
                 }
             </td>

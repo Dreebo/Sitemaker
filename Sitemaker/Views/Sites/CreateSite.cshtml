@@ -124,6 +124,9 @@ h2,h3 {
         height: 50px;
         background-color: rgb(30,30,30);
     }
+    .input-file-row-1{
+        left: 250px;
+    }
 
             .thumb img.selected {
                 opacity: 1;
@@ -141,9 +144,10 @@ h2,h3 {
 <script src="~/Scripts/jquery.tag-editor.min.js"></script>
 @Scripts.Render("~/bundles/createSlideShow")
 
+
 <div id="theme-wrapper">
     <div class="wrapper">
-        <h2>Для начала выберите тему вашего будущего сайта</h2>
+        <h2>@Resources.Resource.ThemeSelection</h2>
         <p>То, как будет выглядить ваш сайт, зависит от одного клика</p>
         <div class="img-wrapper">
             <div class="thumb">
@@ -151,10 +155,11 @@ h2,h3 {
                 <img class="theme-img" align="left" id="2" alt="Тема" src="http://res.cloudinary.com/dgy6x5krf/image/upload/v1469968200/gtaLFel2tl4_j7nugp.jpg" />
             </div>
        </div>
-        <div class="img-wrapper"><p></p>
-<br />
-<p><h2>Выберите тему меню</h2><p>
-<p>Бла бла бла бла бла бла</p></div>
+        </div>
+        <div class="wrapper">
+            <p><h2>@Resources.Resource.MenuSelection</h2><p>
+            <p>Бла бла бла бла бла бла</p>
+        
         
         <div class="img-wrapper">
             <div class="thumbMenu">
@@ -167,15 +172,15 @@ h2,h3 {
 
 <div id="description-wrapper">
     <div class="wrapper">
-        <h2>Придумайте название для сайта</h2>
+        <h2>@Resources.Resource.NameSite</h2>
         <p>Придумайте короткое и легко запоминающееся название</p>
         <input type="text" class="name"  id="Name" value=@Model.Name>
         <div class="line"></div>
-        <h2>Добавьте описание</h2>
+        <h2>@Resources.Resource.Description</h2>
         <p class="com">Опишите свой сайт</p>
         <textarea class="name" id="Textarea" rows="5">@Model.About </textarea>
         <div class="line"></div>
-        <h2>Добавьте теги</h2>
+        <h2>@Resources.Resource.Tags</h2>
         <p class="com">Добавьте ключевые слова, вкратце описывающие ваш сайт</p>
         <div class="com" style="margin-top: 10px"><label>Tags</label><br /><textarea id="tags"></textarea></div>
     </div>
@@ -183,7 +188,7 @@ h2,h3 {
 
 <div id="logo-wrapper">
     <div class="wrapper">
-        <h2>И осталось добавить логотип</h2>
+        <h2>@Resources.Resource.LogoChoose</h2>
         <fieldset>
             <div class="input-file-row-1">
                 <div class="upload-file-container">
@@ -197,7 +202,7 @@ h2,h3 {
         </fieldset>
     </div>
 </div>
-<input id="save" type="button" class="btn btn-success" value="Сохранить" />
+<input id="save" type="button" class="btn btn-success" value="@Resources.Resource.Save" />
 
 
 <script>
@@ -235,3 +240,4 @@ h2,h3 {
         readURL(this);
     });
 </script>
+

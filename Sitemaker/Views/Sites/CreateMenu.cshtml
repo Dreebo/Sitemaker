@@ -36,9 +36,13 @@
                 padding: 2px;
                 margin: 0;
             }
-            iframe {
-    zoom:20%; width:60%; height:60%;border: solid;
-}
+
+        iframe {
+            zoom: 20%;
+            width: 60%;
+            height: 60%;
+            border: solid;
+        }
     </style>
 
     <script>
@@ -93,7 +97,7 @@ $(document).ready(function() {
 
     // here's our click function for when the forms submitted
 
-	
+
 
 	$('#saveMenu').click(function () {
 
@@ -132,15 +136,15 @@ $(document).ready(function() {
 	        });
 	        //sideBar.set(namesSide[k], linksSide[k]);
 	    }
-	    
-	    
+
+
 	    var saveMenu = JSON.stringify({
 	        'Id': @Model.Menu.Id,
 	        'TopBar': topBar,
 	        'SideBar': sideBar
 	    });
 
-        
+
 	    $.ajax({
 	        type: 'POST',
 	        url: "/Sites/SaveMenu",
@@ -154,10 +158,10 @@ $(document).ready(function() {
 	        fail: function () {
 	            alert(data);
 	        }
-	        
+
 	    });
 
-	    
+
 	});
 
 });
@@ -189,7 +193,7 @@ $(document).ready(function() {
                 <nav class="fright" id="navtop-block">
 
                     <div class="fright" style="margin: 2em; background: 0;">
-                        <a id="add" class="button">Добавить</a> | <a id="remove" class="button">Удалить</a>
+                        <a id="add" class="button">@Resources.Resource.Add</a> | <a id="remove" class="button">@Resources.Resource.Remove</a>
                     </div>
 
                     <form id="topBarForm">
@@ -197,14 +201,14 @@ $(document).ready(function() {
 
                             <div style="display: block; width: 100%;" class="inputs">
 
-                                @foreach(var item in Model.Menu.TopBar)
+                                @foreach (var item in Model.Menu.TopBar)
                                 {
-                                <div style="display: inline" class="field">
-                                    <ul>
-                                        <li style="display: block;"><input type="text" id="Name" class="input-formName" placeholder="Name" value=@item.Name></li>
-                                        <li style="display: block;"><input type="text" id="Link" class="input-formLink" placeholder="Link" value=@item.Link></li>
-                                    </ul>
-                                </div>
+                                    <div style="display: inline" class="field">
+                                        <ul>
+                                            <li style="display: block;"><input type="text" id="Name" class="input-formName" placeholder="Name" value=@item.Name></li>
+                                            <li style="display: block;"><input type="text" id="Link" class="input-formLink" placeholder="Link" value=@item.Link></li>
+                                        </ul>
+                                    </div>
                                 }
 
                             </div>
@@ -225,14 +229,15 @@ $(document).ready(function() {
                     <div class="grid-wrap">
                         <menu id="navside-block">
                             <p class="fleft">
-                                <h3>Menu</h3>
+                                <h3>@Resources.Resource.Menu</h3>
                             </p>
 
                             <div class="fleft" style="height: 9em; background: 0;">
-                                <p><a id="addSide" class="button">Добавить</a>
+                                <p>
+                                    <a id="addSide" class="button">@Resources.Resource.Add</a>
                                 </p>
                                 <p></p>
-                                <p><a id="removeSide" class="button">Удалить</a></p>
+                                <p><a id="removeSide" class="button">@Resources.Resource.Remove</a></p>
                             </div>
 
                             <form id="sideBarForm">
@@ -258,26 +263,26 @@ $(document).ready(function() {
                     </div>
                 </aside>
             }
-            
-@foreach (var page in Model.Pages)
-{
-    <section class="grid-wrap">
-        <div class="grid-wrap">
 
-            <input type="text" style="border: none;" value="@Url.Action("Site", "Sites", new {userName = Model.UserName, id = Model.Id, pageId = @page.Id})" />
-            <iframe src="@Url.Action("PageView", "Sites", new {userName = Model.UserName, id = Model.Id, pageId = @page.Id})"> </iframe>
-            
+            @foreach (var page in Model.Pages)
+            {
+                <section class="grid-wrap">
+                    <div class="grid-wrap">
 
-        </div>
-    </section>
-}
-                <div class="grid-wrap" style="align-content: center">
-                    <a id="saveMenu" class="button">Save menu</a>
-                </div>
-            
+                        <input type="text" style="border: none;" value="@Url.Action("Site", "Sites", new {userName = Model.UserName, id = Model.Id, pageId = @page.Id})" />
+                        <iframe src="@Url.Action("PageView", "Sites", new {userName = Model.UserName, id = Model.Id, pageId = @page.Id})"> </iframe>
+
+
+                    </div>
+                </section>
+            }
+            <div class="grid-wrap" style="align-content: center">
+                <a id="saveMenu" class="button">@Resources.Resource.SaveMenu</a>
+            </div>
+
 
         </div> <!--main-->
-        
+
     </div>
     <!-- Javascript - jQuery -->
     <script src="http://code.jquery.com/jquery.min.js"></script>
@@ -300,9 +305,3 @@ $(document).ready(function() {
     </script>
 </body>
 </html>
-
-
-
-
-
-

@@ -96,8 +96,8 @@
         <div class="line"></div>
         <p class="text"> @Model.About</p>
         <div class="but-wr">
-            <a  href="@Url.Action("LoadPage", "Sites", new {userName = Model.UserName, id = Model.Id})" class="but btn btn-primary">Create Page</a>
-            <a href="@Url.Action("CreateMenu", "Sites", new {userName = Model.UserName, id = Model.Id})" class="but btn btn-primary">Create Menu</a>
+            <a  href="@Url.Action("LoadPage", "Sites", new {userName = Model.UserName, id = Model.Id})" class="but btn btn-primary">@Resources.Resource.CreatePage</a>
+            <a href="@Url.Action("CreateMenu", "Sites", new {userName = Model.UserName, id = Model.Id})" class="but btn btn-primary">@Resources.Resource.CreateMenu</a>
         </div>
     </div>
 </div>
