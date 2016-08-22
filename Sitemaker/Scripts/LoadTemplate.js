@@ -64,12 +64,12 @@ function LoadScript() {
                             cloud_name: 'dgy6x5krf', upload_preset: 'ntblzmxf', 'theme': 'purple',
                             cropping: 'server'
                         }, function (error, result) {
-                            launchEditor(1, result[0].secure_url);
                             //image.Id
+                            //launchEditor("uploadImg", result[0].secure_url);
                             image.empty();
-                            image.append("<img  src=\"" + result[0].secure_url + "\"/>");
-
-                            var contentImage = result[0].secure_url;
+                            image.append("<img  src=\"" + result[0].secure_url + "\" id=\"drImg\"/>");
+                            
+                            //var contentImage = result[0].secure_url;
                         }
                         );
 

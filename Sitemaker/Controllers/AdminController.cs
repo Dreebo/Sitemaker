@@ -21,14 +21,8 @@ namespace Sitemaker.Controllers
             List<ApplicationUser> users = new List<ApplicationUser>();
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                IDbSet<ApplicationUser> usersDb = db.Users;
-                foreach (var user in usersDb)
-                {
-                    users.Add(user);
-                }
+                users = db.Users.ToList();
             }
-
-
             return View("Users",users);
         }
 
@@ -42,15 +36,10 @@ namespace Sitemaker.Controllers
             
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                
-                IDbSet<ApplicationUser> usersDb = db.Users;
-                var um = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
                 foreach (string id in block)
                 {
-                    //var user = um.FindByIdAsync(id);
                     ApplicationUser user = db.Users.Where(x => x.Id.Equals(id)).First();
-                    db.Users.Remove(user);
-                      
+                    db.Users.Remove(user);     
                 }
                 db.SaveChanges();
             }
@@ -78,17 +67,12 @@ namespace Sitemaker.Controllers
         [HttpPost]
         public ActionResult ChangeBlock(string blockId, bool block)
         {
-            //string blockId = Request["blockId"];
-            //bool block = Boolean.Parse(Request["block"]);
-
-
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 ApplicationUser user = db.Users.Where(x => x.Id.Equals(blockId)).First();
                 user.IsBlock = block;
                 db.SaveChanges();
             }
-
             return RedirectToAction("Users", new { });
         }
     }

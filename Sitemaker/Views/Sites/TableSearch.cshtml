@@ -91,36 +91,48 @@
             margin: 20px auto 0 auto;
             background: rgb(230,230,230);
         }
+
+        a.disabled {
+    pointer-events: none; /* делаем ссылку некликабельной */
+    cursor: default;  /* устанавливаем курсор в виде стрелки */
+    color: #999; /* цвет текста для нективной ссылки */
+}
 </style>
-<div  id="wrapper">
-    @{ 
+<div id="wrapper">
+    <div style="float: right; width: 100%">
+        <h2> @Html.ActionLink("Date", "SortByDate", "Sites", new {@class = "rating".Equals(Session["sort"]) ? "" : "disabled"}) | @Html.ActionLink("Rating", "SortByRating", "Sites", new {@class = "rating".Equals(Session["sort"]) ? "disabled" : ""}) </h2>
+        <p></p></div>
+    
+    @{
         foreach (var item in Model)
         {
-        <div id="wrapper-bl">
-            <h2><a href="@Url.Action("Site", "Sites", new { userName = @item.UserName, id = @item.Id })">@item.Name</a></h2>
-            <div class="logo"><img style="width:100px; height:100px" src="@item.Logo" /></div>
-            <a href="@Url.Action("Comments", "Sites", new { userName = User.Identity.IsAuthenticated?(string)Session["CurrentUserName"]: "Anonymous", id = item.Id })" class="button">Comments</a>
-            <div class="line"></div>
-            <div class="stars" id="@item.Id" style="left: 100px">
-                <div class="rating" style="display:none" id="@item.AverageRating"></div>
-                <form action="" class="formstars">
-                    <input class="star star-1" id="1" type="radio" name="star" />
-                    <label class="star star-1" for="1"></label>
-                    <input class="star star-2" id="2" type="radio" name="star" />
-                    <label class="star star-2" for="2"></label>
-                    <input class="star star-3" id="3" type="radio" name="star" />
-                    <label class="star star-3" for="3"></label>
-                    <input class="star star-4" id="4" type="radio" name="star" />
-                    <label class="star star-4" for="4"></label>
-                    <input class="star star-5" id="5" type="radio" name="star" />
-                    <label class="star star-5" for="5"></label>
-                </form>
+            <div id="wrapper-bl">
+                <h2><a href="@Url.Action("Site", "Sites", new {userName = @item.UserName, id = @item.Id})">@item.Name</a>
+                </h2>
+                <div class="logo"><img style="width: 100px; height: 100px" src="@item.Logo"/>
+                </div>
+                <a href="@Url.Action("Comments", "Sites", new {userName = User.Identity.IsAuthenticated ? (string) Session["CurrentUserName"] : "Anonymous", id = item.Id})" class="button">Comments</a>
+                <div class="line"></div>
+                <div class="stars" id="@item.Id" style="left: 100px">
+                    <div class="rating" style="display: none" id="@item.AverageRating"></div>
+                    <form action="" class="formstars">
+                        <input class="star star-1" id="1" type="radio" name="star"/>
+                        <label class="star star-1" for="1"></label>
+                        <input class="star star-2" id="2" type="radio" name="star"/>
+                        <label class="star star-2" for="2"></label>
+                        <input class="star star-3" id="3" type="radio" name="star"/>
+                        <label class="star star-3" for="3"></label>
+                        <input class="star star-4" id="4" type="radio" name="star"/>
+                        <label class="star star-4" for="4"></label>
+                        <input class="star star-5" id="5" type="radio" name="star"/>
+                        <label class="star star-5" for="5"></label>
+                    </form>
+                </div>
+                <div class="line" style="position: absolute"></div>
+                <a href="@Url.Action("ShowUser", "Sites", new {userName = item.UserName}) " style="text-align: center; padding: 1%;"> @item.UserName</a>, @item.Date
             </div>
-            <div class="line" style="position:absolute"></div>
-            <a href="@Url.Action("ShowUser", "Sites", new { userName = (string)Session["CurrentUserName"], siteCreator = item.UserName }) " style="text-align: center; padding:1%;">   @item.UserName</a>, @item.Date
-        </div>
-            }
         }
+    }
 </div>
 
     <script src="~/Scripts/jquery.validate.min.js"></script>

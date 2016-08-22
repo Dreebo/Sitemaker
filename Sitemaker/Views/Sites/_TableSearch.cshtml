@@ -127,7 +127,7 @@
                 @item.About
             </td>
             <td id="commet"><a href="@Url.Action("Comments", "Sites", new { userName = (string)Session["CurrentUserName"], id = item.Id })" class="btn btn-primary">Comments</a></td>
-            <td id="signature"><a href="@Url.Action("ShowUser", "Sites", new { userName = (string)Session["CurrentUserName"], siteCreator = item.UserName })">@item.UserName</a>, @item.Date</td>
+            <td id="signature"><a href="@Url.Action("ShowUser", "Sites", new { userName = item.UserName })">@item.UserName</a>, @item.Date</td>
         </tr>
     }
 </table>

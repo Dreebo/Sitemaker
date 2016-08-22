@@ -69,13 +69,13 @@
             onSave: function (imageID, newURL) {
                 //var img = document.getElementById(imageID);
                 //img.src = newURL;
-                image.src = newURL;
+                document.getElementById(imageID).src = newURL;
             }
         });
 
-        function launchEditor(image, src) {
+        function launchEditor(id, src) {
             featherEditor.launch({
-                imageID: image,
+                imageID: id,
                 newURL: src
             });
             return false;

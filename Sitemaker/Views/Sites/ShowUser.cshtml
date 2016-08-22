@@ -1,7 +1,8 @@
-﻿@model Sitemaker.Models.UserRating
+﻿@using Sitemaker.Models
+@model Sitemaker.Models.UserRating
 @{
     ViewBag.Title = "ShowUser";
- }
+}
 <link href="~/Content/rating.css" rel="stylesheet" />
 <script type="text/javascript">
     $(document)
@@ -22,93 +23,30 @@
                 });
         });
 </script>
-<style>
-     .medal p {
-         position: relative;
-         margin: 0;
-         top: -55px;
-         left: 40px;
-         font-weight: bold;
-         z-index: 2;
-         color:#fff;
-         text-shadow:0px 0px 20px #00c6ff;
-         font-size:30px
-     }
+<link href="~/Content/medals.css" rel="stylesheet" />
 
-    .medal {
-        z-index: 1;
-        top: 0px;
-        width: 100px;
-        height: 120px;
-        display: inline-block;
-        position: relative;
-    }
-
-    .ribbon {
-        width: 80px;
-        height: 70px;
-        margin: 0 auto;
-        position: relative;
-
-    }
-
-    .ribbon:before,
-    .ribbon:after {
-        content: '';
-        position: absolute;
-        width: 35px;
-        height: 100%;
-        top: 0;
-    }
-
-    .ribbon:before {
-        right: 0;
-        background: #30110E;
-        transform: skew(-28deg);
-    }
-
-    .ribbon:after {
-        background: #EF7E76;
-        transform: skew(28deg);
-    }
-
-    .coin {
-        border: 1px solid #CA5D3E;
-        border-radius: 50%;
-        background: #F0CD73;
-        width: 70px;
-        height: 70px;
-        position: relative;
-        margin: -15px auto 0 auto;
-        box-shadow: 0px 0px 3px 0px #989898;
-    }
-
-    .coin:after {
-        content: '';
-        position: absolute;
-        transform: translate(-50%, -50%);
-        top: 50%;
-        left: 50%;
-        width: 35px;
-        height: 35px;
-        border-radius: inherit;
-        box-shadow: 0 0 0 9px #D9B867;
-    }
-</style>
-
-
-    @if (Model.Medals != null)
+@if (Model.Medals != null)
+{
+    foreach (var item in Model.Medals)
     {
-        foreach (var item in Model.Medals)
-        {
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.."></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.."></script>
             <div class="medal">
                 <div class="ribbon"></div>
                 <div class="coin"></div>
                 <p>@item.Description</p>
             </div>
-        }
     }
+}
+
+    <p></p>
+    <div style="display: inline-block">
+        <img id="imgPrime" type="file" id="fileUpload" src=@Session["imgUrl"] width="300" height="300" />
+    </div>
+    <div style="display: inline-block">
+        <h2>Author: @Session["authorName"]</h2>
+    </div>
+        <p></p>
+
 
 
 <table class="table">
@@ -128,33 +66,37 @@
         <th></th>
     </tr>
     @foreach (var item in Model.Sites)
-    {
+            {
         <tr>
             <td>
-                <a href="@Url.Action("Site", "Sites", new {userName = item.UserName, id = item.Id, indicator = true})">@item.Name</a>
+                <a href="@Url.Action("Site", "Sites", new {userName = item.UserName, id = item.Id, indicator = true})">
+                    <h3>@item.Name</h3>
+                </a>
             </td>
             <td>
                 <div class="stars" id="@item.Id" style="left: 100px">
                     <div class="rating" style="display: none" id="@item.AverageRating"></div>
                     <form action="" class="formstars">
-                        <input class="star star-1" id="1" type="radio" name="star"/>
+                        <input class="star star-1" id="1" type="radio" name="star" />
                         <label class="star star-1" for="1"></label>
-                        <input class="star star-2" id="2" type="radio" name="star"/>
+                        <input class="star star-2" id="2" type="radio" name="star" />
                         <label class="star star-2" for="2"></label>
-                        <input class="star star-3" id="3" type="radio" name="star"/>
+                        <input class="star star-3" id="3" type="radio" name="star" />
                         <label class="star star-3" for="3"></label>
-                        <input class="star star-4" id="4" type="radio" name="star"/>
+                        <input class="star star-4" id="4" type="radio" name="star" />
                         <label class="star star-4" for="4"></label>
-                        <input class="star star-5" id="5" type="radio" name="star"/>
+                        <input class="star star-5" id="5" type="radio" name="star" />
                         <label class="star star-5" for="5"></label>
                     </form>
                 </div>
             </td>
             <td>
-                <a href="@Url.Action("Comments", "Sites", new { userName = (string)Session["CurrentUserName"], id = item.Id })" class="button">Comments</a>
+                <a href="@Url.Action("Comments", "Sites", new {userName = (string) Session["CurrentUserName"], id = item.Id})" class="btn btn-default">
+                    <h4>Comments</h4>
+                </a>
             </td>
             <td>
-                @item.GetSubDescription()
+                <h3>@item.GetSubDescription()</h3>
             </td>
         </tr>
     }

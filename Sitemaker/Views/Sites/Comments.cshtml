@@ -176,11 +176,11 @@
             <td>
                 @Model.About
             </td>
-            <td id="signature"><a href="@Url.Action("ShowUser", "Sites", new {userName = (string)Session["CurrentUserName"], siteCreator = Model.UserName })">@Model.UserName</a>, @Model.Date</td>
+            <td id="signature"><a href="@Url.Action("ShowUser", "Sites", new {siteCreator = Model.UserName })">@Model.UserName</a>, @Model.Date</td>
 </table>
 </div>
 
-@if (User.Identity.IsAuthenticated)
+@if (User.Identity.IsAuthenticated&&!(bool) Session["userBlock"])
 {
     <body>
     <div class="container">
@@ -207,7 +207,7 @@
             <div class="text">
                 <p>@item.UserComment</p>
             </div>
-            <p class="attribution"><a href="@Url.Action("ShowUser", "Sites", new {userName = (string)Session["CurrentUserName"], siteCreator = item.UserName })">@item.UserName</a>, @item.Date</p>
+            <p class="attribution"><a href="@Url.Action("ShowUser", "Sites", new {userName = item.UserName })">@item.UserName</a>, @item.Date</p>
         </div>
     </article>
 }  

@@ -31,7 +31,7 @@
                 <a href="@Url.Action("Details", "Sites", new {userName = (string) Session["CurrentUserName"], id = item.Id})" class="btn btn-default">Details</a>
                 <a href="@Url.Action("Delete", "Sites", new {userName = (string) Session["CurrentUserName"], id = item.Id})" class="btn btn-default">Delete</a>
                 
-                @if (!item.Pablish)
+                @if (!item.Pablish&&!(bool) Session["userBlock"])
                 {
                     <a href="@Url.Action("PublishSite", "Sites", new { userName = (string)Session["CurrentUserName"], id = item.Id })" class="btn btn-default">Publish</a>
                 
