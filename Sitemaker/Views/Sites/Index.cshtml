@@ -8,6 +8,13 @@
 <div id="updatetarget">
 
     @Html.Partial("_CloudTags")
+    @if (Session["sortEnable"]!=null)
+    {
+        <div style="float: right; width: 100%">
+            <h2> @Html.ActionLink("Date", "SortByDate", "Sites", new {@class = "rating".Equals(Session["sort"]) ? "" : "disabled"}) | @Html.ActionLink("Rating", "SortByRating", "Sites", new {@class = "rating".Equals(Session["sort"]) ? "disabled" : ""}) </h2>
+            <p></p>
+        </div>
+    }
     @{ Html.RenderPartial("TableSearch", Model);}
 </div>
 @Resources.Resource.Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount

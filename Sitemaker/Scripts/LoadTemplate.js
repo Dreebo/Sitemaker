@@ -125,7 +125,6 @@ function SavePage() {
             let userNamePos = userName.lastIndexOf("/");
             userName = userName.slice(userNamePos + 1);
             urlId = urlId.slice(pos + 1);
-
             window.location.replace("https://localhost:44396/Sites/FillSite/" + userName + "/" + urlId);
         }
     });

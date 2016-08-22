@@ -175,7 +175,7 @@
     <value>Menu</value>
   </data>
   <data name="MenuSelection" xml:space="preserve">
-    <value>Select location menu</value>
+    <value>                                                           Select location menu</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>

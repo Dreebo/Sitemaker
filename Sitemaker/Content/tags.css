@@ -63,4 +63,9 @@
             .tag:hover::after {
                 border-left-color: crimson;
             }
+            a.disabled {
+    pointer-events: none; /* делаем ссылку некликабельной */
+    cursor: default;  /* устанавливаем курсор в виде стрелки */
+    color: #999; /* цвет текста для нективной ссылки */
+}
 </style>

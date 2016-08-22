@@ -265,11 +265,11 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Content\SampleDataRepository .cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\SampleDataRepository .cs" />
     <Compile Include="Controllers\SitesController.cs" />
     <Compile Include="Files\Filters\CultureAttribute.cs" />
     <Compile Include="Files\Filters\HandleAllErrorAttribute.cs" />
@@ -307,7 +307,9 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Card.css" />
     <Content Include="Content\Comment.css" />
+    <Content Include="Content\daynght.css" />
     <Content Include="Content\DropDownMenu.css" />
     <Content Include="Content\Images\backgroundcell.jpg" />
     <Content Include="Content\Images\bg-dark.jpg" />
@@ -345,6 +347,7 @@
     <Content Include="Content\tags.css" />
     <Content Include="Content\style_gray.css" />
     <Content Include="Content\style_white.css" />
+    <Content Include="Content\TagsLink.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -548,6 +551,7 @@
     <Content Include="Views\Sites\TableSearch.cshtml" />
     <Content Include="Views\Admin\Users.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Sites\_CloudTags.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

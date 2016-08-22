@@ -40,9 +40,11 @@ namespace Sitemaker.Controllers
             }
             LuceneSearch.ClearLuceneIndex();
             LuceneSearch.AddUpdateLuceneIndex(db.Sites.Include("Comments").Include("Tags"));
-            Session["CurrentUserName"] = GetUserName(User.Identity.GetUserName());
+            Session["CurrentUserName"] = GetUserName();
+            Session["userBlock"] = GetApplicationUser().IsBlock;
             Session.Add("Author", false);
-            ViewBag.Tags = tags;
+            Session["sortEnable"] = "true";
+            ViewBag.Tags = db.Tags.Select(x=>x.Name).ToList();
             return View(sites.ToPagedList((page ?? 1), 9));
         }
 
@@ -66,9 +68,13 @@ namespace Sitemaker.Controllers
         public ActionResult Details(string userName, int? id)
         {
             if (id == null) throw new HttpException(HttpStatusCode.BadRequest.ToString());
-            Site site = db.Sites.SingleOrDefault(p => p.Id == id);
+            Site site = db.Sites.Include(x=>x.Pages).SingleOrDefault(p => p.Id == id);
             if (site == null) throw new HttpException(HttpStatusCode.NotFound.ToString());
-            if (CheckRoot(site)) return View(site);
+            if (CheckRoot(site))
+            {
+                Session.Add("Author",true);
+                return View(site);
+            }
             throw new HttpException(HttpStatusCode.Forbidden.ToString()); ;
         }
 
@@ -293,7 +299,7 @@ namespace Sitemaker.Controllers
             Site site;
             using (MyDbContext db = new MyDbContext())
             {
-                site = db.Sites.SingleOrDefault(p => p.Id == id);
+                site = db.Sites.Include(x=>x.Pages).SingleOrDefault(p => p.Id == id);
             }
             if (site == null)
                 site = new Site();
@@ -552,6 +558,7 @@ namespace Sitemaker.Controllers
                 }
             }
             TempData["sites"] = resultSearch;
+            Session["sortEnable"] = null;
             return PartialView("TableSearch", new PagedList<Site>(resultSearch, 1, 99));
         }
 
